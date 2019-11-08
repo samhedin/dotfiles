@@ -372,4 +372,4 @@ bindsym $mod+b move container to output left
 exec --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.8
 exec --no-startup-id ~/.i3/monitors.sh
 exec --no-startup-id setxkbmap se dvorak_a5
-exec --no-startup-id tint2
+exec --no-startup-id tint2 -c ~/.config/tint2/minima.tint2rc &

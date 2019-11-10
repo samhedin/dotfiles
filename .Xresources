@@ -102,7 +102,7 @@ URxvt.keysym.Shift-Control-Down:  \033[1;6B
 ! URxvt*termName:                   string
 ! URxvt*geometry:                   geometry
 ! URxvt*chdir:                      string
-! URxvt*loginShell:                 boolean
+URxvt*loginShell:                 boolean
 ! URxvt*multiClickTime:             number
 ! URxvt*jumpScroll:                 boolean
 ! URxvt*skipScroll:                 boolean

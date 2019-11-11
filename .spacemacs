@@ -64,6 +64,7 @@ This function should only modify configuration layer settings."
      git
      themes-megapack
      multiple-cursors
+     (multiple-cursors :variables multiple-cursors-backend 'evil-mc)
      treemacs
      org
      rust
@@ -207,8 +208,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
 
-   dotspacemacs-themes '(doom-one
-                         majapahit-light
+   dotspacemacs-themes '(majapahit-light
+                         doom-one
                          spacemacs-dark
                          alect-light
                          apropospriate-dark

@@ -73,7 +73,7 @@ This function should only modify configuration layer settings."
            rust-backend 'lsp
            rust-format-on-save t)
      (shell :variables
-             shell-default-shell 'shell
+             shell-default-shell 'ansi-term
              shell-default-height 30
              shell-default-position 'bottom)
      syntax-checking)
@@ -85,6 +85,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
+   ;; example to install package from github: (mypackage :location (recipe :fetcher github :repo "githubuser/mypackage"))
    dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
@@ -504,13 +505,14 @@ Put your configuration code here, except for variables that should be set before
   (define-key evil-insert-state-map (kbd "M-<tab>") 'hippie-expand)
   (global-set-key (kbd "M-§") "->")
 
+  (global-set-key (kbd "¡") (lambda () (interactive) (insert "->")))
   (global-set-key (kbd "M->") 'sp-forward-slurp-sexp)
   (global-set-key (kbd "C->") 'sp-forward-barf-sexp)
   (global-set-key (kbd "M-<") 'sp-backward-slurp-sexp)
   (global-set-key (kbd "C-<") 'sp-backward-barf-sexp)
   (define-key evil-normal-state-map (kbd "/") 'helm-swoop)
 
-  (add-hook 'change-major-mode-hook 'aggressive-indent-mode)
+  (add-hook 'run-mode-hooks 'aggressive-indent-mode 'electric-pair-mode)
 
   ;; JAVA
   ;;Fix for broken smartparens in emacs 27. https://github.com/Fuco1/smartparens/issues/985
@@ -615,12 +617,12 @@ Put your configuration code here, except for variables that should be set before
     (when buffer-file-name (save-buffer)))
   (defadvice windmove-right (before other-window-now activate)
     (when buffer-file-name (save-buffer)))
-  )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
+
+  ;; Do not write anything past this comment. This is where Emacs will
+  ;; auto-generate custom variable definitions.
+  (defun dotspacemacs/emacs-custom-settings ()
+    "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
@@ -679,4 +681,4 @@ This function is called at the very end of Spacemacs initialization."
  '(font-lock-type-face ((t (:italic nil))))
  '(lsp-face-highlight-write ((t (:italic nil))))
  '(lsp-ui-sideline-code-action ((t (:foreground "#979987"))))
- '(sp-show-pair-match-content-face ((t (:italic nil))) t))
+ '(sp-show-pair-match-content-face ((t (:italic nil))) t)))

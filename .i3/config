@@ -15,7 +15,6 @@ default_floating_border normal
 hide_edge_borders none
 
 # change borders
-bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
@@ -358,7 +357,9 @@ mode "$mode_gaps_outer" {
 
 bindsym $mod+m move container to output right
 bindsym $mod+b move container to output left
+bindsym $mod+u exec --no-startup-id ~/.i3/empty_workspace.sh
 exec --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.8
+exec --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.8
 exec --no-startup-id ~/.i3/monitors.sh
 exec --no-startup-id tint2 -c ~/.config/tint2/minima.tint2rc &
 exec --no-startup-id ~/.i3/dvorak.sh

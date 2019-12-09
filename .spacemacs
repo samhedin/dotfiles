@@ -61,6 +61,7 @@ This function should only modify configuration layer settings."
         :variables
         haskell-completion-backend 'intero)
      theming
+     debug
      emacs-lisp
      git
      themes-megapack
@@ -499,6 +500,11 @@ Put your configuration code here, except for variables that should be set before
 
   (setq leetcode-prefer-language "rust")
 
+  ;;realgud debugger fix for evil
+  (add-hook 'realgud-short-key-mode-hook
+            (lambda ()
+              (local-set-key "\C-c" realgud:shortkey-mode-map)))
+
   ;; GENERIC KEYBINDS
   (define-key evil-insert-state-map (kbd "C-ö") 'evil-paste-after)
   (define-key evil-insert-state-map (kbd "M-RET") 'evil-normal-state)
@@ -513,6 +519,10 @@ Put your configuration code here, except for variables that should be set before
   (define-key evil-normal-state-map (kbd "/") 'helm-swoop)
 
   (add-hook 'run-mode-hooks 'aggressive-indent-mode 'electric-pair-mode)
+
+  (defun my/configure-c ()
+    (add-to-list 'spacemacs--dap-supported-modes 'c-c++-modes))
+  (add-hook 'c-c++-mode-hooks 'my/configure-c)
 
   ;; JAVA
   ;;Fix for broken smartparens in emacs 27. https://github.com/Fuco1/smartparens/issues/985

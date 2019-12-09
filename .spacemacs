@@ -33,7 +33,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(octave
+   '(go
+     octave
      clojure
      (clojure :variables
               clojure-enable-clj-refactor t
@@ -72,7 +73,7 @@ This function should only modify configuration layer settings."
            rust-backend 'lsp
            rust-format-on-save t)
      (shell :variables
-             shell-default-shell 'ansi-term
+             shell-default-shell 'shell
              shell-default-height 30
              shell-default-position 'bottom)
      syntax-checking)
@@ -468,7 +469,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (add-to-list 'exec-path "~/kotlin-language-server/server/build/install/server/bin")
   (setq theming-modifications
         '((majapahit-light
            (lsp-ui-sideline-code-action :foreground "#979987")
@@ -495,9 +495,10 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (define-key evil-normal-state-map (kbd "f") 'evil-avy-goto-char)
   (define-key evil-normal-state-map (kbd "M-ä") 'evil-avy-goto-word-1)
-  (setenv "PATH" (concat (getenv "PATH") ":/home/sam/.cargo/bin"))
+  (setenv "PATH" (concat (getenv "PATH") ":/home/sam/.cargo/bin") ":/home/sam/go")
 
   (setq leetcode-prefer-language "rust")
+
 
   ;; GENERIC KEYBINDS
   (global-set-key (kbd "C-SPC") 'company-complete)
@@ -513,7 +514,7 @@ before packages are loaded."
   (global-set-key (kbd "C-<") 'sp-backward-barf-sexp)
   (define-key evil-normal-state-map (kbd "/") 'helm-swoop)
 
-  (add-hook 'run-mode-hooks 'aggressive-indent-mode 'electric-pair-mode)
+  (add-hook 'prog-mode-hook 'electric-pair-mode)
 
   ;; JAVA
   ;;Fix for broken smartparens in emacs 27. https://github.com/Fuco1/smartparens/issues/985
@@ -636,7 +637,7 @@ This function is called at the very end of Spacemacs initialization."
      '(flycheck-python-pycompile-executable "python3")
      '(linum-format " %7i ")
      '(org-format-latex-options
-       '(:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
+       '(:foreground default :background default :scale 1.6 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
                      ("begin" "$1" "$" "$$" "\\(" "\\[")))
      '(org-startup-indented t)
      '(package-selected-packages
@@ -683,3 +684,46 @@ This function is called at the very end of Spacemacs initialization."
    '(lsp-face-highlight-write ((t (:italic nil))))
    '(lsp-ui-sideline-code-action ((t (:foreground "#979987"))))
    '(sp-show-pair-match-content-face ((t (:italic nil))) t)))
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(flycheck-python-pycompile-executable "python3")
+ '(linum-format " %7i ")
+ '(org-format-latex-options
+   '(:foreground default :background default :scale 1.6 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
+                 ("begin" "$1" "$" "$$" "\\(" "\\[")))
+ '(org-startup-indented t)
+ '(package-selected-packages
+   '(godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc flycheck-golangci-lint company-go go-mode helm-gtags ggtags counsel-gtags counsel swiper zenburn-theme zen-and-art-theme yapfify yaml-mode xterm-color ws-butler winum white-sand-theme which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spaceline powerline spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme pyvenv pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme popwin planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el paradox orgit organic-green-theme org-ref pdf-tools key-chord ivy org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-elixir noctilux-theme neotree naquadah-theme mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme magit-gitflow madhat2r-theme macrostep lush-theme lorem-ipsum livid-mode live-py-mode linum-relative link-hint light-soap-theme js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme intero inkpot-theme indent-guide hy-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation heroku-theme hemisu-theme helm-themes helm-swoop helm-pydoc helm-projectile projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-bibtex parsebib helm-ag hc-zenburn-theme haskell-snippets haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gandalf-theme fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-mix flycheck-haskell flycheck-credo flycheck flx-ido flx flatui-theme flatland-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit transient git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav ein skewer-mode markdown-mode polymode deferred request websocket js2-mode simple-httpd dumb-jump dracula-theme dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat django-theme diminish define-word darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-ghci company-ghc ghc haskell-mode company-emacs-eclim eclim company-cabal company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cmm-mode clues-theme clojure-snippets clj-refactor hydra inflections edn multiple-cursors paredit peg lv clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu cider sesman spinner queue parseedn clojure-mode parseclj a cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme bind-map bind-key biblio biblio-core badwolf-theme auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed apropospriate-theme anti-zenburn-theme anaconda-mode pythonic f ample-zen-theme ample-theme alect-themes alchemist s company dash elixir-mode pkg-info epl aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup majapahit-theme))
+ '(pos-tip-background-color "#F1EBDD")
+ '(tab-width 4)
+ '(tooltip-hide-delay 100)
+ '(xterm-color-names
+   ["#F1EBDD" "#A33555" "#BF5637" "#666E4D" "#3A6E64" "#665843" "#687366" "#50484e"])
+ '(xterm-color-names-bright
+   ["#EBE7D9" "#DB4764" "#CE6A38" "#649888" "#848F86" "#857358" "#50484e"]))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(avy-background-face ((t (:foreground "dark gray"))))
+ '(diff-refine-changed ((t (:background "dark gray"))))
+ '(font-lock-comment-delimiter-face ((t (:foreground "#29a6aa"))))
+ '(font-lock-comment-face ((t (:italic nil))))
+ '(font-lock-keyword-face ((t (:foreground "#29a6aa"))))
+ '(font-lock-string-face ((t (:italic nil))))
+ '(font-lock-type-face ((t (:italic nil))))
+ '(lsp-face-highlight-write ((t (:italic nil))))
+ '(lsp-ui-sideline-code-action ((t (:foreground "#979987"))))
+ '(sp-show-pair-match-content-face ((t (:italic nil))) t)
+ '(spacemacs-normal-face ((t (:background "DarkGoldenrod2" :foreground "#282828" :inherit 'mode-line)))))
+)

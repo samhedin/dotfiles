@@ -355,8 +355,8 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+m move container to output right
-bindsym $mod+b move container to output left
+bindsym $mod+q move container to output right
+bindsym $mod+. move container to output left
 bindsym $mod+u exec --no-startup-id ~/.i3/empty_workspace.sh
 exec --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.8
 exec --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.8

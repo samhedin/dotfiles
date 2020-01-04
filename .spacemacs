@@ -74,7 +74,7 @@ This function should only modify configuration layer settings."
            rust-backend 'lsp
            rust-format-on-save t)
      (shell :variables
-             shell-default-shell 'shell
+             shell-default-shell 'vterm
              shell-default-height 30
              shell-default-position 'bottom)
      syntax-checking)
@@ -93,7 +93,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(smartparens)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -507,6 +507,7 @@ Put your configuration code here, except for variables that should be set before
   ;; GENERIC KEYBINDS
   (define-key evil-insert-state-map (kbd "C-ö") 'evil-paste-after)
   (define-key evil-insert-state-map (kbd "M-RET") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "M-<RET>") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "M-<tab>") 'hippie-expand)
   (global-set-key (kbd "M-§") "->")
 
@@ -518,10 +519,6 @@ Put your configuration code here, except for variables that should be set before
   (define-key evil-normal-state-map (kbd "/") 'helm-swoop)
 
   (add-hook 'prog-mode-hook 'electric-pair-mode)
-
-  (defun my/configure-c ()
-    (add-to-list 'spacemacs--dap-supported-modes 'c-c++-modes))
-  (add-hook 'c-c++-mode-hooks 'my/configure-c)
 
   ;; JAVA
   ;;Fix for broken smartparens in emacs 27. https://github.com/Fuco1/smartparens/issues/985
@@ -576,6 +573,7 @@ Put your configuration code here, except for variables that should be set before
   (defun my/configure-clojure ()
     (global-set-key (kbd "§") 'cider-eval-defun-at-point))
   (add-hook 'clojure-mode-hook 'my/configure-clojure)
+  (setq clojure-align-forms-automatically t)
 
   ;; ELIXIR
   (add-hook 'elixir-mode-hook

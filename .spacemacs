@@ -212,6 +212,7 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
 
    dotspacemacs-themes '(
+                         doom-wilmersdorf
                          majapahit-light
                          doom-one
                          spacemacs-dark
@@ -574,6 +575,10 @@ Put your configuration code here, except for variables that should be set before
     (global-set-key (kbd "§") 'cider-eval-defun-at-point))
   (add-hook 'clojure-mode-hook 'my/configure-clojure)
   (setq clojure-align-forms-automatically t)
+
+  (defun my/configure-elisp ()
+    (global-set-key (kbd "§") 'eval-defun))
+  (add-hook 'emacs-lisp-mode-hook 'my/configure-elisp)
 
   ;; ELIXIR
   (add-hook 'elixir-mode-hook

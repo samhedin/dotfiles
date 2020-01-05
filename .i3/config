@@ -56,8 +56,7 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec chromium
-bindsym $mod+F3 exec dolphin
-# bindsym $mod+F3 exec ranger
+bindsym $mod+F3 exec urxvt -e nnn
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
@@ -91,7 +90,6 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -101,8 +99,6 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# toggle sticky
-bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -358,9 +354,14 @@ mode "$mode_gaps_outer" {
 bindsym $mod+q move container to output right
 bindsym $mod+. move container to output left
 bindsym $mod+u exec --no-startup-id ~/.i3/empty_workspace.sh
+bindsym $mod+s move scratchpad
+bindsym $mod+Shift+s scratchpad show, resize set 1600 1200
+
 exec --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.8
 exec --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.8
 exec --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.8
+exec --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.8
 exec --no-startup-id ~/.i3/monitors.sh
 exec --no-startup-id tint2 -c ~/.config/tint2/minima.tint2rc &
 exec --no-startup-id ~/.i3/dvorak.sh
+exec --no-startup-id redshift-gtk

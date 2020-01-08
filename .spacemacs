@@ -34,7 +34,13 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(go
-     octave
+     erc
+     (erc :variables
+          erc-server-list
+          '(("irc.freenode.net"
+             :port "6697"
+             :ssl t
+             :nick "Just_Sam")))
      clojure
      (clojure :variables
               clojure-enable-clj-refactor t
@@ -74,7 +80,7 @@ This function should only modify configuration layer settings."
            rust-backend 'lsp
            rust-format-on-save t)
      (shell :variables
-             shell-default-shell 'vterm
+             shell-default-shell 'shell
              shell-default-height 30
              shell-default-position 'bottom)
      syntax-checking)
@@ -559,6 +565,7 @@ Put your configuration code here, except for variables that should be set before
   (require 'org-indent)
   (global-set-key (kbd "C-å") 'org-toggle-latex-fragment)
   (setq org-confirm-babel-evaluate nil)
+  (define-key org-mode-map (kbd "M-<return>") nil)
 
   ;; LATEX
   (setq org-latex-pdf-process

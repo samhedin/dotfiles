@@ -1,4 +1,1 @@
-clear lock
-keycode 66 = Return
-keycode 36 = BackSpace
-keycode 22 = Return
+add mod3 = Delete

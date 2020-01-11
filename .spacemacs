@@ -31,21 +31,16 @@ This function should only modify configuration layer settings."
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
 
-   ;; List of configuration layers to load.
+  ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(go
-     erc
-     (erc :variables
-          erc-server-list
-          '(("irc.freenode.net"
-             :port "6697"
-             :ssl t
-             :nick "Just_Sam")))
+   '(yaml
+     go
      clojure
      (clojure :variables
               clojure-enable-clj-refactor t
               clojure-enable-fancify-symbols t
               clojure-enable-linters 'clj-kondo)
+     bibtex
 	c-c++
      (c-c++ :variables c-c++-backend 'lsp-ccls)
      (python :variables
@@ -516,9 +511,7 @@ Put your configuration code here, except for variables that should be set before
   (define-key evil-insert-state-map (kbd "M-RET") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "M-<RET>") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "M-<tab>") 'hippie-expand)
-  (global-set-key (kbd "M-§") "->")
 
-  (global-set-key (kbd "¡") (lambda () (interactive) (insert "->")))
   (global-set-key (kbd "M->") 'sp-forward-slurp-sexp)
   (global-set-key (kbd "C->") 'sp-forward-barf-sexp)
   (global-set-key (kbd "M-<") 'sp-backward-slurp-sexp)
@@ -526,6 +519,13 @@ Put your configuration code here, except for variables that should be set before
   (define-key evil-normal-state-map (kbd "/") 'helm-swoop)
 
   (add-hook 'prog-mode-hook 'electric-pair-mode)
+
+  (define-key evil-normal-state-map (kbd "<deletechar>") nil)
+  (define-key evil-insert-state-map (kbd "<delete>") nil)
+  
+
+  (define-key global-map (kbd "<deletechar>") nil)
+
 
   ;; JAVA
   ;;Fix for broken smartparens in emacs 27. https://github.com/Fuco1/smartparens/issues/985
@@ -565,6 +565,8 @@ Put your configuration code here, except for variables that should be set before
   (require 'org-indent)
   (global-set-key (kbd "C-å") 'org-toggle-latex-fragment)
   (setq org-confirm-babel-evaluate nil)
+
+  ;;Stops org mode from overriding M-RET
   (define-key org-mode-map (kbd "M-<return>") nil)
 
   ;; LATEX

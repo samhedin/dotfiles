@@ -33,7 +33,8 @@ This function should only modify configuration layer settings."
 
   ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
+   '((elixir :variables elixir-backend 'lsp elixir-ls-path "/home/sam/GitHub/elixir-ls/release")
+     yaml
      go
      clojure
      (clojure :variables
@@ -213,8 +214,8 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
 
    dotspacemacs-themes '(
-                         doom-wilmersdorf
                          majapahit-light
+                         doom-wilmersdorf
                          doom-one
                          spacemacs-dark
                          alect-light
@@ -509,21 +510,25 @@ Put your configuration code here, except for variables that should be set before
   ;; GENERIC KEYBINDS
   (define-key evil-insert-state-map (kbd "C-ö") 'evil-paste-after)
   (define-key evil-insert-state-map (kbd "M-RET") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "M-<RET>") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "M-<tab>") 'hippie-expand)
 
-  (global-set-key (kbd "M->") 'sp-forward-slurp-sexp)
-  (global-set-key (kbd "C->") 'sp-forward-barf-sexp)
-  (global-set-key (kbd "M-<") 'sp-backward-slurp-sexp)
-  (global-set-key (kbd "C-<") 'sp-backward-barf-sexp)
+  (global-set-key (kbd "<right>") 'sp-forward-slurp-sexp)
+  (global-set-key (kbd "C-<right>") 'sp-forward-barf-sexp)
+  (global-set-key (kbd "<left>") 'sp-backward-slurp-sexp)
+  (global-set-key (kbd "C-<left>") 'sp-backward-barf-sexp)
+
+  (define-key evil-normal-state-map (kbd "<right>") 'sp-forward-slurp-sexp)
+  (define-key evil-normal-state-map (kbd "C-<right>") 'sp-forward-barf-sexp)
+  (define-key evil-normal-state-map (kbd "<left>") 'sp-backward-slurp-sexp)
+  (define-key evil-normal-state-map (kbd "C-<left>") 'sp-backward-barf-sexp)
+
   (define-key evil-normal-state-map (kbd "/") 'helm-swoop)
 
   (add-hook 'prog-mode-hook 'electric-pair-mode)
 
   (define-key evil-normal-state-map (kbd "<deletechar>") nil)
   (define-key evil-insert-state-map (kbd "<delete>") nil)
-  
-
   (define-key global-map (kbd "<deletechar>") nil)
 
 
@@ -581,9 +586,11 @@ Put your configuration code here, except for variables that should be set before
 
   ;; CLOJURE
   (defun my/configure-clojure ()
-    (global-set-key (kbd "§") 'cider-eval-defun-at-point))
+    (global-set-key (kbd "C-<return>") 'cider-eval-defun-at-point)
+    (cider-jack-in-clj))
   (add-hook 'clojure-mode-hook 'my/configure-clojure)
   (setq clojure-align-forms-automatically t)
+  (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
 
   (defun my/configure-elisp ()
     (global-set-key (kbd "§") 'eval-defun))

@@ -539,6 +539,7 @@ before packages are loaded."
   (spaceline-toggle-version-control-off)
   ;; AUTO-SAVE
   (windmove-default-keybindings 'super)
+  (setq vc-follow-symlinks t)
 
   (global-hl-line-mode -1)
   ;; ;; automatically save buffers associated with files on buffer switch

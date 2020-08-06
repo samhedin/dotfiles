@@ -620,8 +620,6 @@ before packages are loaded."
   (setq paren-face-regexp "[][(){}]")
   (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
 
-  (load-file "/home/sam/github/rustdoc-to-org/rustdoc.el")
-
  ;;; CLOJURE
   ;; (defun cider-debug-function-call ()
   ;;   (interactive)

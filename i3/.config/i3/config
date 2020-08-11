@@ -159,7 +159,7 @@ exec_always --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.5
 exec_always --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.5
 exec_always --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.5
 
-exec --no-startup-id /usr/bin/tint2 -c ~/.config/tint2/minima.tint2rc &
+exec_always --no-startup-id /usr/bin/tint2 -c ~/.config/tint2/minima.tint2rc &
 exec --no-startup-id setxkbmap se dvorak_ep
 exec --no-startup-id xset r rate 200 50
 exec --no-startup-id redshift-gtk

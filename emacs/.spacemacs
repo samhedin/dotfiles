@@ -38,9 +38,9 @@ This function should only modify configuration layer settings."
      ;;          nil lsp-haskell-process-path-hie "haskell-language-server-wrapper")
   common-lisp
               dash
-              (lua :variables lua-backend 'lsp-emmy
-                   lua-lsp-emmy-jar-path "~/.emacs.d/EmmyLua-LS-all.jar"
-                   lua-lsp-emmy-enable-file-watchers t)
+              (lua :variables
+                   ;lua-backend 'lsp-emmy
+                   lsp-clients-emmy-lua-jar-path "~/.emacs.d/EmmyLua-LS-all.jar")
               semantic
               github
               (lsp :variables lsp-rust-server 'rust-analyzer
@@ -600,6 +600,18 @@ before packages are loaded."
   ;; LATEX
   (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
 
+;;;###autoload
+  (defun repeat-latest-command-from-Helm-M-x ()
+    "Returns the latest command that's called with Helm-M-x"
+    (interactive)
+    (let ((history extended-command-history)
+          cmd)
+      ;; remove any occurence of this-command at the head of `history'.
+      (while (string= this-command (setq cmd (pop history))))
+      (message "Running cmd: %s" cmd)
+      (call-interactively (intern cmd))))
+  (global-set-key (kbd "C-\"") 'repeat-latest-command-from-Helm-M-x)
+
   ;;; Rust
   (defun fold-imports-hook ()
     (when (or (string= major-mode "rust-mode")
@@ -621,7 +633,7 @@ before packages are loaded."
   (setq paren-face-regexp "[][(){}]")
   (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
 
-  (load-file "/home/sam/github/rustdoc-to-org/rustdoc.el")
+  ;;(load-file "/home/sam/github/rustdoc-to-org/rustdoc.el")
 
  ;;; CLOJURE
   ;; (defun cider-debug-function-call ()

@@ -221,8 +221,9 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         spacemacs-dark
                          kaolin-light
-                         kaolin-temple
+                         ;; kaolin-temple
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -506,10 +507,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                                  (sp-show-pair-match-content-face :italic nil)
                                                  (font-lock-string-face :italic nil))
 
-                                (kaolin-temple (highlight :background "#469A67"))
-
                                 (kaolin-light (default :background "#f4f5f3")
-                                              (highlight :background "#D9FFB4")
                                               (org-block :background "#ECEDE7")
                                               (org-block-begin-line :background "#ECEDE7")
                                               (org-block-end-line :background "#ECEDE7")
@@ -580,9 +578,11 @@ before packages are loaded."
   (global-set-key (kbd "<C-right>") 'sp-forward-barf-sexp)
   (global-set-key (kbd "<C-left>") 'sp-backward-barf-sexp)
 
-  (add-hook 'rustic-mode-hook (lambda ()
-                                (global-set-key (kbd "<right>") 'sp-slurp-hybrid-sexp)
-                                (global-set-key (kbd "<C-right>") 'sp-dedent-adjust-sexp)))
+
+(dolist (map '(rustic-mode-map ))
+  (define-key map (kbd "<right>") 'sp-slurp-hybrid-sexp)
+  (define-key map (kbd "<C-right>") 'sp-dedent-adjust-sexp)
+  )
 
   (global-set-key (kbd "<f12>") 'eval-expression)
   (with-eval-after-load 'company
@@ -633,7 +633,7 @@ before packages are loaded."
   (setq paren-face-regexp "[][(){}]")
   (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
 
-  ;;(load-file "/home/sam/github/rustdoc-to-org/rustdoc.el")
+  (load-file "/home/sam/github/rustdoc-to-org/rustdoc.el")
 
  ;;; CLOJURE
   ;; (defun cider-debug-function-call ()
@@ -688,249 +688,3 @@ before packages are loaded."
     (when buffer-file-name
       (save-buffer)))
   )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(toml-mode racer pos-tip helm-gtags ggtags flycheck-rust posframe lsp-treemacs bui lsp-mode dash-functional counsel-gtags counsel swiper ivy company cargo markdown-mode rust-mode vi-tilde-fringe zeal-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key vterm volatile-highlights uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org terminal-here symon symbol-overlay string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smeargle shell-pop rustic restart-emacs rainbow-delimiters popwin pcre2el password-generator paren-face paradox overseer origami orgit org-superstar org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain open-junk-file nameless multi-term move-text mmm-mode markdown-toc magit-svn magit-section magit-gitflow macrostep lsp-ui lorem-ipsum link-hint kaolin-themes indent-guide hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gist gh-md fuzzy forge font-lock+ flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word dap-mode company-statistics company-quickhelp company-lua column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell))
- '(safe-local-variable-values
-   '((flycheck-disabled-checkers quote
-                                 (emacs-lisp-checkdoc))
-     (eval progn
-           (let
-               ((dirloc-lsp-defun-regexp
-                 (concat
-                  (concat "^\\s-*(" "lsp-defun" "\\s-+\\(")
-                  (or
-                   (bound-and-true-p lisp-mode-symbol-regexp)
-                   "\\(?:\\sw\\|\\s_\\|\\\\.\\)+")
-                  "\\)")))
-             (add-to-list 'imenu-generic-expression
-                          (list "Functions" dirloc-lsp-defun-regexp 1)))
-           (defvar lsp--override-calculate-lisp-indent\? nil "Whether to override the default
-              `calculate-lisp-indent'.")
-           (setq-local lsp--override-calculate-lisp-indent\? t)
-           (defun wrap~calculate-lisp-indent
-               (fn &optional parse-start)
-             "Add better indentation for quoted and backquoted lists."
-             (if
-                 (not lsp--override-calculate-lisp-indent\?)
-                 (funcall fn parse-start)
-               (defvar calculate-lisp-indent-last-sexp)
-               (save-excursion
-                 (beginning-of-line)
-                 (let
-                     ((indent-point
-                       (point))
-                      state
-                      (desired-indent nil)
-                      (retry t)
-                      calculate-lisp-indent-last-sexp containing-sexp)
-                   (cond
-                    ((or
-                      (markerp parse-start)
-                      (integerp parse-start))
-                     (goto-char parse-start))
-                    ((null parse-start)
-                     (beginning-of-defun))
-                    (t
-                     (setq state parse-start)))
-                   (unless state
-                     (while
-                         (<
-                          (point)
-                          indent-point)
-                       (setq state
-                             (parse-partial-sexp
-                              (point)
-                              indent-point 0))))
-                   (while
-                       (and retry state
-                            (>
-                             (elt state 0)
-                             0))
-                     (setq retry nil)
-                     (setq calculate-lisp-indent-last-sexp
-                           (elt state 2))
-                     (setq containing-sexp
-                           (elt state 1))
-                     (goto-char
-                      (1+ containing-sexp))
-                     (if
-                         (and calculate-lisp-indent-last-sexp
-                              (> calculate-lisp-indent-last-sexp
-                                 (point)))
-                         (let
-                             ((peek
-                               (parse-partial-sexp calculate-lisp-indent-last-sexp indent-point 0)))
-                           (if
-                               (setq retry
-                                     (car
-                                      (cdr peek)))
-                               (setq state peek)))))
-                   (if retry nil
-                     (goto-char
-                      (1+ containing-sexp))
-                     (if
-                         (not calculate-lisp-indent-last-sexp)
-                         (setq desired-indent
-                               (current-column))
-                       (parse-partial-sexp
-                        (point)
-                        calculate-lisp-indent-last-sexp 0 t)
-                       (cond
-                        ((looking-at "\\s("))
-                        ((>
-                          (save-excursion
-                            (forward-line 1)
-                            (point))
-                          calculate-lisp-indent-last-sexp)
-                         (if
-                             (or
-                              (=
-                               (point)
-                               calculate-lisp-indent-last-sexp)
-                              (let*
-                                  ((positions
-                                    (elt state 9))
-                                   (last
-                                    (car
-                                     (last positions)))
-                                   (rest
-                                    (reverse
-                                     (butlast positions)))
-                                   (any-quoted-p nil)
-                                   (point nil))
-                                (or
-                                 (when-let
-                                     ((char
-                                       (char-before last)))
-                                   (or
-                                    (char-equal char 39)
-                                    (char-equal char 96)))
-                                 (progn
-                                   (while
-                                       (and rest
-                                            (not any-quoted-p))
-                                     (setq point
-                                           (pop rest))
-                                     (setq any-quoted-p
-                                           (or
-                                            (when-let
-                                                ((char
-                                                  (char-before point)))
-                                              (or
-                                               (char-equal char 39)
-                                               (char-equal char 96)))
-                                            (save-excursion
-                                              (goto-char
-                                               (1+ point))
-                                              (looking-at-p "\\(?:back\\)?quote[	
- ]+(")))))
-                                   any-quoted-p))))
-                             nil
-                           (progn
-                             (forward-sexp 1)
-                             (parse-partial-sexp
-                              (point)
-                              calculate-lisp-indent-last-sexp 0 t)))
-                         (backward-prefix-chars))
-                        (t
-                         (goto-char calculate-lisp-indent-last-sexp)
-                         (beginning-of-line)
-                         (parse-partial-sexp
-                          (point)
-                          calculate-lisp-indent-last-sexp 0 t)
-                         (backward-prefix-chars)))))
-                   (let
-                       ((normal-indent
-                         (current-column)))
-                     (cond
-                      ((elt state 3)
-                       nil)
-                      ((and
-                        (integerp lisp-indent-offset)
-                        containing-sexp)
-                       (goto-char containing-sexp)
-                       (+
-                        (current-column)
-                        lisp-indent-offset))
-                      (calculate-lisp-indent-last-sexp
-                       (or
-                        (and lisp-indent-function
-                             (not retry)
-                             (funcall lisp-indent-function indent-point state))
-                        (and
-                         (save-excursion
-                           (goto-char indent-point)
-                           (skip-chars-forward " 	")
-                           (looking-at ":"))
-                         (save-excursion
-                           (goto-char calculate-lisp-indent-last-sexp)
-                           (backward-prefix-chars)
-                           (while
-                               (not
-                                (or
-                                 (looking-back "^[ 	]*\\|([ 	]+"
-                                               (line-beginning-position))
-                                 (and containing-sexp
-                                      (>=
-                                       (1+ containing-sexp)
-                                       (point)))))
-                             (forward-sexp -1)
-                             (backward-prefix-chars))
-                           (setq calculate-lisp-indent-last-sexp
-                                 (point)))
-                         (> calculate-lisp-indent-last-sexp
-                            (save-excursion
-                              (goto-char
-                               (1+ containing-sexp))
-                              (parse-partial-sexp
-                               (point)
-                               calculate-lisp-indent-last-sexp 0 t)
-                              (point)))
-                         (let
-                             ((parse-sexp-ignore-comments t)
-                              indent)
-                           (goto-char calculate-lisp-indent-last-sexp)
-                           (or
-                            (and
-                             (looking-at ":")
-                             (setq indent
-                                   (current-column)))
-                            (and
-                             (<
-                              (line-beginning-position)
-                              (prog2
-                                  (backward-sexp)
-                                  (point)))
-                             (looking-at ":")
-                             (setq indent
-                                   (current-column))))
-                           indent))
-                        normal-indent))
-                      (desired-indent)
-                      (t normal-indent)))))))
-           (advice-add #'calculate-lisp-indent :around #'wrap~calculate-lisp-indent)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-latex-sectioning-0-face ((t (:foreground "#8A0069"))))
- '(highlight ((t (:background "#D9FFB4"))))
- '(hl-line ((t (nil :background nil))))
- '(org-block ((t (:background "#ECEDE7"))))
- '(org-block-begin-line ((t (:background "#ECEDE7"))))
- '(org-block-end-line ((t (:background "#ECEDE7")))))
-)

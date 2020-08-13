@@ -36,7 +36,6 @@ This function should only modify configuration layer settings."
      ;; (haskell :variables haskell-completion-backend'lsp
      ;;          haskell-process-suggest-remove-import-lines
      ;;          nil lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-  common-lisp
               dash
               (lua :variables
                    ;lua-backend 'lsp-emmy
@@ -83,7 +82,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(rustic paren-face kaolin-themes)
+   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic helm-rg)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -221,8 +220,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         spacemacs-dark
                          kaolin-light
+                         spacemacs-dark
                          ;; kaolin-temple
                          )
 
@@ -564,7 +563,6 @@ before packages are loaded."
   (global-set-key (kbd "C-3") 'winum-select-window-3)
   (global-set-key (kbd "C-4") 'winum-select-window-4)
   (global-set-key (kbd "C-5") 'winum-select-window-5)
-  (global-set-key (kbd "<up>") 'spacemacs-cmds)
   (define-key evil-insert-state-map (kbd "C-.") 'evil-avy-goto-char)
   (define-key evil-normal-state-map (kbd "C-.") 'evil-avy-goto-char)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
@@ -572,6 +570,7 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "C-t") nil)
   (define-key evil-motion-state-map (kbd "<right>") nil)
   (define-key evil-motion-state-map (kbd "<left>") nil)
+  (global-set-key (kbd "C-l") 'helm-buffers-list)
 
   (global-set-key (kbd "<right>") 'sp-forward-slurp-sexp)
   (global-set-key (kbd "<left>") 'sp-backward-slurp-sexp)
@@ -579,10 +578,12 @@ before packages are loaded."
   (global-set-key (kbd "<C-left>") 'sp-backward-barf-sexp)
 
 
-(dolist (map '(rustic-mode-map ))
-  (define-key map (kbd "<right>") 'sp-slurp-hybrid-sexp)
-  (define-key map (kbd "<C-right>") 'sp-dedent-adjust-sexp)
-  )
+;; (dolist (map '(rustic-mode-map))
+;;   (define-key map (kbd "<right>") 'sp-slurp-hybrid-sexp)
+;;   (define-key map (kbd "<C-right>") 'sp-dedent-adjust-sexp))
+
+  ;; (define-key rustic-mode-map (kbd "<right>") 'sp-slurp-hybrid-sexp)
+  ;; (define-key rustic-mode-map (kbd "<C-right>") 'sp-dedent-adjust-sexp)
 
   (global-set-key (kbd "<f12>") 'eval-expression)
   (with-eval-after-load 'company
@@ -688,3 +689,35 @@ before packages are loaded."
     (when buffer-file-name
       (save-buffer)))
   )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
+ '(package-selected-packages
+   '(helm-rg zeal-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key vterm volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org terminal-here symon symbol-overlay string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smeargle shell-pop rustic restart-emacs rainbow-delimiters popwin pcre2el password-generator paren-face paradox overseer origami orgit org-superstar org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain open-junk-file nameless multi-term move-text mmm-mode markdown-toc magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lorem-ipsum link-hint kaolin-themes indent-guide hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gist gh-md fuzzy forge font-lock+ flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word company-statistics company-quickhelp company-lua column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell))
+ '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e")))
+
+)

@@ -82,7 +82,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic helm-rg)
+   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -220,9 +220,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         kaolin-temple
                          kaolin-light
-                         spacemacs-dark
-                         ;; kaolin-temple
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -532,6 +531,7 @@ before packages are loaded."
     (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
     (setq treemacs-width 30)
     (treemacs-resize-icons 15))
+
   (spaceline-toggle-minor-modes-off)
   (spaceline-toggle-version-control-off)
   ;; AUTO-SAVE
@@ -566,6 +566,7 @@ before packages are loaded."
   (define-key evil-insert-state-map (kbd "C-.") 'evil-avy-goto-char)
   (define-key evil-normal-state-map (kbd "C-.") 'evil-avy-goto-char)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rustdoc-mode)
   (define-key evil-insert-state-map (kbd "C-t") nil)
   (define-key evil-normal-state-map (kbd "C-t") nil)
   (define-key evil-motion-state-map (kbd "<right>") nil)

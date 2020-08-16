@@ -82,7 +82,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic)
+   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic f)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -220,8 +220,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         kaolin-temple
                          kaolin-light
+                         kaolin-temple
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -506,6 +506,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                                  (font-lock-string-face :italic nil))
 
                                 (kaolin-light (default :background "#f4f5f3")
+                                              (shadow :foreground "#BABABA")
                                               (org-block :background "#ECEDE7")
                                               (org-block-begin-line :background "#ECEDE7")
                                               (org-block-end-line :background "#ECEDE7")
@@ -583,9 +584,9 @@ before packages are loaded."
 ;;   (define-key map (kbd "<right>") 'sp-slurp-hybrid-sexp)
 ;;   (define-key map (kbd "<C-right>") 'sp-dedent-adjust-sexp))
 
-  ;; (define-key rustic-mode-map (kbd "<right>") 'sp-slurp-hybrid-sexp)
-  ;; (define-key rustic-mode-map (kbd "<C-right>") 'sp-dedent-adjust-sexp)
-
+  (with-eval-after-load 'rustic-mode
+    (define-key rustic-mode-map (kbd "<right>") 'sp-slurp-hybrid-sexp)
+    (define-key rustic-mode-map (kbd "<C-right>") 'sp-dedent-adjust-sexp))
   (global-set-key (kbd "<f12>") 'eval-expression)
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))

@@ -505,8 +505,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                                  (sp-show-pair-match-content-face :italic nil)
                                                  (font-lock-string-face :italic nil))
 
+                              (kaolin-temple
+                               (shadow :foreground "#596061"))
+
                                 (kaolin-light (default :background "#f4f5f3")
-                                              (shadow :foreground "#BABABA")
+                                              (shadow :foreground "#BABABA") ; Customize this to change paren-face
                                               (org-block :background "#ECEDE7")
                                               (org-block-begin-line :background "#ECEDE7")
                                               (org-block-end-line :background "#ECEDE7")
@@ -590,6 +593,12 @@ before packages are loaded."
   (global-set-key (kbd "<f12>") 'eval-expression)
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
+
+  (global-set-key (kbd "<f5>") (lambda ()
+                                 (interactive)
+                                 (if (eq spacemacs--cur-theme 'kaolin-light)
+                                     (load-theme 'kaolin-temple)
+                                   (load-theme 'kaolin-light))))
 
   ;; org mode
   ;; (require 'org-indent)
@@ -701,6 +710,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("643b4d181b6afa4306d65db76889d8b987e095ae8f262a4c71dd5669d39c9b09" "bb28b083fe1c61848c10c049be076afc572ea9bee6e1f8dc2631c5ee4f7388c8" default))
  '(evil-want-Y-yank-to-eol nil)
  '(hl-todo-keyword-faces
    '(("TODO" . "#dc752f")
@@ -721,5 +732,14 @@ This function is called at the very end of Spacemacs initialization."
  '(package-selected-packages
    '(helm-rg zeal-at-point yasnippet-snippets ws-butler writeroom-mode winum which-key vterm volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org terminal-here symon symbol-overlay string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smeargle shell-pop rustic restart-emacs rainbow-delimiters popwin pcre2el password-generator paren-face paradox overseer origami orgit org-superstar org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain open-junk-file nameless multi-term move-text mmm-mode markdown-toc magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lorem-ipsum link-hint kaolin-themes indent-guide hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-dash helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ gist gh-md fuzzy forge font-lock+ flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word company-statistics company-quickhelp company-lua column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e")))
-
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(font-latex-sectioning-0-face ((t (:foreground "#8A0069"))))
+ '(org-block ((t (:background "#ECEDE7"))))
+ '(org-block-begin-line ((t (:background "#ECEDE7"))))
+ '(org-block-end-line ((t (:background "#ECEDE7"))))
+ '(shadow ((t (:foreground "#BABABA")))))
 )

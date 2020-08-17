@@ -34,8 +34,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # usermod -a -G video sam
 # sudo chmod a+w /sys/class/backlight/amdgpu_bl0/max_brightness
 # sudo chmod a+w /sys/class/backlight/amdgpu_bl0/brightness
-bindsym XF86MonBrightnessUp exec light -A 20
-bindsym XF86MonBrightnessDown exec light -U 20
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
 
 
 # Use Mouse+$mod to drag floating windows to their wanted position

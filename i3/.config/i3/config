@@ -143,7 +143,7 @@ exec_always --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.5
 exec_always --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.5
 exec_always --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.5
 
-# sudo xbacklight phy0-led -set 50
+#exec --no-startup-id sudo xbacklight phy0-led -set 50
 
 exec xmodmap ~/.xmodmap
 exec --no-startup-id /usr/bin/tint2 -c ~/.config/tint2/minima.tint2rc &

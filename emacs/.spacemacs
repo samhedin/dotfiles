@@ -496,7 +496,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-(setq comp-deferred-compilation t)
 (setq theming-modifications '((majapahit-light (lsp-ui-sideline-code-action :foreground "#979987")
                                                  (font-lock-type-face :italic nil)
                                                  (font-lock-comment-face :italic nil)
@@ -576,10 +575,6 @@ before packages are loaded."
   (define-key evil-motion-state-map (kbd "<left>") nil)
   (global-set-key (kbd "C-l") 'helm-buffers-list)
   (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-
-;; (dolist (map '(rustic-mode-map))
-;;   (define-key map (kbd "<right>") 'sp-slurp-hybrid-sexp)
-;;   (define-key map (kbd "<C-right>") 'sp-dedent-adjust-sexp))
 
   (with-eval-after-load 'rustic-mode
     (define-key rustic-mode-map (kbd "<right>") 'sp-slurp-hybrid-sexp)

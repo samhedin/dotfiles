@@ -35,6 +35,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
+(setq doom-modeline-height 5)
+(setq doom-modeline-major-mode-icon nil)
+(setq doom-modeline-vcs-max-length 1)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -55,15 +58,52 @@
 
 (setq which-key-idle-delay 0.01)
 (map! :leader "C-t" 'counsel-M-x)
-(map! :i :n :v "C-1" 'winum-select-window-1)
+(map! :g "C-1" 'winum-select-window-1)
 (map! :i :n :v "C-2" 'winum-select-window-2)
 (map! :i :n :v "C-3" 'winum-select-window-3)
 (map! :i :n :v "C-4" 'winum-select-window-4)
 (map! :i :n :v "C-5" 'winum-select-window-5)
 (map! :i "C-SPC" 'evil-normal-state)
-(after! 'treemacs
-(set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
-    (setq treemacs-width 30)
-    (treemacs-resize-icons 15))
-(after! 'company
-  (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
+
+;; (map! :i :n :v "C-<tab>" 'evil-switch-to-windows-last-buffer)
+
+;; (map! :i :n :v "M-<tab>" 'hippie-expand)
+;; (map! :i :n :v "C-¡" "::")
+;; (map! :i :n :v "C-@" "->")
+;; (map! :i :n :v "C-£" "<-")
+;; (map! :i :n :v "C-e" 'move-end-of-line)
+;; (map! :i :n :v "C-n" 'forward-char)
+
+;; (map! "<f5>"
+;;       (lambda ()
+;;         (interactive)
+;;         (if (eq doom-theme 'kaolin-light)
+;;         (load-theme 'kaolin-temple)
+;;         (load-theme 'kaolin-light))))
+
+(map! :after 'lispy :map 'lispy-mode-map "C-1" nil)
+(map! :after 'lispy :map 'lispy-mode-map "C-2" nil)
+(map! :after 'lispy :map 'lispy-mode-map "C-3" nil)
+(map! :after 'lispy :map 'lispy-mode-map "C-3" nil)
+(map! :after 'lispy :map 'lispy-mode-map "C-4" nil)
+(map! :after 'lispy :map 'lispy-mode-map "C-5" nil)
+
+(map! :after 'lispy :map 'lispy-mode-map-c-digits "C-1" nil)
+(map! :after 'lispy :map 'lispy-mode-map-c-digits "C-2" nil)
+(map! :after 'lispy :map 'lispy-mode-map-c-digits "C-3" nil)
+(map! :after 'lispy :map 'lispy-mode-map-c-digits "C-3" nil)
+(map! :after 'lispy :map 'lispy-mode-map-c-digits "C-4" nil)
+(map! :after 'lispy :map 'lispy-mode-map-c-digits "C-5" nil)
+;; (after! 'treemacs
+;;   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
+;;   (setq treemacs-width 30)
+;;   (treemacs-resize-icons 15))
+
+;; (after! 'company
+;;   (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
+
+;; (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
+
+
+;; (setq paren-face-regexp "[][(){}]")
+;; (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))

@@ -28,7 +28,7 @@ This function should only modify configuration layer settings."
 
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/.emacs.d/private/local/")
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
@@ -61,6 +61,7 @@ This function should only modify configuration layer settings."
                                auto-completion-minimum-prefix-length 0
                                auto-completion-idle-delay 0.0
                                auto-completion-enable-help-tooltip 'manual)
+              exwm
               theming
               emacs-lisp
               markdown
@@ -80,7 +81,8 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic f (rustdoc :location (recipe :fetcher github :repo "samhedin/rustdoc-to-org")))
+;; (rustdoc :location (recipe :fetcher github :repo "samhedin/rustdoc-to-org"))
+   dotspacemacs-additional-packages '(paren-face kaolin-themes rustic f )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -218,8 +220,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         kaolin-temple
                          kaolin-light
+                         kaolin-temple
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -495,6 +497,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+
 (setq theming-modifications '((majapahit-light (lsp-ui-sideline-code-action :foreground "#979987")
                                                  (font-lock-type-face :italic nil)
                                                  (font-lock-comment-face :italic nil)
@@ -613,6 +616,7 @@ before packages are loaded."
       (call-interactively (intern cmd))))
   (global-set-key (kbd "C-\"") 'repeat-latest-command-from-Helm-M-x)
 
+
   ;;; Rust
   (defun fold-imports-hook ()
     (when (or (string= major-mode "rust-mode")
@@ -630,6 +634,7 @@ before packages are loaded."
                                 (point)))))))
   (add-hook 'find-file-hook 'fold-imports-hook)
 
+  (load-file "/home/sam/github/rustdoc-to-org/rustdoc.el")
   (global-paren-face-mode)
   (setq paren-face-regexp "[][(){}]")
   (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))

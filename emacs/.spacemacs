@@ -36,7 +36,6 @@ This function should only modify configuration layer settings."
      ;; (haskell :variables haskell-completion-backend'lsp
      ;;          haskell-process-suggest-remove-import-lines
      ;;          nil lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-              dash
               (lua :variables
                    ;lua-backend 'lsp-emmy
                    lsp-clients-emmy-lua-jar-path "~/.emacs.d/EmmyLua-LS-all.jar")
@@ -87,7 +86,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(git-gutter+ vi-tilde-fringe)
+   dotspacemacs-excluded-packages '(git-gutter+ vi-tilde-fringe highlight-numbers)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -512,6 +511,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                               (org-block-begin-line :background "#ECEDE7")
                                               (org-block-end-line :background "#ECEDE7")
                                               (font-latex-sectioning-0-face :foreground "#8A0069"))))
+
   )
 
 (defun dotspacemacs/user-load ()

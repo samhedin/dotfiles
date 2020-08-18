@@ -36,9 +36,11 @@
 (setq display-line-numbers-type nil)
 
 (setq doom-modeline-height 5)
-;; (setq doom-modeline--vcs-icon nil)
+(setq doom-modeline--vcs-icon nil)
+(setq doom-modeline-buffer-encoding nil)
+(setq doom-modeline--vcs-text nil)
 (setq doom-modeline-major-mode-icon nil)
-(setq doom-modeline-vcs-max-length 1)
+(setq doom-modeline-percent-position nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

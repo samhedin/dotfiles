@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Source Code Pro" :size 11.0 :weight 'normal)
+(setq doom-font (font-spec :family "Source Code Pro" :size 11.5 :weight 'normal)
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -98,9 +98,15 @@
   (treemacs-resize-icons 15))
 
 (after! company
-  (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
+  (define-key company-active-map (kbd "C-<return>") #'company-complete-selection)
+  (define-key company-active-map (kbd "C-SPC") nil))
 
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
 
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
+
 ;; (setq paren-face-regexp "[][(){}]")
 ;; (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
+
+(setq-default line-spacing 8)

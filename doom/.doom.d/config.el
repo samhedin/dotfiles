@@ -56,22 +56,24 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq which-key-idle-delay 0.01)
+(setq which-key-idle-delay 0.1)
 (map! :leader "C-t" 'counsel-M-x)
 (map! :g "C-1" 'winum-select-window-1)
-(map! :i :n :v "C-2" 'winum-select-window-2)
-(map! :i :n :v "C-3" 'winum-select-window-3)
-(map! :i :n :v "C-4" 'winum-select-window-4)
-(map! :i :n :v "C-5" 'winum-select-window-5)
+(map! :g "C-2" 'winum-select-window-2)
+(map! :g "C-3" 'winum-select-window-3)
+(map! :g "C-4" 'winum-select-window-4)
+(map! :g "C-5" 'winum-select-window-5)
 (map! :i "C-SPC" 'evil-normal-state)
 
+(map! :map evil-normal-state-map "C-<tab>" nil)
+(map! :map evil-visual-state-map "C-<tab>" nil)
 (map! :g "C-<tab>" 'evil-switch-to-windows-last-buffer)
 
-(map! :i :n :v "C-¡" "::")
-(map! :i :n :v "C-@" "->")
-(map! :i :n :v "C-£" "<-")
-(map! :i :n :v "C-e" 'move-end-of-line)
-(map! :i :n :v "C-n" 'forward-char)
+(map! :i "C-¡" "::")
+(map! :i "C-@" "->")
+(map! :i "C-£" "<-")
+(map! :i "C-e" 'move-end-of-line)
+(map! :i "C-n" 'forward-char)
 
 (map! "<f5>"
       (lambda ()
@@ -80,24 +82,22 @@
         (load-theme 'kaolin-temple)
         (load-theme 'kaolin-light))))
 
-(map! :map 'lispy-mode-map-c-digits "C-1" nil)
-(map! :map 'lispy-mode-map-c-digits "C-2" nil)
-(map! :map 'lispy-mode-map-c-digits "C-3" nil)
-(map! :map 'lispy-mode-map-c-digits "C-3" nil)
-(map! :map 'lispy-mode-map-c-digits "C-4" nil)
-(map! :map 'lispy-mode-map-c-digits "C-5" nil)
+(map! :map lispy-mode-map-c-digits "C-1" nil)
+(map! :map lispy-mode-map-c-digits "C-2" nil)
+(map! :map lispy-mode-map-c-digits "C-3" nil)
+(map! :map lispy-mode-map-c-digits "C-3" nil)
+(map! :map lispy-mode-map-c-digits "C-4" nil)
+(map! :map lispy-mode-map-c-digits "C-5" nil)
 
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
   (setq treemacs-width 30)
   (treemacs-resize-icons 15))
 
-
 (after! company
   (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
 
-;; (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
-
+(remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
 
 ;; (setq paren-face-regexp "[][(){}]")
 ;; (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))

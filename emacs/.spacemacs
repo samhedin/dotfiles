@@ -40,7 +40,6 @@ This function should only modify configuration layer settings."
               (lua :variables
                    ;lua-backend 'lsp-emmy
                    lsp-clients-emmy-lua-jar-path "~/.emacs.d/EmmyLua-LS-all.jar")
-              semantic
               github
               (lsp :variables lsp-rust-server 'rust-analyzer
                    lsp-ui-doc-enable
@@ -88,7 +87,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(git-gutter+ vi-tilde-fringe)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -220,8 +219,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         kaolin-light
                          kaolin-temple
+                         kaolin-light
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -307,7 +306,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil, the paste transient-state is enabled. While enabled, after you
    ;; paste something, pressing `C-j' and `C-k' several times cycles through the
    ;; elements in the `kill-ring'. (default nil)
-   dotspacemacs-enable-paste-transient-state nil
+   dotspacemacs-enable-paste-transient-state t
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
@@ -576,12 +575,7 @@ before packages are loaded."
   (define-key evil-motion-state-map (kbd "<right>") nil)
   (define-key evil-motion-state-map (kbd "<left>") nil)
   (global-set-key (kbd "C-l") 'helm-buffers-list)
-
-  (global-set-key (kbd "<right>") 'sp-forward-slurp-sexp)
-  (global-set-key (kbd "<left>") 'sp-backward-slurp-sexp)
-  (global-set-key (kbd "<C-right>") 'sp-forward-barf-sexp)
-  (global-set-key (kbd "<C-left>") 'sp-backward-barf-sexp)
-
+  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
 
 ;; (dolist (map '(rustic-mode-map))
 ;;   (define-key map (kbd "<right>") 'sp-slurp-hybrid-sexp)

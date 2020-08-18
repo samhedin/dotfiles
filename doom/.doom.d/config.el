@@ -36,6 +36,7 @@
 (setq display-line-numbers-type nil)
 
 (setq doom-modeline-height 5)
+;; (setq doom-modeline--vcs-icon nil)
 (setq doom-modeline-major-mode-icon nil)
 (setq doom-modeline-vcs-max-length 1)
 

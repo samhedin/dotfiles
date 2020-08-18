@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'kaolin-light)
+(setq doom-theme 'kaolin-temple)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -67,7 +67,6 @@
 
 (map! :g "C-<tab>" 'evil-switch-to-windows-last-buffer)
 
-(map! :i :n :v "M-<tab>" 'hippie-expand)
 (map! :i :n :v "C-¡" "::")
 (map! :i :n :v "C-@" "->")
 (map! :i :n :v "C-£" "<-")
@@ -87,13 +86,15 @@
 (map! :map 'lispy-mode-map-c-digits "C-3" nil)
 (map! :map 'lispy-mode-map-c-digits "C-4" nil)
 (map! :map 'lispy-mode-map-c-digits "C-5" nil)
-;; (after! 'treemacs
-;;   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
-;;   (setq treemacs-width 30)
-;;   (treemacs-resize-icons 15))
 
-;; (after! 'company
-;;   (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
+(after! treemacs
+  (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
+  (setq treemacs-width 30)
+  (treemacs-resize-icons 15))
+
+
+(after! company
+  (define-key company-active-map (kbd "C-<return>") #'company-complete-selection))
 
 ;; (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
 

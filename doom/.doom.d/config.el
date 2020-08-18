@@ -35,12 +35,12 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 
-(setq doom-modeline-height 5)
-(setq doom-modeline--vcs-icon nil)
-(setq doom-modeline-buffer-encoding nil)
-(setq doom-modeline--vcs-text nil)
-(setq doom-modeline-major-mode-icon nil)
-(setq doom-modeline-percent-position nil)
+(setq-default doom-modeline-height 5)
+(setq-default doom-modeline--vcs-icon nil)
+(setq-default doom-modeline-buffer-encoding nil)
+(setq-default doom-modeline--vcs-text nil)
+(setq-default doom-modeline-major-mode-icon nil)
+(setq-default doom-modeline-percent-position nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -106,7 +106,9 @@
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
 
-;; (setq paren-face-regexp "[][(){}]")
-;; (setq paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
-
 (setq-default line-spacing 8)
+(global-paren-face-mode)
+(setq-default paren-face-regexp "[][(){}]")
+(setq-default paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
+
+(advice-add #'rainbow-delimiters-mode :override #'ignore)

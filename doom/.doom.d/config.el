@@ -91,6 +91,8 @@
 (map! :map lispy-mode-map-c-digits "C-3" nil)
 (map! :map lispy-mode-map-c-digits "C-4" nil)
 (map! :map lispy-mode-map-c-digits "C-5" nil)
+(map! :map lispy-mode-map "C-," nil)
+(map! :map lispy-mode-map-lispy "C-," nil)
 
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
@@ -99,7 +101,10 @@
 
 (after! company
   (define-key company-active-map (kbd "C-<return>") #'company-complete-selection)
+  (define-key company-active-map (kbd "<return>") nil)
+  (define-key company-active-map (kbd "RET") nil)
   (define-key company-active-map (kbd "C-SPC") nil))
+(map! :g "<f12>" 'eval-expression)
 
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
 

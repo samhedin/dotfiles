@@ -85,12 +85,14 @@
         (load-theme 'kaolin-temple)
         (load-theme 'kaolin-light))))
 
-(map! :map lispy-mode-map-c-digits "C-1" nil)
-(map! :map lispy-mode-map-c-digits "C-2" nil)
-(map! :map lispy-mode-map-c-digits "C-3" nil)
-(map! :map lispy-mode-map-c-digits "C-3" nil)
-(map! :map lispy-mode-map-c-digits "C-4" nil)
-(map! :map lispy-mode-map-c-digits "C-5" nil)
+(map! :map lispy-mode-map-c-digits
+      :g "C-1" nil
+      :g "C-2" nil
+      :niv "C-3" nil
+      :niv "C-4" nil
+      :niv "C-5" nil
+      :niv "C-6" nil
+      )
 (map! :map lispy-mode-map "C-," nil)
 (map! :map lispy-mode-map-lispy "C-," nil)
 

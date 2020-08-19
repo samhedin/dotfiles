@@ -114,3 +114,11 @@
 (setq-default paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
 
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
+
+(defun sneaky-save-buffer (&rest _r)
+  (save-buffer))
+(advice-add 'magit-status :before #'sneaky-save-buffer)
+(advice-add 'winum-select-window-by-number :before #'sneaky-save-buffer)
+(advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
+(advice-add 'recompile :before #'sneaky-save-buffer)
+(advice-add 'switch-to-buffer :before #'sneaky-save-buffer)

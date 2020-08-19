@@ -24,7 +24,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'kaolin-temple)
+;; (setq doom-theme 'kaolin-temple)
+(setq doom-theme 'kaolin-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -81,8 +82,8 @@
       (lambda ()
         (interactive)
         (if (eq doom-theme 'kaolin-light)
-        (load-theme 'kaolin-temple)
-        (load-theme 'kaolin-light))))
+            (load-theme 'kaolin-temple)
+          (load-theme 'kaolin-light))))
 
 (map! :map lispy-mode-map-c-digits :g "C-1" nil :g "C-2" nil :g "C-3" nil :g "C-4" nil :g "C-5" nil)
 
@@ -118,7 +119,5 @@
 (defun sneaky-save-buffer (&rest _r)
   (save-buffer))
 (advice-add 'magit-status :before #'sneaky-save-buffer)
-(advice-add 'winum-select-window-by-number :before #'sneaky-save-buffer)
 (advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
 (advice-add 'recompile :before #'sneaky-save-buffer)
-(advice-add 'switch-to-buffer :before #'sneaky-save-buffer)

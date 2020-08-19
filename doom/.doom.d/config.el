@@ -68,6 +68,10 @@
       :g "C-5" 'winum-select-window-5
       :i "C-SPC" 'evil-normal-state)
 
+(map! :map evil-normal-state-map "C-." nil)
+(map! :map evil-insert-state-map "C-." nil)
+(map! :g "C-." 'evil-avy-goto-char)
+
 (map! :map evil-normal-state-map "C-<tab>" nil)
 (map! :map evil-visual-state-map "C-<tab>" nil)
 (map! :g "C-<tab>" 'evil-switch-to-windows-last-buffer)

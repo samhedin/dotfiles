@@ -24,8 +24,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;; (setq doom-theme 'kaolin-temple)
-(setq doom-theme 'kaolin-light)
+(setq doom-theme 'kaolin-temple)
+;; (setq doom-theme 'kaolin-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -41,6 +41,7 @@
 (setq-default doom-modeline--vcs-text nil)
 (setq-default doom-modeline-major-mode-icon nil)
 (setq-default doom-modeline-percent-position nil)
+(setq confirm-kill-emacs nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -107,6 +108,7 @@
         "C-SPC" nil))
 (map! :g "<f12>" 'eval-expression)
 (map! :leader "!" 'shell-command)
+(map! :g "C-l" 'switch-to-buffer)
 
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
 

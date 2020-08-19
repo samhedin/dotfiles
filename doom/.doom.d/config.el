@@ -61,22 +61,22 @@
 
 (setq which-key-idle-delay 0.1)
 (map! :leader "C-t" 'counsel-M-x)
-(map! :g "C-1" 'winum-select-window-1)
-(map! :g "C-2" 'winum-select-window-2)
-(map! :g "C-3" 'winum-select-window-3)
-(map! :g "C-4" 'winum-select-window-4)
-(map! :g "C-5" 'winum-select-window-5)
-(map! :i "C-SPC" 'evil-normal-state)
+(map! :g "C-1" 'winum-select-window-1
+      :g "C-2" 'winum-select-window-2
+      :g "C-3" 'winum-select-window-3
+      :g "C-4" 'winum-select-window-4
+      :g "C-5" 'winum-select-window-5
+      :i "C-SPC" 'evil-normal-state)
 
 (map! :map evil-normal-state-map "C-<tab>" nil)
 (map! :map evil-visual-state-map "C-<tab>" nil)
 (map! :g "C-<tab>" 'evil-switch-to-windows-last-buffer)
 
-(map! :i "C-¡" "::")
-(map! :i "C-@" "->")
-(map! :i "C-£" "<-")
-(map! :i "C-e" 'move-end-of-line)
-(map! :i "C-n" 'forward-char)
+(map! :i "C-¡" "::"
+      :i "C-@" "->"
+      :i "C-£" "<-"
+      :i "C-e" 'move-end-of-line
+      :i "C-n" 'forward-char)
 
 (map! "<f5>"
       (lambda ()
@@ -85,14 +85,8 @@
         (load-theme 'kaolin-temple)
         (load-theme 'kaolin-light))))
 
-(map! :map lispy-mode-map-c-digits
-      :g "C-1" nil
-      :g "C-2" nil
-      :niv "C-3" nil
-      :niv "C-4" nil
-      :niv "C-5" nil
-      :niv "C-6" nil
-      )
+(map! :map lispy-mode-map-c-digits :g "C-1" nil :g "C-2" nil :g "C-3" nil :g "C-4" nil :g "C-5" nil)
+
 (map! :map lispy-mode-map "C-," nil)
 (map! :map lispy-mode-map-lispy "C-," nil)
 
@@ -102,10 +96,11 @@
   (treemacs-resize-icons 15))
 
 (after! company
-  (define-key company-active-map (kbd "C-<return>") #'company-complete-selection)
-  (define-key company-active-map (kbd "<return>") nil)
-  (define-key company-active-map (kbd "RET") nil)
-  (define-key company-active-map (kbd "C-SPC") nil))
+  (map! :map company-active-map
+        "C-<return>" #'company-complete-selection
+        "<return>" nil
+        "RET" nil
+        "C-SPC" nil))
 (map! :g "<f12>" 'eval-expression)
 
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)

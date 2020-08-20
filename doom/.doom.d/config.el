@@ -27,6 +27,18 @@
 (setq doom-theme 'kaolin-temple)
 ;; (setq doom-theme 'kaolin-light)
 
+(let ((time  (string-to-number (format-time-string "%H"))))
+  (if (or (< time 5) (> time 19))
+      (load-theme 'kaolin-temple t)
+    (load-theme 'kaolin-light t)))
+
+(map! "<f5>"
+      (lambda ()
+        (interactive)
+        (if (eq doom-theme 'kaolin-light)
+            (load-theme 'kaolin-temple)
+          (load-theme 'kaolin-light))))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -83,16 +95,7 @@
       :i "C-e" 'move-end-of-line
       :i "C-n" 'forward-char)
 
-
-(map! "<f5>"
-      (lambda ()
-        (interactive)
-        (if (eq doom-theme 'kaolin-light)
-            (load-theme 'kaolin-temple)
-          (load-theme 'kaolin-light))))
-
 (map! :map lispy-mode-map-c-digits :g "C-1" nil :g "C-2" nil :g "C-3" nil :g "C-4" nil :g "C-5" nil)
-
 (map! :map lispy-mode-map "C-," nil)
 (map! :map lispy-mode-map-lispy "C-," nil)
 
@@ -133,8 +136,3 @@
       (lambda ()
         (dired-hide-details-mode)
         (dired-sort-toggle-or-edit)))
-
-(let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 5) (> time 19))
-      (load-theme 'kaolin-temple t)
-    (load-theme 'kaolin-light t)))

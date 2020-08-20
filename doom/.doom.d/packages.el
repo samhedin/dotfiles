@@ -45,6 +45,6 @@
 
 (package! rustic
   :recipe (:host github :repo "samhedin/rustic" :branch "rustic-rustdoc"))
-
+(package! highlight-parentheses)
 ;; (package! rustdoc
 ;;   :recipe (:local-repo "/home/sam/github/rustdoc-to-org/"))

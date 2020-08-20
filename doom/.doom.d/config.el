@@ -83,6 +83,7 @@
       :i "C-e" 'move-end-of-line
       :i "C-n" 'forward-char)
 
+
 (map! "<f5>"
       (lambda ()
         (interactive)
@@ -120,6 +121,7 @@
 (setq-default paren-face-regexp "[][(){}]")
 (setq-default paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
 
+(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 
 (defun sneaky-save-buffer (&rest _r)
@@ -127,3 +129,12 @@
 (advice-add 'magit-status :before #'sneaky-save-buffer)
 (advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
 (advice-add 'recompile :before #'sneaky-save-buffer)
+(add-hook 'dired-mode-hook
+      (lambda ()
+        (dired-hide-details-mode)
+        (dired-sort-toggle-or-edit)))
+
+(let ((time  (string-to-number (format-time-string "%H"))))
+  (if (or (< time 5) (> time 20))
+      (load-theme 'kaolin-temple)
+    (load-theme 'kaolin-light)))

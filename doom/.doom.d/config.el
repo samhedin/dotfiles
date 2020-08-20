@@ -135,6 +135,6 @@
         (dired-sort-toggle-or-edit)))
 
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 5) (> time 20))
-      (load-theme 'kaolin-temple)
-    (load-theme 'kaolin-light)))
+  (if (or (< time 5) (> time 19))
+      (load-theme 'kaolin-temple t)
+    (load-theme 'kaolin-light t)))

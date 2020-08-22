@@ -109,6 +109,8 @@
   (setq treemacs-width 30)
   (treemacs-resize-icons 15))
 
+(map! :map undo-fu-mode-map "C-_" nil)
+(map! :g "C-_" '+popup/toggle)
 (after! company
   (map! :map company-active-map
         "C-<return>" #'company-complete-selection
@@ -120,6 +122,7 @@
 (map! :g "C-l" 'switch-to-buffer)
 
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
+
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
@@ -138,14 +141,17 @@
 (advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
 (advice-add 'recompile :before #'sneaky-save-buffer)
 (add-hook 'dired-mode-hook
-      (lambda ()
-        (dired-hide-details-mode)
-        (dired-sort-toggle-or-edit)))
+          (lambda ()
+            (dired-hide-details-mode)
+            (dired-sort-toggle-or-edit)))
 
 (use-package lsp-haskell
- :ensure t
- :config
- (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
- ;; Comment/uncomment this line to see interactions between lsp client/server.
- ;;(setq lsp-log-io t)
-)
+  :ensure t
+  :config
+  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+  ;; Comment/uncomment this line to see interactions between lsp client/server.
+  ;;(setq lsp-log-io t)
+  )
+(mini-modeline-mode)
+(rich-minority-mode)
+(setq rm-blacklist ".")

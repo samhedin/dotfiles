@@ -49,3 +49,5 @@
 (package! helm-ag)
 (package! rustic
   :recipe (:local-repo "/home/sam/github/rustic/"))
+(package! mini-modeline)
+(package! rich-minority)

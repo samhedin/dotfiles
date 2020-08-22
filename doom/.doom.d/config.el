@@ -86,8 +86,13 @@
 (map! :g "C-." 'evil-avy-goto-char)
 
 (map! :map evil-normal-state-map "C-<tab>" nil)
+(map! :map evil-normal-state-map "q" nil)
+(map! :map evil-insert-state-map "C-<tab>" nil)
 (map! :map evil-visual-state-map "C-<tab>" nil)
 (map! :g "C-<tab>" 'evil-switch-to-windows-last-buffer)
+(map! :g  "C-\"" 'recompile)
+(map! :g  "C-!" 'kill-compilation)
+
 
 (map! :i "C-¡" "::"
       :i "C-@" "->"
@@ -136,3 +141,11 @@
       (lambda ()
         (dired-hide-details-mode)
         (dired-sort-toggle-or-edit)))
+
+(use-package lsp-haskell
+ :ensure t
+ :config
+ (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+ ;; Comment/uncomment this line to see interactions between lsp client/server.
+ ;;(setq lsp-log-io t)
+)

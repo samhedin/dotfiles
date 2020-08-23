@@ -46,7 +46,7 @@
 (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
 (map! :map evil-normal-state-map
       "C-." nil
-      "C-<tab>" nil
+      "<C-tab>" nil
       "q" nil)
 
 (after! company

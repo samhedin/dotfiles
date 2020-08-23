@@ -110,5 +110,3 @@
 (set-docsets! 'haskell-mode "Haskell" "haskell")
 (setq dash-docs-common-docsets "Rust")
 (setq +lookup-open-url-fn #'eww)
-
-(require 'mykeys)

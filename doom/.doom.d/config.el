@@ -46,13 +46,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
-
-(setq-default doom-modeline-height 5)
-(setq-default doom-modeline--vcs-icon nil)
-(setq-default doom-modeline-buffer-encoding nil)
-(setq-default doom-modeline--vcs-text nil)
-(setq-default doom-modeline-major-mode-icon nil)
-(setq-default doom-modeline-percent-position nil)
 (setq confirm-kill-emacs nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:

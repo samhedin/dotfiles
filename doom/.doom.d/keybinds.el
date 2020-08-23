@@ -6,6 +6,7 @@
 (define-minor-mode keybinds-mode
   "Keybinds"
   :lighter " keybinds"
+  :global t
   :init-value t
   :keymap keybinds-mode-map)
 
@@ -23,9 +24,9 @@
       :g "C-3" 'winum-select-window-3
       :g "C-4" 'winum-select-window-4
       :g "C-5" 'winum-select-window-5
-      :g "C-<tab>" 'evil-switch-to-windows-last-buffer
+      :g "<C-tab>" 'evil-switch-to-windows-last-buffer
       :g  "C-\"" 'recompile
-      "C-!" 'kill-compilation
+      :g "C-!" 'kill-compilation
       :i "C-¡" "::"
       :i "C-@" "->"
       :i "C-£" "<-"
@@ -33,19 +34,20 @@
       :i "C-n" 'forward-char
       :g "C-." 'evil-avy-goto-char
       :g "<f12>" 'eval-expression
-      :leader "!" 'shell-command
-      :leader "C-t" 'counsel-M-x
       :g "C-l" 'switch-to-buffer
-      :g "C-_" '+popup/toggle)
+      :g "C-_" '+popup/toggle
+
+      ;; Must follow leader after here
+      :leader
+      "!" 'shell-command
+      "C-t" 'counsel-M-x
+      )
 
 (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
 (map! :map evil-normal-state-map
       "C-." nil
       "C-<tab>" nil
       "q" nil)
-
-(map! :map undo-fu-mode-map "C-_" nil)
-(define-key undo-fu-mode-map (kbd "C-_") nil)
 
 (after! company
   (map! :map company-active-map

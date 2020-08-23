@@ -72,6 +72,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(load! "keybinds.el")
+(require 'keybinds-mode)
+
 (setq which-key-idle-delay 0.1)
 (map! :leader "C-t" 'counsel-M-x)
 (map! :g "C-1" 'winum-select-window-1

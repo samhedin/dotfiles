@@ -76,46 +76,13 @@
 (keybinds-mode)
 
 (setq which-key-idle-delay 0.1)
-(map! :leader "C-t" 'counsel-M-x)
-
-(map! :map evil-normal-state-map "C-." nil)
-(map! :map evil-insert-state-map "C-." nil)
-(map! :g "C-." 'evil-avy-goto-char)
-
-(map! :map evil-normal-state-map "C-<tab>" nil)
-(map! :map evil-normal-state-map "q" nil)
-(map! :map evil-insert-state-map "C-<tab>" nil)
-(map! :map evil-visual-state-map "C-<tab>" nil)
-(map! :g "C-<tab>" 'evil-switch-to-windows-last-buffer)
-(map! :g  "C-\"" 'recompile)
-(map! :g  "C-!" 'kill-compilation)
-
-
-(map! :i "C-¡" "::"
-      :i "C-@" "->"
-      :i "C-£" "<-"
-      :i "C-e" 'move-end-of-line
-      :i "C-n" 'forward-char)
 
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
   (setq treemacs-width 30)
   (treemacs-resize-icons 15))
 
-(map! :map undo-fu-mode-map "C-_" nil)
-(map! :g "C-_" '+popup/toggle)
-(after! company
-  (map! :map company-active-map
-        "C-<return>" #'company-complete-selection
-        "<return>" nil
-        "RET" nil
-        "C-SPC" nil))
-(map! :g "<f12>" 'eval-expression)
-(map! :leader "!" 'shell-command)
-(map! :g "C-l" 'switch-to-buffer)
-
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
-
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))

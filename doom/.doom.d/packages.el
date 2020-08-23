@@ -49,6 +49,8 @@
 (package! helm-ag)
 (package! rustic
   :recipe (:local-repo "/home/sam/github/rustic/"))
+(package! mykeys
+  :recipe (:local-repo "/home/sam/github/mykeys/"))
 
 ;; (package! tree-sitter
 ;;   :recipe (:host github

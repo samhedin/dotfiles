@@ -5,8 +5,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Sam Hedin"
+      user-mail-address "sam.hedin@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -67,8 +67,6 @@
 
 (load! "keybinds.el")
 (keybinds-mode)
-;; (require 'tree-sitter-langs)
-;; (global-tree-sitter-mode)
 
 (setq which-key-idle-delay 0.1)
 
@@ -112,3 +110,5 @@
 (set-docsets! 'haskell-mode "Haskell" "haskell")
 (setq dash-docs-common-docsets "Rust")
 (setq +lookup-open-url-fn #'eww)
+
+(require 'mykeys)

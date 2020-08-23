@@ -152,6 +152,7 @@
   ;; Comment/uncomment this line to see interactions between lsp client/server.
   ;;(setq lsp-log-io t)
   )
-(mini-modeline-mode)
+
+(setq rm-blacklist "")
 (rich-minority-mode)
-(setq rm-blacklist ".")
+(mini-modeline-mode)

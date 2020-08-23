@@ -49,19 +49,6 @@
 (package! helm-ag)
 (package! rustic
   :recipe (:local-repo "/home/sam/github/rustic/"))
-(package! mykeys
-  :recipe (:local-repo "/home/sam/github/mykeys/"))
-
-;; (package! tree-sitter
-;;   :recipe (:host github
-;;            :repo "ubolonton/emacs-tree-sitter"
-;;            :files ("lisp/*.el")))
-
-;; (package! tree-sitter-langs
-;;   :recipe (:host github
-;;            :repo "ubolonton/emacs-tree-sitter"
-;;            :files ("langs/*.el" "langs/queries")))
-
 
 (package! mini-modeline)
 (package! rich-minority)

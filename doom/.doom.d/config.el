@@ -67,6 +67,8 @@
 
 (load! "keybinds.el")
 (keybinds-mode)
+;; (require 'tree-sitter-langs)
+;; (global-tree-sitter-mode)
 
 (setq which-key-idle-delay 0.1)
 
@@ -106,3 +108,7 @@
 (setq rm-blacklist "")
 (rich-minority-mode)
 (mini-modeline-mode)
+
+(set-docsets! 'haskell-mode "Haskell" "haskell")
+(setq dash-docs-common-docsets "Rust")
+(setq +lookup-open-url-fn #'eww)

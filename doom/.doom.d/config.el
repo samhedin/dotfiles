@@ -73,16 +73,10 @@
 ;; they are implemented.
 
 (load! "keybinds.el")
-(require 'keybinds-mode)
+(keybinds-mode)
 
 (setq which-key-idle-delay 0.1)
 (map! :leader "C-t" 'counsel-M-x)
-(map! :g "C-1" 'winum-select-window-1
-      :g "C-2" 'winum-select-window-2
-      :g "C-3" 'winum-select-window-3
-      :g "C-4" 'winum-select-window-4
-      :g "C-5" 'winum-select-window-5
-      :i "C-SPC" 'evil-normal-state)
 
 (map! :map evil-normal-state-map "C-." nil)
 (map! :map evil-insert-state-map "C-." nil)
@@ -102,10 +96,6 @@
       :i "C-£" "<-"
       :i "C-e" 'move-end-of-line
       :i "C-n" 'forward-char)
-
-(map! :map lispy-mode-map-c-digits :g "C-1" nil :g "C-2" nil :g "C-3" nil :g "C-4" nil :g "C-5" nil)
-(map! :map lispy-mode-map "C-," nil)
-(map! :map lispy-mode-map-lispy "C-," nil)
 
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)

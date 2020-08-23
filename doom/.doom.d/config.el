@@ -107,6 +107,5 @@
 (rich-minority-mode)
 (mini-modeline-mode)
 
-(set-docsets! 'haskell-mode "Haskell" "haskell")
-(setq dash-docs-common-docsets "Rust")
+(set-docsets! 'haskell-mode "Haskell")
 (setq +lookup-open-url-fn #'eww)

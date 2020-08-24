@@ -99,7 +99,6 @@
             (dired-sort-toggle-or-edit)))
 
 (use-package lsp-haskell
-  :ensure t
   :config
   (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 

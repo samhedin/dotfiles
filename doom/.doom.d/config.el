@@ -108,3 +108,7 @@
 
 (set-docsets! 'haskell-mode "Haskell")
 (setq +lookup-open-url-fn #'eww)
+
+;; BROKEN PDF? TRY THESE
+;; (delete-file pdf-info-epdfinfo-program)
+;; (pdf-tools-install)

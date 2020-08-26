@@ -100,7 +100,8 @@
 
 (use-package lsp-haskell
   :config
-  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+  (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
+(setenv "PATH" (concat (getenv "PATH") ":" "/home/sam/.local/bin/"))
 
 (setq rm-blacklist "")
 (rich-minority-mode)
@@ -109,6 +110,10 @@
 (set-docsets! 'haskell-mode "Haskell")
 (setq +lookup-open-url-fn #'eww)
 
-;; BROKEN PDF? TRY THESE
-;; (delete-file pdf-info-epdfinfo-program)
+;; Did pdf-tools break? Try
 ;; (pdf-tools-install)
+
+(after! pdf-view
+  (setq pdf-view-midnight-colors '("#928776" . "#2b2b2F")))
+(after! frog-jump
+  (setq frog-jump-buffer-posframe-handler 'posframe-poshandler-frame-bottom-center))

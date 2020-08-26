@@ -52,3 +52,4 @@
 
 (package! mini-modeline)
 (package! rich-minority)
+(package! frog-jump-buffer)

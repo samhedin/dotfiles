@@ -115,5 +115,4 @@
 
 (after! pdf-view
   (setq pdf-view-midnight-colors '("#928776" . "#2b2b2F")))
-(after! frog-jump
-  (setq frog-jump-buffer-posframe-handler 'posframe-poshandler-frame-bottom-center))
+(setq frog-jump-buffer-posframe-handler 'posframe-poshandler-frame-bottom-center)

@@ -40,18 +40,20 @@
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
-
-;; Doom's packages are pinned to a specific commit and updated from release to
-;; release. The `unpin!' macro allows you to unpin single packages...
-;(unpin! pinned-package)
-;; ...or multiple packages
-;(unpin! pinned-package another-pinned-package)
-;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
-;(unpin! t)
 (package! paren-face)
 (package! kaolin-themes)
+(package! highlight-parentheses)
+
+;; (package! rustic
+;;   :recipe (:host github :repo "samhedin/rustic" :branch "rustic-rustdoc"))
+(package! helm-ag)
+(package! rustic
+  :recipe (:local-repo "/home/sam/github/rustic/"))
 
  (package! rustdoc
    :recipe (:host github :repo "samhedin/rustdoc-to-org"))
 ;;(package! rustdoc
  ;; :recipe (:local-repo "/home/sam/github/rustdoc-to-org/"))
+(package! mini-modeline)
+(package! rich-minority)
+(package! frog-jump-buffer)

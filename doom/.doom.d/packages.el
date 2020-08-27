@@ -51,7 +51,7 @@
 (package! paren-face)
 (package! kaolin-themes)
 
-;; (package! rustdoc
-;;   :recipe (:host github :repo "samhedin/rustdoc-to-org"))
-(package! rustdoc
-  :recipe (:local-repo "/home/sam/github/rustdoc-to-org/"))
+ (package! rustdoc
+   :recipe (:host github :repo "samhedin/rustdoc-to-org"))
+;;(package! rustdoc
+ ;; :recipe (:local-repo "/home/sam/github/rustdoc-to-org/"))

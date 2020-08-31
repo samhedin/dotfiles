@@ -47,8 +47,7 @@ This function should only modify configuration layer settings."
                    0.0
                    read-process-output-max
                    (* 4096 4096)
-                   lsp-signature-render-documentation
-                   nil
+                   lsp-signature-render-documentation nil
                    lsp-rust-analyzer-server-display-inlay-hints
                    t
                    lsp-ui-sideline-delay

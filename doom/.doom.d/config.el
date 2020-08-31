@@ -29,7 +29,7 @@
 
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 5) (> time 19))
-      (load-theme 'kaolin-temple t)
+      (load-theme 'doom-Iosvkem t)
     (load-theme 'kaolin-light t)))
 
 (map! "<f5>"
@@ -112,7 +112,13 @@
 
 ;; Did pdf-tools break? Try
 ;; (pdf-tools-install)
+(after! lsp
+  (setq lsp-signature-render-documentation nil))
 
 (after! pdf-view
   (setq pdf-view-midnight-colors '("#928776" . "#2b2b2F")))
-(setq frog-jump-buffer-posframe-handler 'posframe-poshandler-frame-bottom-center)
+
+(after! org
+  (require 'ox-bibtex)
+  (setq-default fill-column 90)
+  (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))

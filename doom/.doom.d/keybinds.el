@@ -34,7 +34,7 @@
       :i "C-n" 'forward-char
       :g "C-." 'evil-avy-goto-char
       :g "<f12>" 'eval-expression
-      :g "C-l" 'frog-jump-buffer
+      :g "C-l" 'ivy-switch-buffer
       :g "C-_" '+popup/toggle
 
       ;; Must follow leader after here
@@ -56,4 +56,4 @@
         "RET" nil
         "C-SPC" nil))
 
-(provide 'keybinds-mode)
+(provide 'keybinds)

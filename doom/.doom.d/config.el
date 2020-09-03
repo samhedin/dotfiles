@@ -32,13 +32,6 @@
       (load-theme 'doom-Iosvkem t)
     (load-theme 'kaolin-light t)))
 
-(map! "<f5>"
-      (lambda ()
-        (interactive)
-        (if (eq doom-theme 'kaolin-light)
-            (load-theme 'kaolin-temple)
-          (load-theme 'kaolin-light))))
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -102,6 +95,7 @@
   :config
   (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
 (setenv "PATH" (concat (getenv "PATH") ":" "/home/sam/.local/bin/"))
+(setq exec-path (append exec-path '("/home/sam/.local/bin")))
 
 (setq rm-blacklist "")
 (rich-minority-mode)
@@ -119,6 +113,8 @@
   (setq pdf-view-midnight-colors '("#928776" . "#2b2b2F")))
 
 (after! org
-  (require 'ox-bibtex)
   (setq-default fill-column 90)
   (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))
+
+(after! pdf-view
+  (setq pdf-view-resize-factor 1.10))

@@ -44,12 +44,8 @@
 (package! kaolin-themes)
 (package! highlight-parentheses)
 
-;; (package! rustic
-;;   :recipe (:host github :repo "samhedin/rustic" :branch "rustic-rustdoc"))
-(package! helm-ag)
-(package! rustic
-  :recipe (:local-repo "/home/sam/github/rustic/"))
-
+(package! rustdoc
+  :recipe (:host github :repo "samhedin/rustdoc-to-org"))
 
 (package! mini-modeline)
 (package! rich-minority)

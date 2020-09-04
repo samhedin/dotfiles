@@ -41,7 +41,6 @@
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
 (package! paren-face)
-(package! kaolin-themes)
 (package! highlight-parentheses)
 
 (package! rustdoc

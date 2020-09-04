@@ -24,13 +24,14 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'kaolin-temple)
+(setq doom-theme 'doom-Iosvkem)
 ;; (setq doom-theme 'kaolin-light)
 
+;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 5) (> time 19))
       (load-theme 'doom-Iosvkem t)
-    (load-theme 'kaolin-light t)))
+    (load-theme 'doom-acario-light)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -65,7 +66,7 @@
 
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
-  (setq treemacs-width 30)
+  (setq treemacs-width 25)
   (treemacs-resize-icons 15))
 
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
@@ -114,7 +115,9 @@
 
 (after! org
   (setq-default fill-column 90)
+  (auto-fill-mode)
   (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))
+
 
 (after! pdf-view
   (setq pdf-view-resize-factor 1.10))

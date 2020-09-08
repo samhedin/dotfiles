@@ -19,19 +19,18 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Source Code Pro" :size 11.5 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+      doom-variable-pitch-font (font-spec :family "sans" :size 11.0))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-Iosvkem)
-;; (setq doom-theme 'kaolin-light)
 
 ;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 5) (> time 19))
+  (if (or (< time 7) (> time 19))
       (load-theme 'doom-Iosvkem t)
-    (load-theme 'doom-acario-light)))
+    (load-theme 'doom-acario-light t)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!

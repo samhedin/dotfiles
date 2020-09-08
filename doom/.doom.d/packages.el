@@ -42,7 +42,6 @@
 
 (package! paren-face)
 (package! highlight-parentheses)
-
 (package! rustdoc
   :recipe (:host github :repo "samhedin/rustdoc-to-org"))
 

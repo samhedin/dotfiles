@@ -36,6 +36,9 @@
       :g "<f12>" 'eval-expression
       :g "C-l" 'ivy-switch-buffer
       :g "C-_" '+popup/toggle
+      :n "C->" 'sp-slurp-hybrid-sexp
+      :g "C-|" 'forward-sexp
+      :g "C-%" 'backward-sexp
 
       ;; Must follow leader after here
       :leader

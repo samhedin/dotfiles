@@ -30,7 +30,7 @@
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 7) (> time 19))
       (load-theme 'doom-Iosvkem t)
-    (load-theme 'doom-acario-light t)))
+    (load-theme 'doom-solarized-light t)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -82,7 +82,11 @@
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 
 (defun sneaky-save-buffer (&rest _r)
-  (save-buffer))
+  (unless (string-match-p (regexp-quote "*") (buffer-name))
+    (save-buffer)))
+
+(advice-add 'winum-select-window-by-number :before #'sneaky-save-buffer)
+(advice-add 'evil-switch-to-windows-last-buffer :before #'sneaky-save-buffer)
 (advice-add 'magit-status :before #'sneaky-save-buffer)
 (advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
 (advice-add 'recompile :before #'sneaky-save-buffer)
@@ -101,18 +105,15 @@
 (rich-minority-mode)
 (mini-modeline-mode)
 
-(set-docsets! 'haskell-mode "Haskell")
-(setq +lookup-open-url-fn #'eww)
-
 ;; Did pdf-tools break? Try
 ;; (pdf-tools-install)
 (after! lsp
   (setq lsp-signature-render-documentation nil))
 
 (after! pdf-view
-  (setq pdf-view-midnight-colors '("#928776" . "#2b2b2F")))
+  (setq pdf-view-midnight-colors '("#D9D2C9" . "#2b2b2F")))
 
-(after! org
+(add-hook! 'org-mode-hook
   (setq-default fill-column 90)
   (auto-fill-mode)
   (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))

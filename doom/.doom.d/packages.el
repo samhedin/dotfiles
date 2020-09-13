@@ -44,9 +44,6 @@
 (package! highlight-parentheses)
 (package! rustdoc
   :recipe (:host github :repo "samhedin/rustdoc-to-org"))
-
- (package! rustdoc
-   :recipe (:host github :repo "samhedin/rustdoc-to-org"))
 ;;(package! rustdoc
  ;; :recipe (:local-repo "/home/sam/github/rustdoc-to-org/"))
 (package! mini-modeline)

@@ -47,6 +47,8 @@
       )
 
 (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
+(map! :map special-mode-map
+      "h" nil)
 (map! :map evil-normal-state-map
       "C-." nil
       "<C-tab>" nil

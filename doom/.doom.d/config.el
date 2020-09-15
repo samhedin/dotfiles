@@ -76,7 +76,7 @@
 (setq-default line-spacing 8)
 (global-paren-face-mode)
 (setq-default paren-face-regexp "[][(){}]")
-(setq-default paren-face-modes (append '(rustic-mode org-mode) paren-face-modes))
+(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
 
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
@@ -94,6 +94,7 @@
           (lambda ()
             (dired-hide-details-mode)
             (dired-sort-toggle-or-edit)))
+(setq projectile-enable-caching nil)
 
 (use-package lsp-haskell
   :config

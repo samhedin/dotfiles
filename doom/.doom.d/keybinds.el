@@ -31,10 +31,12 @@
       :i "C-@" "->"
       :i "C-£" "<-"
       :i "C-e" 'move-end-of-line
+      :g "C-;" 'iedit-mode
       :i "C-n" 'forward-char
       :g "C-." 'evil-avy-goto-char
       :g "<f12>" 'eval-expression
       :g "C-l" 'ivy-switch-buffer
+      :g "C-q" '+ivy/switch-workspace-buffer
       :g "C-_" '+popup/toggle
       :n "C->" 'sp-slurp-hybrid-sexp
       :g "C-|" 'forward-sexp

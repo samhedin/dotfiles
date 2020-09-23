@@ -42,9 +42,11 @@
 
 (package! paren-face)
 (package! highlight-parentheses)
-(package! rustdoc
-  :recipe (:host github :repo "samhedin/rustdoc-to-org"))
-;;(package! rustdoc
- ;; :recipe (:local-repo "/home/sam/github/rustdoc-to-org/"))
+(package! rustic
+  :recipe (:local-repo "/home/sam/github/rustic/"))
+(package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)
+(package! exwm)
+(package! prescient)
+(package! ivy-prescient)

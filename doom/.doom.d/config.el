@@ -8,6 +8,56 @@
 (setq user-full-name "Sam Hedin"
       user-mail-address "sam.hedin@gmail.com")
 
+;; EXWM
+;;
+;; (start-process-shell-command
+;;  "keyboard" nil "setxkbmap se dvorak_ep")
+;; (start-process-shell-command
+;;  "xset" nil "xset r rate 200 50")
+
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (require 'exwm-systemtray)
+;; (exwm-systemtray-enable)
+
+;; (setq exwm-input-global-keys
+;;       `(([?\s-r] . exwm-reset)
+;;         ([?\s-c] . exwm-input-release-keyboard)
+;;         ([?\s-t] . counsel-M-x)
+;;         ([?\s-d] . (lambda (command)
+;;                      (interactive (list (read-shell-command "$ ")))
+;;                      (start-process-shell-command command nil command)))
+;;         ([?\s-w] . exwm-workspace-switch)
+;;         ,@(mapcar (lambda (i)
+;;                     `(,(kbd (format "s-%d" i)) .
+;;                       (lambda ()
+;;                         (interactive)
+;;                         (exwm-workspace-switch-create ,i))))
+;;                   (number-sequence 0 9))))
+
+;; (setq exwm-input-simulation-keys
+;;       '(([?\C-b] . [left])
+;;         ([?\C-f] . [right])
+;;         ([?\C-p] . [up])
+;;         ([?\C-n] . [down])
+;;         ([?\C-a] . [home])
+;;         ([?\C-e] . [end])
+;;         ([?\M-v] . [prior])
+;;         ([?\C-v] . [next])
+;;         ([?\C-d] . [delete])
+;;         ([?\C-k] . [S-end delete])))
+
+
+;; (require 'exwm-randr)
+;; (setq exwm-randr-workspace-output-plist '(1 "DisplayPort-1"
+;;                                             2 "HDMI-A-0"))
+;; (add-hook 'exwm-randr-screen-change-hook
+;;           (lambda ()
+;;             (start-process-shell-command
+;;              "xrandr" nil "xrandr --output DisplayPort-1 --mode 1920x1080 --rate 120 --output HDMI-A-0 --mode 1920x1080 --right-of DisplayPort-1")))
+;; (exwm-randr-enable)
+;; (exwm-enable)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -28,9 +78,9 @@
 
 ;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 19))
+  (if (or (< time 7) (> time 17))
       (load-theme 'doom-Iosvkem t)
-    (load-theme 'doom-solarized-light t)))
+    (load-theme 'doom-one-light t)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -85,6 +135,7 @@
   (unless (string-match-p (regexp-quote "*") (buffer-name))
     (save-buffer)))
 
+(advice-add 'grep :before #'sneaky-save-buffer)
 (advice-add 'winum-select-window-by-number :before #'sneaky-save-buffer)
 (advice-add 'evil-switch-to-windows-last-buffer :before #'sneaky-save-buffer)
 (advice-add 'magit-status :before #'sneaky-save-buffer)
@@ -121,4 +172,6 @@
 
 
 (after! pdf-view
-  (setq pdf-view-resize-factor 1.10))
+  (setq pdf-view-resize-factor 1.10)
+  (setq lazy-highlight-cleanup nil))
+(ivy-prescient-mode)

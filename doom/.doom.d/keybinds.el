@@ -24,37 +24,17 @@
       :g "C-3" 'winum-select-window-3
       :g "C-4" 'winum-select-window-4
       :g "C-5" 'winum-select-window-5
-      :g "<C-tab>" 'evil-switch-to-windows-last-buffer
       :g  "C-\"" 'recompile
       :g "C-!" 'kill-compilation
       :i "C-¡" "::"
       :i "C-@" "->"
       :i "C-£" "<-"
-      :i "C-e" 'move-end-of-line
       :g "C-;" 'iedit-mode
-      :i "C-n" 'forward-char
-      :g "C-." 'evil-avy-goto-char
       :g "<f12>" 'eval-expression
       :g "C-l" 'ivy-switch-buffer
       :g "C-q" '+ivy/switch-workspace-buffer
       :g "C-_" '+popup/toggle
-      :n "C->" 'sp-slurp-hybrid-sexp
-      :g "C-|" 'forward-sexp
-      :g "C-%" 'backward-sexp
-
-      ;; Must follow leader after here
-      :leader
-      "!" 'shell-command
-      "C-t" 'counsel-M-x
       )
-
-(define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
-(map! :map special-mode-map
-      "h" nil)
-(map! :map evil-normal-state-map
-      "C-." nil
-      "<C-tab>" nil
-      "q" nil)
 
 (after! company
   (map! :map company-active-map

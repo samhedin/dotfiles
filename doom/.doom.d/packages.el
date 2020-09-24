@@ -47,6 +47,5 @@
 (package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)
-(package! exwm)
 (package! prescient)
 (package! ivy-prescient)

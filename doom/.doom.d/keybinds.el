@@ -36,12 +36,5 @@
       :g "C-_" '+popup/toggle
       )
 
-(after! company
-  (map! :map company-active-map
-        "<C-return>" #'company-complete-selection
-        "<return>" nil
-        "RET" nil
-        "C-SPC" nil)
-  (setq company-minimum-prefix-length 1))
 
 (provide 'keybinds)

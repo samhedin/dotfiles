@@ -147,9 +147,9 @@
             (dired-sort-toggle-or-edit)))
 (setq projectile-enable-caching nil)
 
-(use-package lsp-haskell
-  :config
-  (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
+;; (use-package lsp-haskell
+;;   :config
+;;   (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
 (setenv "PATH" (concat (getenv "PATH") ":" "/home/sam/.local/bin/"))
 (setq exec-path (append exec-path '("/home/sam/.local/bin")))
 

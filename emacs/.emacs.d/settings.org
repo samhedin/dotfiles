@@ -1,11 +1,38 @@
 * Visual stuff
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-(menu-bar-mode -1)
 (set-face-attribute 'default nil :font "Source Code Pro" :height 115)
 (blink-cursor-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(set-fringe-mode 5)
+(menu-bar-mode -1)
 #+END_SRC
+
+* straight.el
+#+BEGIN_SRC emacs-lisp
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+#+END_SRC
+#+begin_src emacs-lisp
+(straight-use-package 'magit)
+#+end_src
+
+* Functions
+#+begin_src emacs-lisp
+(find-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org")
+#+end_src
+#+begin_src emacs-lisp
+(defun open-settings ()
+  (interactive)
+    (find-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org"))
+#+end_src

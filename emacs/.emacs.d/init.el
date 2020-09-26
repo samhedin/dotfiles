@@ -1,4 +1,2 @@
 (require 'org)
-(org-babel-load-file
- (expand-file-name "settings.org"
-		   user-emacs-directory))
+(org-babel-load-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org")

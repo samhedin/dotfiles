@@ -10,6 +10,14 @@
 (setq org-startup-folded nil)
 #+END_SRC
 
+
+* Functions
+#+begin_src emacs-lisp
+(defun open-settings ()
+  (interactive)
+    (find-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org"))
+#+end_src
+
 * Packages
 ** straight.el
 #+BEGIN_SRC emacs-lisp
@@ -25,11 +33,14 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
 #+END_SRC
 
 ** Magit
 #+begin_src emacs-lisp
-(straight-use-package 'magit)
+(use-package magit
+  :straight t
+  :bind (("C-c s" . magit-status)))   
 #+end_src
 
 ** Selectrum
@@ -42,9 +53,3 @@
 (selectrum-mode +1)
 #+end_src
 
-* Functions
-#+begin_src emacs-lisp
-(defun open-settings ()
-  (interactive)
-    (find-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org"))
-#+end_src

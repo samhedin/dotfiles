@@ -83,8 +83,6 @@
 (require 'smartparens)
 (require 'smartparens-config)
 (add-hook 'programming-mode-hook #'smartparens-mode)
-(smartparens-strict-mode +1)
-(smartparens-mode 1)
 (smartparens-global-mode t)
 #+end_src
 ** Which-key
@@ -102,4 +100,23 @@
 :bind (("C-c f" . crux-recentf-find-file)
        ("C-o" . crux-smart-open-line)
       ("C-S-o" . crux-smart-open-line-above)))
+#+end_src
+** Dumb-jump
+#+begin_src emacs-lisp
+(use-package dumb-jump
+:straight t)
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+#+end_src
+** Winum
+#+begin_src emacs-lisp
+(use-package winum
+:straight t
+:bind (
+("C-2" . winum-select-window-2)
+("C-3" . winum-select-window-3)
+("C-1" . winum-select-window-1)))
+(require 'winum)
+(winum-mode)
+
+
 #+end_src

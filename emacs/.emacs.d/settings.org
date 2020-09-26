@@ -6,9 +6,12 @@
 (tool-bar-mode -1)
 (set-fringe-mode 5)
 (menu-bar-mode -1)
+(setq org-startup-indented t)
+(setq org-startup-folded nil)
 #+END_SRC
 
-* straight.el
+* Packages
+** straight.el
 #+BEGIN_SRC emacs-lisp
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -23,14 +26,23 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 #+END_SRC
+
+** Magit
 #+begin_src emacs-lisp
 (straight-use-package 'magit)
 #+end_src
 
-* Functions
+** Selectrum
 #+begin_src emacs-lisp
-(find-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org")
+(straight-use-package 'selectrum)
+(straight-use-package 'prescient)
+(straight-use-package 'selectrum-prescient)
+(selectrum-prescient-mode +1)
+(prescient-persist-mode +1)
+(selectrum-mode +1)
 #+end_src
+
+* Functions
 #+begin_src emacs-lisp
 (defun open-settings ()
   (interactive)

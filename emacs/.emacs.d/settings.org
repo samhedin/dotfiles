@@ -42,7 +42,17 @@
   :straight t
   :bind (("C-c s" . magit-status)))   
 #+end_src
-
+** Projectile
+#+begin_src emacs-lisp
+(use-package projectile
+  :straight t)
+#+end_src
+** Ace-jump
+#+begin_src emacs-lisp
+(use-package avy
+  :straight t
+  :bind (("C-." . avy-goto-char)))
+#+end_src
 ** Selectrum
 #+begin_src emacs-lisp
 (straight-use-package 'selectrum)

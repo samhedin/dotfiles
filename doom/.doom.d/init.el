@@ -182,8 +182,3 @@
        :config
        ;;literate
        (default +bindings +smartparens))
-
-(setq doom-leader-key "C-t"
-      doom-leader-alt-key "C-t")
-(setq doom-localleader-key "C-,"
-      doom-localleader-alt-key "C-,")

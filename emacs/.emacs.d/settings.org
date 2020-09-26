@@ -45,9 +45,14 @@
 ** Projectile
 #+begin_src emacs-lisp
 (use-package projectile
-  :straight t)
+  :straight t
+  :bind (("C-c p p" . projectile-switch-project)
+         ("C-c p s" . projectile-grep)
+         ("C-c p f" . projectile-find-file)))
+  
+(projectile-global-mode +1)
 #+end_src
-** Ace-jump
+** avy
 #+begin_src emacs-lisp
 (use-package avy
   :straight t
@@ -62,4 +67,39 @@
 (prescient-persist-mode +1)
 (selectrum-mode +1)
 #+end_src
+** Company
+#+begin_src emacs-lisp
+(use-package company
+:straight t
+:config
+(setq company-minimum-prefix-length 1))
+(add-hook 'after-init-hook 'global-company-mode)
+#+end_src
 
+** Smartparens
+#+begin_src emacs-lisp
+(use-package smartparens
+:straight t)
+(require 'smartparens)
+(require 'smartparens-config)
+(add-hook 'programming-mode-hook #'smartparens-mode)
+(smartparens-strict-mode +1)
+(smartparens-mode 1)
+(smartparens-global-mode t)
+#+end_src
+** Which-key
+#+begin_src emacs-lisp
+(use-package which-key
+:straight t
+:config
+(setq which-key-idle-delay 0.001))
+(which-key-mode)
+#+end_src
+** Crux
+#+begin_src emacs-lisp
+(use-package crux
+:straight t
+:bind (("C-c f" . crux-recentf-find-file)
+       ("C-o" . crux-smart-open-line)
+      ("C-S-o" . crux-smart-open-line-above)))
+#+end_src

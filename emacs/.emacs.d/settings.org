@@ -60,7 +60,8 @@
 #+end_src
 ** Selectrum
 #+begin_src emacs-lisp
-(straight-use-package 'selectrum)
+(use-package selectrum
+:straight t)
 (straight-use-package 'prescient)
 (straight-use-package 'selectrum-prescient)
 (selectrum-prescient-mode +1)
@@ -117,6 +118,8 @@
 ("C-1" . winum-select-window-1)))
 (require 'winum)
 (winum-mode)
-
+#+end_src
+* Binds
+#+begin_src emacs-lisp
 
 #+end_src

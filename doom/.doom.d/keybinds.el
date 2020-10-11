@@ -32,7 +32,7 @@
       :i "C-£" "<-"
       :i "C-e" 'move-end-of-line
       :g "C-;" 'iedit-mode
-      :i "C-n" 'forward-char
+      :i "C-f" 'forward-char
       :g "C-." 'evil-avy-goto-char
       :g "<f12>" 'eval-expression
       :g "C-l" 'ivy-switch-buffer

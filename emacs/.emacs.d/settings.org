@@ -1,0 +1,125 @@
+* Visual stuff
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :font "Source Code Pro" :height 115)
+(blink-cursor-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(set-fringe-mode 5)
+(menu-bar-mode -1)
+(setq org-startup-indented t)
+(setq org-startup-folded nil)
+#+END_SRC
+
+
+* Functions
+#+begin_src emacs-lisp
+(defun open-settings ()
+  (interactive)
+    (find-file "/home/sam/dotfiles/emacs/.emacs.d/settings.org"))
+#+end_src
+
+* Packages
+** straight.el
+#+BEGIN_SRC emacs-lisp
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
+#+END_SRC
+
+** Magit
+#+begin_src emacs-lisp
+(use-package magit
+  :straight t
+  :bind (("C-c s" . magit-status)))   
+#+end_src
+** Projectile
+#+begin_src emacs-lisp
+(use-package projectile
+  :straight t
+  :bind (("C-c p p" . projectile-switch-project)
+         ("C-c p s" . projectile-grep)
+         ("C-c p f" . projectile-find-file)))
+  
+(projectile-global-mode +1)
+#+end_src
+** avy
+#+begin_src emacs-lisp
+(use-package avy
+  :straight t
+  :bind (("C-." . avy-goto-char)))
+#+end_src
+** Selectrum
+#+begin_src emacs-lisp
+(use-package selectrum
+:straight t)
+(straight-use-package 'prescient)
+(straight-use-package 'selectrum-prescient)
+(selectrum-prescient-mode +1)
+(prescient-persist-mode +1)
+(selectrum-mode +1)
+#+end_src
+** Company
+#+begin_src emacs-lisp
+(use-package company
+:straight t
+:config
+(setq company-minimum-prefix-length 1))
+(add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+** Smartparens
+#+begin_src emacs-lisp
+(use-package smartparens
+:straight t)
+(require 'smartparens)
+(require 'smartparens-config)
+(add-hook 'programming-mode-hook #'smartparens-mode)
+(smartparens-global-mode t)
+#+end_src
+** Which-key
+#+begin_src emacs-lisp
+(use-package which-key
+:straight t
+:config
+(setq which-key-idle-delay 0.001))
+(which-key-mode)
+#+end_src
+** Crux
+#+begin_src emacs-lisp
+(use-package crux
+:straight t
+:bind (("C-c f" . crux-recentf-find-file)
+       ("C-o" . crux-smart-open-line)
+      ("C-S-o" . crux-smart-open-line-above)))
+#+end_src
+** Dumb-jump
+#+begin_src emacs-lisp
+(use-package dumb-jump
+:straight t)
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+#+end_src
+** Winum
+#+begin_src emacs-lisp
+(use-package winum
+:straight t
+:bind (
+("C-2" . winum-select-window-2)
+("C-3" . winum-select-window-3)
+("C-1" . winum-select-window-1)))
+(require 'winum)
+(winum-mode)
+#+end_src
+* Binds
+#+begin_src emacs-lisp
+
+#+end_src

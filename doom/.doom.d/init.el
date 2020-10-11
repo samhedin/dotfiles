@@ -40,7 +40,7 @@
        ;; ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;pretty-code       ; ligatures or substitute text with pretty symbols
-       ;tabs              ; a tab bar for Emacs
+                                        ;tabs              ; a tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        ;;vc-gutter         ; vcs diff in the fringe
@@ -51,12 +51,13 @@
        ;;zen               ; distraction-free coding or writing
 
        :editor
-       (evil +everywhere); come to the dark side, we have cookies
-       file-templates    ; auto-snippets for empty files
+       ;; (evil +everywhere)               ; come to the dark side, we have cookies
+       file-templates
+                                        ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        format   ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
-       lispy             ; vim for lisp, for people who don't like vim
+                                        ;       lispy                    ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
@@ -94,7 +95,7 @@
        (lookup +docsets +offline +dictionary)              ; navigate your code and its documentation
        lsp
        ;;macos             ; MacOS-specific commands
-       magit             ; a git porcelain for Emacs
+       (magit +forge)             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf               ; pdf enhancements
@@ -181,8 +182,3 @@
        :config
        ;;literate
        (default +bindings +smartparens))
-
-(setq doom-leader-key "C-t"
-      doom-leader-alt-key "C-t")
-(setq doom-localleader-key "C-,"
-      doom-localleader-alt-key "C-,")

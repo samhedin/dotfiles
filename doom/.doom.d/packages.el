@@ -47,3 +47,8 @@
 (package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)
+<<<<<<< HEAD
+=======
+(package! prescient)
+(package! ivy-prescient)
+>>>>>>> 4f805abb8d93519e0e159c19b1c21c5bcfaef4dd

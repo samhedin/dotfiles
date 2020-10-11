@@ -6,7 +6,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Sam Hedin"
-      user-mail-address "sam.hedin@gmail.com")
+            user-mail-address "sam.hedin@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -71,7 +71,7 @@
 (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
 
 (after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
+	  (setq rustic-lsp-server 'rust-analyzer))
 
 (setq-default line-spacing 10)
 (global-paren-face-mode)
@@ -82,8 +82,8 @@
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 
 (defun sneaky-save-buffer (&rest _r)
-  (unless (string-match-p (regexp-quote "*") (buffer-name))
-    (save-buffer)))
+    (unless (string-match-p (regexp-quote "*") (buffer-name))
+          (save-buffer)))
 
 (advice-add 'grep :before #'sneaky-save-buffer)
 (advice-add 'winum-select-window-by-number :before #'sneaky-save-buffer)
@@ -92,9 +92,9 @@
 (advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
 (advice-add 'recompile :before #'sneaky-save-buffer)
 (add-hook 'dired-mode-hook
-          (lambda ()
-            (dired-hide-details-mode)
-            (dired-sort-toggle-or-edit)))
+	            (lambda ()
+		                  (dired-hide-details-mode)
+				              (dired-sort-toggle-or-edit)))
 (setq projectile-enable-caching nil)
 
 ;; (use-package lsp-haskell
@@ -111,16 +111,20 @@
 ;; Did pdf-tools break? Try
 ;; (pdf-tools-install)
 (after! lsp
-  (setq lsp-signature-render-documentation nil))
+	  (setq lsp-signature-render-documentation nil))
 
 (after! pdf-view
   (setq pdf-view-resize-factor 1.10)
   (setq pdf-view-midnight-colors '("#dddddd" . "#262829")))
 
 (add-hook! 'org-mode-hook
-  (setq-default fill-column 90)
-  (auto-fill-mode)
-  (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))
+	     (setq-default fill-column 90)
+	       (auto-fill-mode)
+	         (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))
 
 (setq lsp-signature-render-documentation nil)
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+
+(after! pdf-view
+	  (setq pdf-view-resize-factor 1.10)
+	    (setq lazy-highlight-cleanup nil))

@@ -30,16 +30,33 @@
       :i "C-@" "->"
       :i "C-£" "<-"
       :g "C-;" 'iedit-mode
-<<<<<<< HEAD
       :i "C-f" 'forward-char
       :g "C-." 'evil-avy-goto-char
-=======
->>>>>>> 4f805abb8d93519e0e159c19b1c21c5bcfaef4dd
       :g "<f12>" 'eval-expression
       :g "C-l" 'ivy-switch-buffer
       :g "C-q" '+ivy/switch-workspace-buffer
       :g "C-_" '+popup/toggle
+
+      :leader
+      "!" 'shell-command
+      "C-t" 'counsel-M-x
       )
 
+(define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
+
+(map! :map special-mode-map
+      "h" nil)
+(map! :map evil-normal-state-map
+      "C-." nil
+      "<C-tab>" nil
+      "q" nil)
+
+(after! company
+  (map! :map company-active-map
+        "<C-return>" #'company-complete-selection
+        "<return>" nil
+        "RET" nil
+        "C-SPC" nil)
+  (setq company-minimum-prefix-length 1))
 
 (provide 'keybinds)

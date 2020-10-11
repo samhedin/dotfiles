@@ -51,7 +51,7 @@
        ;;zen               ; distraction-free coding or writing
 
        :editor
-       ;; (evil +everywhere)               ; come to the dark side, we have cookies
+       (evil +everywhere)               ; come to the dark side, we have cookies
        file-templates
                                         ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
@@ -135,7 +135,7 @@
        ;;json              ; At least it ain't XML
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
-       (julia +lsp)             ; a better, faster MATLAB
+       ;; (julia +lsp)             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        latex             ; writing papers in Emacs has never been so fun
        ;;lean
@@ -182,3 +182,8 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+(setq doom-leader-key "C-t"
+      doom-leader-alt-key "C-t")
+(setq doom-localleader-key "C-,"
+      doom-localleader-alt-key "C-,")

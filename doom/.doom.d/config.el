@@ -28,7 +28,7 @@
 
 ;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 17))
+  (if (or (< time 7) (> time 16))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -129,9 +129,9 @@
   (setq lazy-highlight-cleanup nil))
 
 (after! org
-
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
+  (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)
 
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -147,7 +147,7 @@
 (defun exercism-submit ()
   (interactive)
   (compile (format "exercism submit %s"  (buffer-name))))
+
 (defun exercism-run ()
   (interactive)
   (compile (format "julia runtests.jl")))
-

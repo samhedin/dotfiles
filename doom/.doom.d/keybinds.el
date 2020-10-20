@@ -30,6 +30,7 @@
       :i "C-@" "->"
       :i "C-£" "<-"
       :g "C-;" 'iedit-mode
+      :g "<C-tab>" 'evil-switch-to-windows-last-buffer
       :i "C-f" 'forward-char
       :g "C-." 'evil-avy-goto-char
       :g "<f12>" 'eval-expression

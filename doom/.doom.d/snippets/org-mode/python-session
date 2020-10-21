@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: python-session
+# key: ps
+# --
+
+#+BEGIN_SRC python :session
+$0
+#+END_SRC

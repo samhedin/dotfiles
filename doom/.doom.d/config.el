@@ -128,7 +128,22 @@
   (setq pdf-view-resize-factor 1.10)
   (setq lazy-highlight-cleanup nil))
 
+(setq org-startup-with-latex-preview t)
 (after! org
+;; (add-to-list 'org-latex-packages-alist '("" "listings" nil))
+;; (setq org-latex-listings t)
+;; (setq org-latex-listings-options '(("breaklines" "true")))
+  (require 'ox-latex)
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted")))
+(setq  org-latex-pdf-process
+       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-minted-options '(("breaklines" "true")
+                                 ("breakanywhere" "true")))
+
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)
@@ -142,12 +157,4 @@
 
 (setq dash-docs-docsets '("Julia"))
 (setq dash-docs-common-docsets '("Julia"))
-
-
-(defun exercism-submit ()
-  (interactive)
-  (compile (format "exercism submit %s"  (buffer-name))))
-
-(defun exercism-run ()
-  (interactive)
-  (compile (format "julia runtests.jl")))
+(setq large-file-warning-threshold 100000000)

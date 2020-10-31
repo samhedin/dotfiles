@@ -52,6 +52,11 @@
       "<C-tab>" nil
       "q" nil)
 
+(after! org
+  (map! :map org-mode-map
+        "C-c C-l" #'org-latex-preview
+        "C-c C-p" #'org-latex-export-to-pdf))
+
 (after! company
   (map! :map company-active-map
         "<C-return>" #'company-complete-selection

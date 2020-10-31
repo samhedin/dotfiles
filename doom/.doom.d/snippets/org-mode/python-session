@@ -3,6 +3,6 @@
 # key: ps
 # --
 
-#+BEGIN_SRC python :session
+#+BEGIN_SRC python :session :tangle yes :exports both
 $0
 #+END_SRC

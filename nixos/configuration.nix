@@ -89,17 +89,32 @@ nixpkgs.overlays = [
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
-git
-     wget vim
-     firefox
+     	git
+     	wget 
+	vim
+     	firefox
 	chromium
-vlc
-gcc
-spotify
+	vlc
+	gcc
+	spotify
 	j4-dmenu-desktop
 	tint2
-discord
+	discord
+	arc-theme
+	papirus-icon-theme
    ];
+
+fonts.fonts = with pkgs; [
+  noto-fonts
+  noto-fonts-cjk
+  noto-fonts-emoji
+  liberation_ttf
+  fira-code
+  fira-code-symbols
+  mplus-outline-fonts
+  dina-font
+  proggyfonts
+];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

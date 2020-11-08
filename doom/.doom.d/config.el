@@ -73,7 +73,7 @@
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
 
-(setq-default line-spacing 10)
+(setq-default line-spacing 8)
 (global-paren-face-mode)
 (setq-default paren-face-regexp "[][(){}]")
 (setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
@@ -85,12 +85,9 @@
   (unless (string-match-p (regexp-quote "*") (buffer-name))
     (save-buffer)))
 
-(advice-add 'grep :before #'sneaky-save-buffer)
-(advice-add 'winum-select-window-by-number :before #'sneaky-save-buffer)
-(advice-add 'evil-switch-to-windows-last-buffer :before #'sneaky-save-buffer)
-(advice-add 'magit-status :before #'sneaky-save-buffer)
-(advice-add 'projectile-compile-project :before #'sneaky-save-buffer)
-(advice-add 'recompile :before #'sneaky-save-buffer)
+(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile))
+  (advice-add f :before #'sneaky-save-buffer))
+
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	    (dired-hide-details-mode)
@@ -146,6 +143,6 @@
      (rust . t)
      (sh . t))))
 
-(setq dash-docs-docsets '("Julia"))
-(setq dash-docs-common-docsets '("Julia"))
+(setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
+(setq dash-docs-common-docsets '("Julia""Python 3" "NumPy" "SciPy"))
 (setq large-file-warning-threshold 100000000)

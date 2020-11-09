@@ -127,9 +127,9 @@
 
 (setq org-startup-with-latex-preview t)
 (after! org
-(add-to-list 'org-latex-packages-alist '("" "listings" nil))
-(setq org-latex-listings t)
-(setq org-latex-listings-options '(("breaklines" "true")))
+  (add-to-list 'org-latex-packages-alist '("" "listings" nil))
+  (setq org-latex-listings t)
+  (setq org-latex-listings-options '(("breaklines" "true")))
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)

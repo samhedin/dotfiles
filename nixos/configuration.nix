@@ -47,11 +47,6 @@
  # services.xserver.displayManager.sddm.enable = true;
  # services.xserver.desktopManager.plasma5.enable = true;
 
-nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
 
  services.xserver = {
     enable = true;   
@@ -65,6 +60,7 @@ nixpkgs.overlays = [
     };
     windowManager.i3.enable = true;
     displayManager.defaultSession = "xfce+i3";
+ 	displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
   };
  #  Configure keymap in X11
    services.xserver.layout = "us";
@@ -86,13 +82,26 @@ nixpkgs.overlays = [
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
    };
 
+nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+	stow
      	git
      	wget 
 	vim
+	fd
+	ripgrep
      	firefox
+	ark
+	alacritty
+	fira-code
+	emacs
 	chromium
 	vlc
 	gcc
@@ -100,6 +109,7 @@ nixpkgs.overlays = [
 	j4-dmenu-desktop
 	tint2
 	discord
+	polybar
 	arc-theme
 	papirus-icon-theme
    ];

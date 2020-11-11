@@ -28,7 +28,7 @@
 
 ;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 16))
+  (if (or (< time 7) (> time 21))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -146,3 +146,9 @@
 (setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
 (setq dash-docs-common-docsets '("Julia""Python 3" "NumPy" "SciPy"))
 (setq large-file-warning-threshold 100000000)
+
+(defadvice find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+               (file-writable-p buffer-file-name))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))

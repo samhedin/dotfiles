@@ -4,21 +4,17 @@
 
 { config, pkgs, lib, ... }:
 
-
-
 {
-
- nix = {
+  nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-   };
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./cachix.nix
-    ];
+  };
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./cachix.nix
+  ];
   nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -26,7 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
-   networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -51,12 +47,11 @@
 
   # Enable the Plasma 5 Desktop Environment.
   #services.xserver.enable = true;
- # services.xserver.displayManager.sddm.enable = true;
- # services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
 
-
- services.xserver = {
-    enable = true;   
+  services.xserver = {
+    enable = true;
     desktopManager = {
       xterm.enable = false;
       xfce = {
@@ -67,78 +62,85 @@
     };
     windowManager.i3.enable = true;
     displayManager.defaultSession = "xfce+i3";
- 	#displayManager.sessionCommands = "setxkbmap se dvorak_a5\n"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
+    #displayManager.sessionCommands = "setxkbmap se dvorak_a5\n"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
   };
- #  Configure keymap in X11
-   services.xserver.layout = "us";
-   services.xserver.xkbOptions = "eurosign:e";
+  #  Configure keymap in X11
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
   # Enable sound.
-   sound.enable = true;
-   hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.sam = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-   };
+  users.users.sam = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  };
 
-nixpkgs.overlays = [
+  nixpkgs.overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+      url =
+        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
     }))
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; 
-	let
-	      polybar = pkgs.polybar.override {
-		i3Support = true;
-	      };
-    in
-	[
-	stow
-     	git
-     	wget 
-	vim
-	fd
-	ripgrep
-     	firefox
-	ark
-	alacritty
-	fira-code
-	emacs
-	chromium
-	vlc
-	gcc
-	deluge
-	spotify
-	j4-dmenu-desktop
-	discord
-	polybar
-	arc-theme
-	papirus-icon-theme
-   ];
+  environment.systemPackages = with pkgs;
+    let polybar = pkgs.polybar.override { i3Support = true; };
+        my-python-packages = python-packages: with python-packages; [
+            pandas
+            numpy
+            matplotlib
+            scipy
+            scikitlearn
+          ];
+          my-python = python38.withPackages my-python-packages;
+    in [
+      stow
+      git
+      wget
+      nixfmt
+      vim
+      fd
+      ripgrep
+      firefox
+      ark
+      alacritty
+      fira-code
+      emacs
+      my-python
+      chromium
+      vlc
+      gcc
+      deluge
+      spotify
+      j4-dmenu-desktop
+      discord
+      polybar
+      arc-theme
+      papirus-icon-theme
+    ];
 
-fonts.fonts = with pkgs; [
-  noto-fonts
-  siji
-  noto-fonts-cjk
-  noto-fonts-emoji
-  liberation_ttf
-  fira-code
-  fira-code-symbols
-  mplus-outline-fonts
-  dina-font
-  proggyfonts
-];
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    siji
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -151,7 +153,7 @@ fonts.fonts = with pkgs; [
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

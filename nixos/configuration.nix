@@ -121,7 +121,6 @@ nixpkgs.overlays = [
 	deluge
 	spotify
 	j4-dmenu-desktop
-	tint2
 	discord
 	polybar
 	arc-theme

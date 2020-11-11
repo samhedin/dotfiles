@@ -7,6 +7,13 @@
 
 
 {
+
+ nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+   };
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -60,7 +67,7 @@
     };
     windowManager.i3.enable = true;
     displayManager.defaultSession = "xfce+i3";
- 	displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
+ 	#displayManager.sessionCommands = "setxkbmap se dvorak_a5\n"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
   };
  #  Configure keymap in X11
    services.xserver.layout = "us";
@@ -90,7 +97,13 @@ nixpkgs.overlays = [
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
+   environment.systemPackages = with pkgs; 
+	let
+	      polybar = pkgs.polybar.override {
+		i3Support = true;
+	      };
+    in
+	[
 	stow
      	git
      	wget 
@@ -105,6 +118,7 @@ nixpkgs.overlays = [
 	chromium
 	vlc
 	gcc
+	deluge
 	spotify
 	j4-dmenu-desktop
 	tint2
@@ -116,6 +130,7 @@ nixpkgs.overlays = [
 
 fonts.fonts = with pkgs; [
   noto-fonts
+  siji
   noto-fonts-cjk
   noto-fonts-emoji
   liberation_ttf

@@ -43,7 +43,7 @@
 (package! paren-face)
 (package! highlight-parentheses)
 (package! rustic
-  :recipe (:local-repo "/home/sam/github/rustic/"))
+  :recipe (:local-repo "/home/sam/git/rustic/"))
 (package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)

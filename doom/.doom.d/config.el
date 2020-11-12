@@ -174,3 +174,5 @@ STDERR with `org-babel-eval-error-notify'."
   (unless (and buffer-file-name
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(setq auth-sources '("/home/sam/.authinfo"))

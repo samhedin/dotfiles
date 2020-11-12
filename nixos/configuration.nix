@@ -118,11 +118,15 @@
       fira-code
       sqlite
       my-python
+      rust-analyzer
       chromium
       vlc
       gcc
       deluge
+      pandoc
+      rustup
       spotify
+      openssl
       j4-dmenu-desktop
       discord
       polybar

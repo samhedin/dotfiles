@@ -101,6 +101,7 @@
             matplotlib
             scipy
             scikitlearn
+            black
           ];
           my-python = python38.withPackages my-python-packages;
     in [
@@ -115,7 +116,7 @@
       ark
       alacritty
       fira-code
-      emacs
+      sqlite
       my-python
       chromium
       vlc

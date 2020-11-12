@@ -134,6 +134,28 @@
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)
 
+  (defvar org-babel-eval-verbose t
+    "A non-nil value makes `org-babel-eval' display")
+
+  (defun org-babel-eval (cmd body)
+    "Run CMD on BODY.
+If CMD succeeds then return its results, otherwise display
+STDERR with `org-babel-eval-error-notify'."
+    (let ((err-buff (get-buffer-create " *Org-Babel Error*")) exit-code)
+      (with-current-buffer err-buff (erase-buffer))
+      (with-temp-buffer
+        (insert body)
+        (setq exit-code
+              (org-babel--shell-command-on-region
+               (point-min) (point-max) cmd err-buff))
+        (if (or (not (numberp exit-code)) (> exit-code 0)
+                (and org-babel-eval-verbose (> (buffer-size err-buff) 0))) ; new condition
+            (progn
+              (with-current-buffer err-buff
+                (org-babel-eval-error-notify exit-code (buffer-string)))
+              nil)
+          (buffer-string)))))
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
@@ -144,7 +166,7 @@
      (sh . t))))
 
 (setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
-(setq dash-docs-common-docsets '("Julia""Python 3" "NumPy" "SciPy"))
+(setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
 (setq large-file-warning-threshold 100000000)
 
 (defadvice find-file (after find-file-sudo activate)

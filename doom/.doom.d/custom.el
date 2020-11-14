@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
+ '(org-startup-folded t)
  '(safe-local-variable-values
    '((lsp--override-calculate-lisp-indent\? . t)
      (flycheck-disabled-checkers quote

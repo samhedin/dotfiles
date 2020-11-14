@@ -54,7 +54,6 @@
 
 (after! org
   (map! :map org-mode-map
-        "C-c C-l" #'org-latex-preview
         "C-c C-p" #'org-latex-export-to-pdf))
 
 (after! company

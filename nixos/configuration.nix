@@ -99,6 +99,7 @@
             pandas
             numpy
             matplotlib
+            i3ipc
             scipy
             scikitlearn
             black

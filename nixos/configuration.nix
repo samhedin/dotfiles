@@ -129,13 +129,18 @@
       pandoc
       rustup
       spotify
+      aspell
+      aspellDicts.en
+      aspellDicts.sv
+      aspellDicts.en-computers
+      aspellDicts.en-science
       openssl
       j4-dmenu-desktop
       discord
       polybar
       arc-theme
       papirus-icon-theme
-	 pkgs.ntfsprogs
+	    pkgs.ntfsprogs
     ];
 
   fonts.fonts = with pkgs; [

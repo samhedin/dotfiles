@@ -156,4 +156,4 @@
 (setq auth-sources '("/home/sam/.authinfo"))
 
 (after! centaur-tabs
-  (centaur-tabs-group-by-projectile-project))
+  (setq centaur-tabs-set-close-button nil))

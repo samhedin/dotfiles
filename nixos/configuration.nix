@@ -104,7 +104,7 @@
             scikitlearn
             black
           ];
-          my-python = python38.withPackages my-python-packages;
+        my-python = python38.withPackages my-python-packages;
     in [
       stow
       git
@@ -140,7 +140,8 @@
       polybar
       arc-theme
       papirus-icon-theme
-	    pkgs.ntfsprogs
+      languagetool
+      pkgs.ntfsprogs
     ];
 
   fonts.fonts = with pkgs; [

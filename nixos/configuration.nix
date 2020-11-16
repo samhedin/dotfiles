@@ -84,12 +84,12 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    }))
-  ];
+  # nixpkgs.overlays = [
+  #   (import (builtins.fetchTarball {
+  #     url =
+  #       "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+  #   }))
+  # ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -115,9 +115,11 @@
       ripgrep
       firefox
       ark
+      unrar
       alacritty
       fira-code
       sqlite
+      slack
       my-python
       rust-analyzer
       chromium
@@ -133,6 +135,7 @@
       polybar
       arc-theme
       papirus-icon-theme
+	 pkgs.ntfsprogs
     ];
 
   fonts.fonts = with pkgs; [

@@ -154,3 +154,6 @@
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (setq auth-sources '("/home/sam/.authinfo"))
+
+(after! centaur-tabs
+  (centaur-tabs-group-by-projectile-project))

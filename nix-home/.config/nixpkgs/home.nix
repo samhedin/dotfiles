@@ -10,7 +10,7 @@
   home.homeDirectory = "/home/sam";
   programs.git = {
     enable = true;
-    userName  = "Sam Hedin";
+    userName  = "samhedin";
     userEmail = "sam.hedin@gmail.com";
   };
  programs.emacs = {

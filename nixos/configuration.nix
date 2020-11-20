@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
 {
   nix = {
     package = pkgs.nixFlakes;
@@ -108,6 +107,8 @@
     in [
       stow
       git
+      udiskie
+      udisks
       wget
       nixfmt
       vim
@@ -128,6 +129,7 @@
       deluge
       pandoc
       rustup
+      libreoffice
       spotify
       aspell
       aspellDicts.en

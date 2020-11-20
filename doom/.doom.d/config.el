@@ -28,7 +28,7 @@
 
 ;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 21))
+  (if (or (< time 7) (> time 15))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 

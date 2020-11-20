@@ -22,6 +22,10 @@
     { device = "/dev/disk/by-uuid/B851-A94D";
       fsType = "vfat";
     };
+  fileSystems."/run/media/sam/Lagring" =
+    {
+      device = "/dev/sda1";
+    };
 
   swapDevices = [ ];
 

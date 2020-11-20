@@ -18,6 +18,27 @@
     package = pkgs.emacsGcc;
     extraPackages = (epkgs: [ epkgs.vterm ] );
   };
+
+ programs.texlive.enable = true;
+  programs.texlive.extraPackages = tpkgs: {
+    inherit (tpkgs)
+      scheme-medium
+      cm-super
+      capt-of
+      algorithms
+      tikz-cd
+      caption
+      csquotes
+      wrapfig
+      braket
+      turnstile
+      dashbox
+      chktex
+      cleveref
+      bussproofs
+      latexmk;
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

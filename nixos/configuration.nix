@@ -107,14 +107,15 @@
     in [
       stow
       git
-      udiskie
-      udisks
       wget
+      cmake
+      ninja
       nixfmt
       vim
       fd
       ripgrep
       firefox
+      julia
       ark
       unrar
       alacritty
@@ -130,6 +131,8 @@
       pandoc
       rustup
       libreoffice
+      teamviewer
+      zoom-us
       spotify
       aspell
       aspellDicts.en

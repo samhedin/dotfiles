@@ -82,7 +82,8 @@
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 
 (defun sneaky-save-buffer (&rest _r)
-  (unless (string-match-p (regexp-quote "*") (buffer-name))
+  (unless (or  (string-match-p (regexp-quote "*") (buffer-name))
+               (string-match-p (regexp-quote "pdf") (buffer-name)))
     (save-buffer)))
 
 (dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile))
@@ -115,7 +116,7 @@
   (setq pdf-view-midnight-colors '("#dddddd" . "#262829")))
 
 (add-hook! 'org-mode-hook
-  (setq-default fill-column 90)
+  (setq-default fill-column 120)
   (auto-fill-mode)
   (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))
 
@@ -146,12 +147,6 @@
 (setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
 (setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
 (setq large-file-warning-threshold 100000000)
-
-(defadvice find-file (after find-file-sudo activate)
-  "Find file as root if necessary."
-  (unless (and buffer-file-name
-               (file-writable-p buffer-file-name))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (setq auth-sources '("/home/sam/.authinfo"))
 

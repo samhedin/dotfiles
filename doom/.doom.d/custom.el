@@ -204,7 +204,8 @@ is the buffer position of the start of the containing expression."
                       (t normal-indent)))))))
            (when
                (< emacs-major-version 28)
-             (advice-add #'calculate-lisp-indent :around #'wrap-calculate-lisp-indent))))))
+             (advice-add #'calculate-lisp-indent :around #'wrap-calculate-lisp-indent)))))
+ '(warning-suppress-types '(((undo discard-info)) ((undo discard-info)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

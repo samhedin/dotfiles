@@ -21,6 +21,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -61,7 +62,7 @@
     };
     windowManager.i3.enable = true;
     displayManager.defaultSession = "xfce+i3";
-    #displayManager.sessionCommands = "setxkbmap se dvorak_a5\n"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
+    displayManager.sessionCommands = "xkbcomp layout.xkm $DISPLAY\nxset r rate 200"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
   };
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -115,7 +116,6 @@
       fd
       ripgrep
       firefox
-      julia
       ark
       unrar
       alacritty

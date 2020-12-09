@@ -68,7 +68,8 @@
   (setq treemacs-width 35)
   (treemacs-resize-icons 15))
 
-(remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
+;; (remove-hook! (prog-mode text-mode conf-mode special-mode) 'hl-line-mode)
+(advice-add #'hl-line-mode :override #'ignore)
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))

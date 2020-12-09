@@ -62,7 +62,8 @@
     };
     windowManager.i3.enable = true;
     displayManager.defaultSession = "xfce+i3";
-    displayManager.sessionCommands = "xkbcomp layout.xkm $DISPLAY\nxset r rate 200"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
+    displayManager.sessionCommands = "xkbcomp layout.xkm $DISPLAY
+xset r rate 200"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
   };
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -109,6 +110,7 @@
       stow
       git
       wget
+      nodejs
       cmake
       ninja
       nixfmt

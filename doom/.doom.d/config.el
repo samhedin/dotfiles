@@ -5,7 +5,7 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Sam Hedin"
+(setq user-full-name "Sam Yousefzadegan Hedin"
       user-mail-address "sam.hedin@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -132,6 +132,8 @@
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)
+  (setq org-latex-toc-command "\\tableofcontents \\clearpage")
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)

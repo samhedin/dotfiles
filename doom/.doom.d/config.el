@@ -129,19 +129,9 @@
 
 (setq org-startup-with-latex-preview t)
 (after! org
-  (add-to-list 'org-latex-packages-alist '("" "listings" nil))
-  (setq org-latex-listings t)
-  (setq org-latex-listings-options '(("breaklines" "true")))
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)
-
-  (setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
@@ -150,6 +140,14 @@
      (latex . t)
      (rust . t)
      (sh . t))))
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-minted-options '(("breaklines" "true")
+                                 ("breakanywhere" "true")))
 
 (setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
 (setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy"))

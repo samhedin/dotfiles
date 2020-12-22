@@ -116,11 +116,6 @@
   (setq pdf-view-resize-factor 1.10)
   (setq pdf-view-midnight-colors '("#dddddd" . "#262829")))
 
-(add-hook! 'org-mode-hook
-  (setq-default fill-column 120)
-  (auto-fill-mode)
-  (setq org-latex-pdf-process '("latexmk -pdf -outdir=%o %f")))
-
 (setq lsp-signature-render-documentation nil)
 
 (after! pdf-view
@@ -129,6 +124,8 @@
 
 (setq org-startup-with-latex-preview t)
 (after! org
+  (setq-default fill-column 120)
+  (auto-fill-mode)
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-meta-line nil :height 0.8 :background nil)
@@ -142,6 +139,7 @@
      (latex . t)
      (rust . t)
      (sh . t))))
+
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
@@ -151,8 +149,8 @@
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))
 
-(setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
-(setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy"))
+(setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "Pytorch"))
+(setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "Pytorch"))
 (setq large-file-warning-threshold 100000000)
 
 (setq auth-sources '("/home/sam/.authinfo"))

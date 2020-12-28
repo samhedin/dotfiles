@@ -25,6 +25,8 @@
       scheme-medium
       cm-super
       capt-of
+      minted
+      biblatex
       algorithms
       tikz-cd
       caption

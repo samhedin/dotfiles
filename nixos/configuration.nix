@@ -62,8 +62,7 @@
     };
     windowManager.i3.enable = true;
     displayManager.defaultSession = "xfce+i3";
-    displayManager.sessionCommands = "xkbcomp layout.xkm $DISPLAY
-xset r rate 200"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
+    displayManager.sessionCommands = "xkbcomp layout.xkm $DISPLAY"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
   };
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -84,7 +83,7 @@ xset r rate 200"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
-
+  nixpkgs.overlays = [(self: super: { discord = super.discord.overrideAttrs (_: { src = builtins.fetchTarball https://discordapp.com/api/download?platform=linux&format=tar.gz ; });})];
   # nixpkgs.overlays = [
   #   (import (builtins.fetchTarball {
   #     url =
@@ -99,6 +98,8 @@ xset r rate 200"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
         my-python-packages = python-packages: with python-packages; [
             pandas
             numpy
+            pytorch
+            pygments
             matplotlib
             i3ipc
             scipy

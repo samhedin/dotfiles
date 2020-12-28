@@ -47,7 +47,7 @@ bindsym XF86MonBrightnessDown exec light -U 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec konsole
 
 bindsym $mod+q kill
 
@@ -163,7 +163,6 @@ bindsym $mod+t split toggle
 bindsym $mod+Shift+q move container to output right
 bindsym $mod+Shift+c exec chromium
 bindsym $mod+Shift+e exec emacs
-bindsym $mod+Shift+y exec xkbcomp ~/dotfiles/nixos/layout.xkm $DISPLAY
 
 exec_always --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.3
 exec_always --no-startup-id xinput set-prop 13 "libinput Accel Speed" -0.3

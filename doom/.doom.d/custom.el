@@ -206,7 +206,9 @@ is the buffer position of the start of the containing expression."
                (< emacs-major-version 28)
              (advice-add #'calculate-lisp-indent :around #'wrap-calculate-lisp-indent)))))
  '(warning-suppress-types
-   '((with-editor)
+   '(((undo discard-info))
+     ((undo discard-info))
+     (with-editor)
      ((undo discard-info))
      ((undo discard-info)))))
 (custom-set-faces

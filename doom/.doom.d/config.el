@@ -28,7 +28,7 @@
 
 ;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 15))
+  (if (or (< time 7) (> time 14))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -149,11 +149,21 @@
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))
 
-(setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "Pytorch"))
-(setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "Pytorch"))
+(setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "PyTorch"))
+(setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "PyTorch"))
 (setq large-file-warning-threshold 100000000)
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
 (after! centaur-tabs
   (setq centaur-tabs-set-close-button nil))
+
+(defun copy-current-file-path ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))

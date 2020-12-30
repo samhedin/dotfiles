@@ -149,6 +149,12 @@
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))
 
+;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy"))
+;;   (dash-docs-install-docset f))
+
+;; (dolist (f '("scikit-learn" "PyTorch"))
+;;   (dash-docs-install-user-docset f))
+
 (setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "PyTorch"))
 (setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "PyTorch"))
 (setq large-file-warning-threshold 100000000)

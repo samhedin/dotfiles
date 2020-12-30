@@ -1,15 +1,12 @@
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 #+end_src
-
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
+* Variable settings
 #+begin_src emacs-lisp
 (setq user-full-name "Sam Yousefzadegan Hedin"
       user-mail-address "sam.hedin@gmail.com")
+
+(setq auth-sources '("/home/sam/.authinfo"))
 #+end_src
 
 Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -29,12 +26,27 @@ are the three important ones:
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-#+begin_src
-(setq doom-theme 'doom-Iosvkem)
+#+begin_src emacs-lisp
 #+end_src
 
-;; https://www.reddit.com/r/emacs/comments/ilujry/doomthemes_miramare_oldhope_flatwhite/
 #+begin_src emacs-lisp
+(setq display-line-numbers-type nil)
+(setq confirm-kill-emacs nil)
+(setq which-key-idle-delay 0.001)
+#+end_src
+
+#+begin_src emacs-lisp
+(defun sneaky-save-buffer (&rest _r)
+  (unless (or  (string-match-p (regexp-quote "*") (buffer-name))
+               (string-match-p (regexp-quote "pdf") (buffer-name)))
+    (save-buffer)))
+
+(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile))
+  (advice-add f :before #'sneaky-save-buffer))
+#+end_src
+* Theme
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 7) (> time 14))
       (load-theme 'doom-one t)
@@ -43,12 +55,21 @@ are the three important ones:
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+#+end_src
+* My private functions
+#+begin_src emacs-lisp
+(defun copy-current-file-path ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
+#+end_src
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type nil)
-(setq confirm-kill-emacs nil)
-
+#+begin_src emacs-lisp
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -69,66 +90,33 @@ are the three important ones:
 (load! "keybinds.el")
 (keybinds-mode)
 
-(setq which-key-idle-delay 0.001)
+(global-hl-line-mode 0)
 
+(setq-default line-spacing 8)
+(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+(advice-add #'rainbow-delimiters-mode :override #'ignore)
+
+(setq projectile-enable-caching nil)
+
+(setenv "PATH" (concat (getenv "PATH") ":" "/home/sam/.local/bin/"))
+(setq exec-path (append exec-path '("/home/sam/.local/bin")))
+#+end_src
+
+* Packages
+** Treemacs
+#+begin_src emacs-lisp
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
   (setq treemacs-width 35)
   (treemacs-resize-icons 15))
-
-(global-hl-line-mode 0)
-
-(after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
-
-(setq-default line-spacing 8)
-(global-paren-face-mode)
-(setq-default paren-face-regexp "[][(){}]")
-(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
-
-(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
-(advice-add #'rainbow-delimiters-mode :override #'ignore)
-
-(defun sneaky-save-buffer (&rest _r)
-  (unless (or  (string-match-p (regexp-quote "*") (buffer-name))
-               (string-match-p (regexp-quote "pdf") (buffer-name)))
-    (save-buffer)))
-
-(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile))
-  (advice-add f :before #'sneaky-save-buffer))
-
-(add-hook 'dired-mode-hook
-	  (lambda ()
-	    (dired-hide-details-mode)
-	    (dired-sort-toggle-or-edit)))
-(setq projectile-enable-caching nil)
-
-;; (use-package lsp-haskell
-;;   :config
-;;   (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
-
-(setenv "PATH" (concat (getenv "PATH") ":" "/home/sam/.local/bin/"))
-(setq exec-path (append exec-path '("/home/sam/.local/bin")))
-
-(setq rm-blacklist "")
-(rich-minority-mode)
-(mini-modeline-mode)
-
-;; Did pdf-tools break? Try
-;; (pdf-tools-install)
-(after! lsp
-  (setq lsp-signature-render-documentation nil))
-
-(after! pdf-view
-  (setq pdf-view-resize-factor 1.10)
-  (setq pdf-view-midnight-colors '("#dddddd" . "#262829")))
-
-(setq lsp-signature-render-documentation nil)
-
-(after! pdf-view
-  (setq pdf-view-resize-factor 1.10)
-  (setq lazy-highlight-cleanup nil))
-
+#+end_src
+** Centaur tabs
+#+begin_src emacs-lisp
+(after! centaur-tabs
+  (setq centaur-tabs-set-close-button nil))
+#+end_src
+** Org-mode
+#+begin_src emacs-lisp
 (setq org-startup-with-latex-preview t)
 (after! org
   (setq-default fill-column 120)
@@ -156,6 +144,9 @@ are the three important ones:
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))
 
+#+end_src
+** Dash-docs
+#+begin_src emacs-lisp
 ;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy"))
 ;;   (dash-docs-install-docset f))
 
@@ -165,19 +156,48 @@ are the three important ones:
 (setq dash-docs-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "PyTorch"))
 (setq dash-docs-common-docsets '("Julia" "Python 3" "NumPy" "SciPy" "scikit-learn" "PyTorch"))
 (setq large-file-warning-threshold 100000000)
+#+end_src
 
-(setq auth-sources '("/home/sam/.authinfo"))
+** LSP-mode
+#+begin_src emacs-lisp
+(after! lsp
+  (setq lsp-signature-render-documentation nil))
+;; (setq lsp-signature-render-documentation nil)
 
-(after! centaur-tabs
-  (setq centaur-tabs-set-close-button nil))
+;; (use-package lsp-haskell
+;;   :config
+;;   (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
 
-(defun copy-current-file-path ()
-  "Copy the current buffer file name to the clipboard."
-  (interactive)
-  (let ((filename (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (buffer-file-name))))
-    (when filename
-      (kill-new filename)
-      (message "Copied buffer file name '%s' to the clipboard." filename))))
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
+#+end_src
+
+** Paren-face
+#+begin_src emacs-lisp
+(global-paren-face-mode)
+(setq-default paren-face-regexp "[][(){}]")
+(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
+#+end_src
+** PDF-tools
+#+begin_src emacs-lisp
+;; Did pdf-tools break? Try
+;; (pdf-tools-install)
+
+(after! pdf-view
+  (setq pdf-view-resize-factor 1.10)
+  (setq pdf-view-midnight-colors '("#dddddd" . "#262829")))
+#+end_src
+** Dired
+#+begin_src emacs-lisp
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (dired-hide-details-mode)
+	    (dired-sort-toggle-or-edit)))
+#+end_src
+
+** Modeline, rich-minority and mini-modeline
+#+begin_src emacs-lisp
+(setq rm-blacklist "")
+(rich-minority-mode)
+(mini-modeline-mode)
 #+end_src

@@ -19,8 +19,8 @@ are the three important ones:
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Fira Code" :size 11.5 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 11.5))
+(setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
 #+end_src
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -107,7 +107,7 @@ are the three important ones:
 #+begin_src emacs-lisp
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
-  (setq treemacs-width 35)
+  (setq treemacs-width 25)
   (treemacs-resize-icons 15))
 #+end_src
 ** Centaur tabs
@@ -135,11 +135,11 @@ are the three important ones:
      (rust . t)
      (sh . t))))
 
-(setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+;; (setq org-latex-listings 'minted
+;;       org-latex-packages-alist '(("" "minted"))
+;;       org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))

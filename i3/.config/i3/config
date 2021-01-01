@@ -164,16 +164,16 @@ bindsym $mod+Shift+q move container to output right
 bindsym $mod+Shift+c exec chromium
 bindsym $mod+Shift+e exec emacs
 
-exec_always --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.3
-exec_always --no-startup-id xinput set-prop 13 "libinput Accel Speed" -0.3
-exec_always --no-startup-id xinput set-prop 15 "libinput Accel Speed" -0.3
-exec_always --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.3
-exec_always --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.3
-exec_always --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.3
+exec_always --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.5
+exec_always --no-startup-id xinput set-prop 13 "libinput Accel Speed" -0.5
+exec_always --no-startup-id xinput set-prop 15 "libinput Accel Speed" -0.5
+exec_always --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.5
+exec_always --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.5
+exec_always --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.5
 
 # exec --no-startup-id setxkbmap se dvorak_a5
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id xset r rate 200 50
+exec_always --no-startup-id xset r rate 200 50
 exec --no-startup-id redshift-gtk
 exec --no-startup-id picom -b
 exec --no-startup-id qbittorrent

@@ -70,6 +70,7 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
+  services.sshd.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -83,13 +84,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
-  nixpkgs.overlays = [(self: super: { discord = super.discord.overrideAttrs (_: { src = builtins.fetchTarball https://discordapp.com/api/download?platform=linux&format=tar.gz ; });})];
-  # nixpkgs.overlays = [
-  #   (import (builtins.fetchTarball {
-  #     url =
-  #       "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-  #   }))
-  # ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -99,6 +93,9 @@
             pandas
             numpy
             pytorch
+            pytorch-lightning
+            torchvision
+            tqdm
             pygments
             matplotlib
             i3ipc
@@ -117,6 +114,7 @@
       nixfmt
       vim
       fd
+      tint2
       ripgrep
       firefox
       ark
@@ -144,7 +142,7 @@
       aspellDicts.en-science
       openssl
       j4-dmenu-desktop
-      discord
+      discord-ptb
       polybar
       arc-theme
       papirus-icon-theme

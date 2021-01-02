@@ -21,6 +21,23 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 default_border pixel 3
 
+
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    font pango:monospace 20
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
 #client.focused #CBCCB3 #285577 #FFFFFF #eb4034
 
 # Use pactl to adjust volume in PulseAudio.
@@ -122,7 +139,6 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
-
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -172,9 +188,7 @@ exec_always --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.5
 exec_always --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.5
 
 # exec --no-startup-id setxkbmap se dvorak_a5
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset r rate 200 50
 exec --no-startup-id redshift-gtk
 exec --no-startup-id picom -b
 exec --no-startup-id qbittorrent
-# NOTE: https://github.com/meelkor/polybar-i3-windows

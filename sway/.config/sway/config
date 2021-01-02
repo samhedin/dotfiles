@@ -21,6 +21,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 default_border pixel 3
 
+# monitors
+output DP-2 resolution 3840x2160@144Hz position 0,0
+output HDMI-A-1 resolution 1920x1080@60Hz position 3840,0
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {

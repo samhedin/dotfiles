@@ -116,7 +116,7 @@
       fd
       tint2
       ripgrep
-      firefox
+      firefox-wayland
       ark
       unrar
       alacritty

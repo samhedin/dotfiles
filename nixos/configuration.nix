@@ -2,8 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -20,7 +19,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -46,24 +44,7 @@
   # };
 
   # Enable the Plasma 5 Desktop Environment.
-  #services.xserver.enable = true;
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
 
-  services.xserver = {
-    enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
-    };
-    windowManager.i3.enable = true;
-    displayManager.defaultSession = "xfce+i3";
-    displayManager.sessionCommands = "xkbcomp layout.xkm $DISPLAY"; #"${pkgs.xorg.xkbcomp}/bin/xkbcomp layout.xkm $DISPLAY";
-  };
   #  Configure keymap in X11
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
@@ -88,22 +69,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs;
-    let polybar = pkgs.polybar.override { i3Support = true; };
-        my-python-packages = python-packages: with python-packages; [
-            pandas
-            numpy
-            pytorch
-            pytorch-lightning
-            torchvision
-            tqdm
-            pygments
-            matplotlib
-            i3ipc
-            scipy
-            scikitlearn
-            black
-          ];
-        my-python = python38.withPackages my-python-packages;
+    let
+      polybar = pkgs.polybar.override { i3Support = true; };
+      my-python-packages = python-packages:
+        with python-packages; [
+          pandas
+          numpy
+          pytorch
+          pytorch-lightning
+          torchvision
+          tqdm
+          pygments
+          matplotlib
+          i3ipc
+          scipy
+          scikitlearn
+          black
+        ];
+      my-python = python38.withPackages my-python-packages;
     in [
       stow
       git
@@ -148,8 +131,7 @@
       papirus-icon-theme
       languagetool
       pkgs.ntfsprogs
-(
-      pkgs.writeTextFile {
+      (pkgs.writeTextFile {
         name = "startsway";
         destination = "/bin/startsway";
         executable = true;
@@ -161,10 +143,9 @@
           # then start the service
           exec systemctl --user start sway.service
         '';
-      }
-    )
+      })
     ];
-systemd.user.targets.sway-session = {
+  systemd.user.targets.sway-session = {
     description = "Sway compositor session";
     documentation = [ "man:systemd.special(7)" ];
     bindsTo = [ "graphical-session.target" ];
@@ -250,7 +231,7 @@ systemd.user.targets.sway-session = {
     ];
   };
   location.latitude = 59.37118495540346;
-  location.longitude =  18.065956381997143;
+  location.longitude = 18.065956381997143;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

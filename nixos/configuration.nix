@@ -67,6 +67,7 @@
   users.users.sam = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    openssh.authorizedKeys.keys = ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHDafR03vQCA1qNsRs1MtRqP3WzjhZkHgVdmatKbzYvJ1UVonAptpnY7aDAnNyzuWNBhdYoCPFLmtQ/gUOEpabm5AOZgbuwpZBR4c3AJddqp8gUmunEmFXPIT/6EqA5MRXGcfqGxwQsdooHELqWn6xcN7Y/LlRtRLRhe2DVmnDrLj1i/Rd02qIpYznlpfo+261PnwxH44sqPpW7SwbZPTvYxqWfQ0z0LRm7ntEI4/Y0A7eu0fCRnrQ/1oeucFP7B6A6IlxViNMeFXc3v/P6LnU6yeLr5CSuU74JxAGUkX8Y0nR1lfWz/ygUM3DQVJuZP4JIlS+dTppw7qkE3kAn/ufHhe8Rw6gT7u0MsF9kDDVsvteDM0wgQdlrHoXAxSBrE/IWMQDQmS4h7PRvyCLuYeWqjrUjm4voWrAQf0tuHoUPr6HvuUeQxJjdghEey1g4bYy1yCbXyBqxHNefDRUXFNi+u7Y392WxBrElELbZUdnolHHSKSoWkklxLjGengy1JtyxbGHfrbOZI6FWFll942LmF7eAFo8xJlQIiuBbfk+RqbC0lCrsHXwQ58hNQHucDirHxJjih6n4Cv1neEzKk7gDwyX7lW136j1f3vwc8EpqIsPHaZpE04JDMQa0jt9FYBKEvq/GcNL2uLoCEI2w2ZTI9paauf/dirDDLC8hhIWiw== sam.hedin@gmail.com"];
   };
 
   # List packages installed in system profile. To search, run:
@@ -92,6 +93,7 @@
       my-python = python38.withPackages my-python-packages;
     in [
       stow
+      autoflake
       git
       wget
       nodejs

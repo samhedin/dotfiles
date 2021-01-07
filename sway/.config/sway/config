@@ -11,10 +11,6 @@ font pango:monospace 15
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 #exec --no-startup-id nm-applet
@@ -22,7 +18,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 default_border pixel 3
 
 # monitors
-output DP-2 resolution 3840x2160@144Hz position 0,0 scale 1
+output DP-2 resolution 3840x2160@144Hz position 0,0 scale 2
 output HDMI-A-1 resolution 1920x1080@60Hz position 3840,0 scale 1
 
 # Read `man 5 sway-bar` for more information about this section.
@@ -30,7 +26,7 @@ bar {
     font pango:monospace 20
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    status_command while date +'%Y-%m-%d %H:%M'; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -139,7 +135,7 @@ bindsym $mod+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+p restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+m exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+m exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -163,12 +159,11 @@ bindsym $mod+Shift+q move container to output right
 bindsym $mod+Shift+c exec chromium
 bindsym $mod+Shift+e exec emacs
 
-exec_always --no-startup-id xinput set-prop 12 "libinput Accel Speed" -0.5
-exec_always --no-startup-id xinput set-prop 13 "libinput Accel Speed" -0.5
-exec_always --no-startup-id xinput set-prop 15 "libinput Accel Speed" -0.5
-exec_always --no-startup-id xinput set-prop 14 "libinput Accel Speed" -0.5
-exec_always --no-startup-id xinput set-prop 11 "libinput Accel Speed" -0.5
-exec_always --no-startup-id xinput set-prop 9 "libinput Accel Speed" -0.5
+input 5426:123:Razer_Razer_Viper_Ultimate_Dongle {
+      scroll_factor 10
+      accel_profile flat
+      pointer_accel 0.1
+}
 
 # exec --no-startup-id setxkbmap se dvorak_a5
 exec_always --no-startup-id xset r rate 200 50

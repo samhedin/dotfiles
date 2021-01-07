@@ -85,6 +85,7 @@
           tqdm
           pygments
           matplotlib
+          jsonpickle
           i3ipc
           scipy
           scikitlearn

@@ -18,8 +18,8 @@ font pango:monospace 15
 default_border pixel 3
 
 # monitors
-output DP-2 resolution 3840x2160@144Hz position 0,0 scale 2
-output HDMI-A-1 resolution 1920x1080@60Hz position 3840,0 scale 1
+output DP-2 resolution 1920x1080@120Hz position 3840,0 scale 1
+output DP-3 resolution 3840x2160@144Hz position 0,0 scale 1
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
@@ -160,19 +160,15 @@ bindsym $mod+Shift+c exec chromium
 bindsym $mod+Shift+e exec emacs
 
 input 5426:123:Razer_Razer_Viper_Ultimate_Dongle {
-      scroll_factor 10
+      scroll_factor 3
       accel_profile flat
       pointer_accel 0.1
 }
 
-# exec --no-startup-id setxkbmap se dvorak_a5
-exec_always --no-startup-id xset r rate 200 50
-exec --no-startup-id redshift-gtk
+input 10730:258:Kinesis_Advantage2_Keyboard {
+    xkb_file /home/sam/layout.xkb
+    repeat_delay 170
+    repeat_rate 50
+}
 exec --no-startup-id picom -b
 exec --no-startup-id qbittorrent
-
-input 10730:258:Kinesis_Advantage2_Keyboard xkb_file /home/sam/layout.xkb
-input 10730:258:Kinesis_Advantage2_Keyboard repeat_delay 170
-input 10730:258:Kinesis_Advantage2_Keyboard repeat_rate 50
-
-exec --no-startup-id /usr/bin/tint2 -c ~/.config/tint2/minima.tint2rc &

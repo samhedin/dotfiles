@@ -47,3 +47,4 @@
 (package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)
+(package! gnu-apl-mode)

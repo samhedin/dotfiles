@@ -66,6 +66,10 @@ available. You can either set `doom-theme' or manually load a theme with the
     (when filename
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
+
+(defun pdfgrep ()
+  (interactive)
+  (grep (format "pdfgrep --ignore-case --recursive --page-number '%s' ." (read-string "Enter term: "))))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -194,9 +198,36 @@ available. You can either set `doom-theme' or manually load a theme with the
 	    (dired-sort-toggle-or-edit)))
 #+end_src
 
+** APL
+#+begin_src emacs-lisp
+(defun em-gnu-apl-init ()
+  (setq buffer-face-mode-face 'gnu-apl-default)
+  (buffer-face-mode))
+
+(add-hook 'gnu-apl-interactive-mode-hook 'em-gnu-apl-init)
+(add-hook 'gnu-apl-mode-hook 'em-gnu-apl-init)
+(defun gnu-apl-keyboard ()
+  (interactive)
+  (set-input-method "APL-Z"))
+(add-hook 'gnu-apl-interactive-mode-hook 'gnu-apl-keyboard)
+#+end_src
 ** Modeline, rich-minority and mini-modeline
 #+begin_src emacs-lisp
 (setq rm-blacklist "")
 (rich-minority-mode)
 (mini-modeline-mode)
+#+end_src
+
+** EAF
+#+begin_src emacs-lisp
+;; (use-package eaf
+;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework" ; Set to "/usr/share/emacs/site-lisp/eaf" if installed from AUR
+;;   :custom
+;;   (eaf-browser-continue-where-left-off t)
+;;   :config
+;;   (eaf-setq eaf-browser-enable-adblocker "true")
+;;   (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+;;   (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+;;   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
+;;   (eaf-bind-key nil "M-q" eaf-browser-keybinding))
 #+end_src

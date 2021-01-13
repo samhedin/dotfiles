@@ -74,7 +74,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs;
     let
-      polybar = pkgs.polybar.override { i3Support = true; };
       my-python-packages = python-packages:
         with python-packages; [
           pandas
@@ -98,6 +97,7 @@
       git
       wget
       nodejs
+      pdfgrep
       cmake
       ninja
       nixfmt
@@ -107,6 +107,8 @@
       ripgrep
       firefox-wayland
       ark
+      grim
+      slurp
       unrar
       alacritty
       fira-code
@@ -115,6 +117,8 @@
       my-python
       rust-analyzer
       chromium
+      steam
+      nyxt
       vlc
       gcc
       deluge

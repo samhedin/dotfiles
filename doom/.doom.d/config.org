@@ -121,6 +121,7 @@ available. You can either set `doom-theme' or manually load a theme with the
 ** Org-mode
 #+begin_src emacs-lisp
 (setq org-startup-with-latex-preview t)
+(add-hook 'org-mode-hook 'LaTex-math-mode)
 (after! org
   (setq-default fill-column 120)
   (auto-fill-mode)

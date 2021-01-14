@@ -86,6 +86,7 @@
           matplotlib
           jsonpickle
           i3ipc
+          seaborn
           scipy
           scikitlearn
           black

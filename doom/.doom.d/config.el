@@ -74,9 +74,6 @@
 
 (setq projectile-enable-caching nil)
 
-(setenv "PATH" (concat (getenv "PATH") ":" "/home/sam/.local/bin/"))
-(setq exec-path (append exec-path '("/home/sam/.local/bin")))
-
 (after! treemacs
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
   (setq treemacs-width 50)
@@ -86,7 +83,8 @@
   (setq centaur-tabs-set-close-button nil))
 
 (setq org-startup-with-latex-preview t)
-(add-hook 'org-mode-hook 'LaTex-math-mode)
+;; (add-hook 'org-mode-hook 'LaTex-math-mode)
+
 (after! org
   (setq-default fill-column 120)
   (auto-fill-mode)
@@ -101,9 +99,12 @@
      (emacs-lisp .t)
      (julia . t)
      (latex . t)
+     (jupyter . t)
      (rust . t)
      (sh . t))))
-
+(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+						    (:exports . "both")
+						    (:results . "scalar")))
 ;; (setq org-latex-listings 'minted
 ;;       org-latex-packages-alist '(("" "minted"))
 ;;       org-latex-pdf-process
@@ -113,7 +114,8 @@
 (setq org-latex-minted-options '(("breaklines" "true")
                                  ("breakanywhere" "true")))
 
-;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "mono"))
+;;  Install dash docsets with these functions.
+;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono"))
 ;;   (dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch"))
@@ -130,16 +132,22 @@
 (add-hook 'julia-mode-hook
           (lambda ()
             (setq-local dash-docs-docsets '("Julia"))))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local dash-docs-docsets '("Julia"))))
 
 (after! lsp
   (setq lsp-signature-render-documentation nil))
+
+;; (add-hook 'csharp-mode-hook
+;;           (lambda ()))
 (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
-;; (use-package lsp-haskell
-;;   :config
-;;   (setq lsp-haskell-process-path-hie "/home/sam/.local/bin/haskell-language-server-wrapper"))
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
+;; (setq rustic-compile-display-method 'display-buffer-other-frame)
+
+(setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
 (global-paren-face-mode)
 (setq-default paren-face-regexp "[][(){}]")
@@ -157,17 +165,14 @@
 	    (dired-hide-details-mode)
 	    (dired-sort-toggle-or-edit)))
 
-(defun em-gnu-apl-init ()
-  (setq buffer-face-mode-face 'gnu-apl-default)
-  (buffer-face-mode))
-
-(add-hook 'gnu-apl-interactive-mode-hook 'em-gnu-apl-init)
-(add-hook 'gnu-apl-mode-hook 'em-gnu-apl-init)
-(defun gnu-apl-keyboard ()
-  (interactive)
-  (set-input-method "APL-Z"))
-(add-hook 'gnu-apl-interactive-mode-hook 'gnu-apl-keyboard)
-
 (setq rm-blacklist "")
 (rich-minority-mode)
 (mini-modeline-mode)
+
+(defun remove-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+
+(add-hook 'csharp-mode-hook 'remove-dos-eol)

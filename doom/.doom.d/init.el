@@ -38,7 +38,7 @@
        ;;nav-flash         ; blink cursor line after big motions
        ;;neotree           ; a project drawer, like NERDTree for vim
        ;; ophints           ; highlight the region an operation acts on
-       (popup +defaults)   ; tame sudden yet inevitable temporary windows
+       ;; (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;; pretty-code       ; ligatures or substitute text with pretty symbols
        ligatures
        ;; tabs              ; a tab bar for Emacs
@@ -90,7 +90,7 @@
        ;; direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;; ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        (lookup +docsets +offline +dictionary)              ; navigate your code and its documentation
@@ -117,7 +117,7 @@
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
-       (csharp +lsp +unity)            ; unity, .NET, and mono shenanigans
+       (csharp +lsp)             ; unity, .NET, and mono shenanigans
 
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
@@ -125,7 +125,7 @@
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
-       ;;ess               ; emacs speaks statistics
+       ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3

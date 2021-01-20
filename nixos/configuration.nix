@@ -83,8 +83,8 @@
           tqdm
           pygments
           matplotlib
+          jupyter
           jsonpickle
-          i3ipc
           seaborn
           scipy
           scikitlearn
@@ -101,9 +101,9 @@
       unityhub
       unity3d
       mono
+      omnisharp-roslyn
       vscode
       dotnet-sdk
-      omnisharp-roslyn
       pdfgrep
       electrum
       cmake
@@ -129,7 +129,6 @@
       nyxt
       vlc
       gcc
-      deluge
       pandoc
       rustup
       libreoffice
@@ -144,7 +143,6 @@
       openssl
       j4-dmenu-desktop
       discord-ptb
-      polybar
       arc-theme
       papirus-icon-theme
       languagetool

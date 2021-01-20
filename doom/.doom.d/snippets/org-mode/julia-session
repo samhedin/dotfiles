@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: julia-session
+# key: js
+# --
+
+#+BEGIN_SRC julia :results output
+begin
+$0
+end
+#+END_SRC

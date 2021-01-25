@@ -5,10 +5,10 @@
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
-;; (setq doom-font (font-spec :family "Fira Code" :size 11.5 :weight 'normal)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 11.5))
-(setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
+(setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
+;; (setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
+;;       doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
 
 (setq display-line-numbers-type nil)
 (setq confirm-kill-emacs nil)
@@ -115,10 +115,10 @@
                                  ("breakanywhere" "true")))
 
 ;;  Install dash docsets with these functions.
-;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono"))
+;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
 ;;   (dash-docs-install-docset f))
 
-;; (dolist (f '("scikit-learn" "PyTorch"))
+;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
 
 (add-hook 'csharp-mode-hook
@@ -127,7 +127,7 @@
 
 (add-hook 'python-mode-hook
           (lambda ()
-            (setq-local dash-docs-docsets '("Python 3" "NumPy" "SciPy" "scikit-learn"))))
+            (setq-local dash-docs-docsets '("Python 3" "NumPy" "SciPy" "scikit-learn" "TensorFlow 2" "Pandas"))))
 
 (add-hook 'julia-mode-hook
           (lambda ()

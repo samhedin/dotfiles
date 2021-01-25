@@ -79,6 +79,8 @@
           numpy
           pytorch
           pytorch-lightning
+          tensorflow
+          Keras
           torchvision
           tqdm
           pygments
@@ -87,7 +89,7 @@
           jsonpickle
           seaborn
           scipy
-          scikitlearn
+          # scikitlearn
           black
         ];
       my-python = python38.withPackages my-python-packages;
@@ -106,6 +108,7 @@
       dotnet-sdk
       pdfgrep
       electrum
+      imagemagick
       cmake
       ninja
       nixfmt
@@ -123,6 +126,7 @@
       sqlite
       slack
       my-python
+      qt5.qtwayland
       rust-analyzer
       chromium
       steam

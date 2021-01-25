@@ -5,8 +5,8 @@
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
-(setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
+(setq doom-font (font-spec :family "Fira Code" :size 13.5 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13.5))
 ;; (setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
 

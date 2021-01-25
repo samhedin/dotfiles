@@ -49,4 +49,3 @@
 (package! rich-minority)
 (package! gnu-apl-mode)
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
-(package! jupyter)

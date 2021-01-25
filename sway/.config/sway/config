@@ -160,7 +160,7 @@ bindsym $mod+Shift+c exec chromium -enable-features=UseOzonePlatform -ozone-plat
 bindsym $mod+Shift+e exec emacs
 
 input 5426:123:Razer_Razer_Viper_Ultimate_Dongle {
-      scroll_factor 12
+      scroll_factor 10
       accel_profile flat
       pointer_accel 0.1
 }

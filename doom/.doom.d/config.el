@@ -151,7 +151,7 @@
 
 (global-paren-face-mode)
 (setq-default paren-face-regexp "[][(){}]")
-(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
+(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode csharp-mode) paren-face-modes))
 
 ;; Did pdf-tools break? Try
 ;; (pdf-tools-install)
@@ -176,3 +176,4 @@
   (aset buffer-display-table ?\^M []))
 
 (add-hook 'csharp-mode-hook 'remove-dos-eol)
+(add-hook 'focus-out-hook 'save-buffer)

@@ -20,6 +20,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = ["v4l2loopback"];
+  boot.extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
+  boot.extraModprobeConfig = ''
+   options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"
+  '';
+
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -97,11 +103,14 @@
     in [
       stow
       autoflake
+      feh
       git
       tor
       wget
       nodejs
       unityhub
+      smplayer
+      droidcam
       unity3d
       mono
       omnisharp-roslyn

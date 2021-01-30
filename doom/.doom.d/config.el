@@ -22,6 +22,8 @@
 (dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile))
   (advice-add f :before #'sneaky-save-buffer))
 
+(add-hook 'focus-out-hook 'sneaky-save-buffer)
+
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 7) (> time 14))
@@ -115,8 +117,8 @@
                                  ("breakanywhere" "true")))
 
 ;;  Install dash docsets with these functions.
-;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
-;;   (dash-docs-install-docset f))
+;;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
+;;  (dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
@@ -176,4 +178,5 @@
   (aset buffer-display-table ?\^M []))
 
 (add-hook 'csharp-mode-hook 'remove-dos-eol)
-(add-hook 'focus-out-hook 'save-buffer)
+
+(setq large-file-warning-threshold 100000000)

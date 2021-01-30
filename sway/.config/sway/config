@@ -18,7 +18,7 @@ font pango:monospace 10
 default_border pixel 3
 
 # monitors
-output DP-2 resolution 1920x1080@120Hz position 2398,0 scale 1
+output DP-2 resolution 1920x1080@120Hz position 2560,0 scale 1
 output DP-3 resolution 3840x2160@144Hz position 0,0 scale 1.5
 
 # Read `man 5 sway-bar` for more information about this section.
@@ -151,6 +151,7 @@ mode "resize" {
 }
 bindsym Shift+Alt+P exec grim -g "$(slurp)" ~/Downloads/screenshot.png
 bindsym $mod+r mode "resize"
+
 
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split

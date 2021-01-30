@@ -151,8 +151,8 @@
 
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
-(global-paren-face-mode)
-(setq-default paren-face-regexp "[][(){}]")
+(global-paren-face-mode)                ; Not working? Try customizing the `shadow` face.
+(setq-default paren-face-regexp "[][(){};]")
 (setq-default paren-face-modes (append '(rustic-mode org-mode python-mode csharp-mode) paren-face-modes))
 
 ;; Did pdf-tools break? Try

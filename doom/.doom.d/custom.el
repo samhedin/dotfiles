@@ -217,4 +217,4 @@ is the buffer position of the start of the containing expression."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(flycheck-error ((t (:underline "red2"))))
- '(shadow ((t (:foreground "light gray")))))
+ '(shadow ((t (:foreground "dim gray")))))

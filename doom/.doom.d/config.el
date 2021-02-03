@@ -5,8 +5,8 @@
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
-(setq doom-font (font-spec :family "Fira Code" :size 13.5 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13.5))
+(setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
 ;; (setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
 
@@ -117,8 +117,8 @@
                                  ("breakanywhere" "true")))
 
 ;;  Install dash docsets with these functions.
-;;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
-;;  (dash-docs-install-docset f))
+;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
+; (dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
@@ -141,8 +141,6 @@
 (after! lsp
   (setq lsp-signature-render-documentation nil))
 
-;; (add-hook 'csharp-mode-hook
-;;           (lambda ()))
 (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
 
 (after! rustic

@@ -15,6 +15,18 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
+nixpkgs.overlays =
+    [ (self: super:
+      {
+            omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+                src = pkgs.fetchurl {
+                    url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
+                    sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+                };
+            });
+        })
+    ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -50,6 +62,7 @@
   #   keyMap = "us";
   # };
 
+  nix.autoOptimiseStore = true;
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
@@ -84,16 +97,11 @@
         with python-packages; [
           pandas
           numpy
-          pytorch
-          pytorch-lightning
-          tensorflow
           Keras
           torchvision
           tqdm
           pygments
           matplotlib
-          jupyter
-          jsonpickle
           seaborn
           scipy
           # scikitlearn
@@ -105,24 +113,24 @@
       autoflake
       feh
       git
-      tor
+      tor-browser-bundle-bin
       wget
       nodejs
-      unityhub
-      smplayer
+      #unityhub
       droidcam
-      unity3d
+      #unity3d
       mono
-      omnisharp-roslyn
-      vscode
-      dotnet-sdk
+      dotnet-sdk_5
       pdfgrep
+      j4-dmenu-desktop
+
       electrum
       imagemagick
       cmake
       ninja
       nixfmt
       vim
+vscode
       fd
       tint2
       ripgrep
@@ -132,30 +140,21 @@
       slurp
       unrar
       alacritty
-      fira-code
+unityhub
+unity3d
       sqlite
+omnisharp-roslyn
       slack
       my-python
       qt5.qtwayland
-      rust-analyzer
       chromium
       steam
       nyxt
       vlc
       gcc
       pandoc
-      rustup
-      libreoffice
-      teamviewer
       zoom-us
       spotify
-      aspell
-      aspellDicts.en
-      aspellDicts.sv
-      aspellDicts.en-computers
-      aspellDicts.en-science
-      openssl
-      j4-dmenu-desktop
       discord-ptb
       arc-theme
       papirus-icon-theme

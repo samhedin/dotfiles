@@ -26,7 +26,6 @@
         };
       });
     })
-
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -102,10 +101,13 @@
           torchvision
           tqdm
           pygments
+          jupyterlab
+          ipykernel
+          notebook
           matplotlib
           seaborn
           scipy
-          # scikitlearn
+          scikitlearn
           black
         ];
       my-python = python38.withPackages my-python-packages;
@@ -117,14 +119,11 @@
       tor-browser-bundle-bin
       wget
       nodejs
-      #unityhub
       droidcam
-      #unity3d
       mono
       dotnet-sdk_5
       pdfgrep
       j4-dmenu-desktop
-
       nodePackages.pyright
       electrum
       imagemagick

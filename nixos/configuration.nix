@@ -25,6 +25,10 @@ nixpkgs.overlays =
                 };
             });
         })
+        # Emacs, see home-manager for more.
+        (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
     ];
 
   # Use the systemd-boot EFI boot loader.

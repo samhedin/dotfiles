@@ -26,7 +26,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 14))
+  (if (or (< time 9) (> time 14))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 

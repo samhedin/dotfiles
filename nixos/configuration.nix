@@ -146,6 +146,7 @@ unity3d
 omnisharp-roslyn
       slack
       my-python
+      wf-recorder
       qt5.qtwayland
       chromium
       steam

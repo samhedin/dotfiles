@@ -15,33 +15,34 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
-nixpkgs.overlays =
-    [ (self: super:
-      {
-            omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
-                src = pkgs.fetchurl {
-                    url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
-                    sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
-                };
-            });
-        })
-        # Emacs, see home-manager for more.
-        (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  nixpkgs.overlays = [
+    #omnisharp roslyn, remove when outdated.
+    (self: super: {
+      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+        src = pkgs.fetchurl {
+          url =
+            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
+          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+        };
+      });
+    })
+    # Emacs, see home-manager for more.
+    (import (builtins.fetchTarball {
+      url =
+        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
     }))
-    ];
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = ["v4l2loopback"];
+  boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
   boot.extraModprobeConfig = ''
-   options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"
+    options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"
   '';
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -134,7 +135,7 @@ nixpkgs.overlays =
       ninja
       nixfmt
       vim
-vscode
+      vscode
       fd
       tint2
       ripgrep
@@ -144,10 +145,10 @@ vscode
       slurp
       unrar
       alacritty
-unityhub
-unity3d
+      unityhub
+      unity3d
       sqlite
-omnisharp-roslyn
+      omnisharp-roslyn
       slack
       my-python
       wf-recorder

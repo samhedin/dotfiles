@@ -10,35 +10,20 @@
   home.homeDirectory = "/home/sam";
   programs.git = {
     enable = true;
-    userName  = "samhedin";
+    userName = "samhedin";
     userEmail = "sam.hedin@gmail.com";
   };
- programs.emacs = {
+  programs.emacs = {
     enable = true;
     package = pkgs.emacsPgtkGcc;
-    extraPackages = (epkgs: [ epkgs.vterm ] );
+    extraPackages = (epkgs: [ epkgs.vterm ]);
   };
 
-
- programs.texlive.enable = true;
+  programs.texlive.enable = true;
   programs.texlive.extraPackages = tpkgs: {
     inherit (tpkgs)
-      scheme-medium
-      cm-super
-      capt-of
-      minted
-      biblatex
-      algorithms
-      tikz-cd
-      caption
-      csquotes
-      wrapfig
-      braket
-      turnstile
-      dashbox
-      chktex
-      cleveref
-      bussproofs
+      scheme-medium cm-super capt-of minted biblatex algorithms tikz-cd caption
+      csquotes wrapfig braket turnstile dashbox chktex cleveref bussproofs
       latexmk;
   };
 

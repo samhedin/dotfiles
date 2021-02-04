@@ -46,7 +46,7 @@ bindsym XF86MonBrightnessDown exec light -U 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec alacritty
 
 bindsym $mod+q kill
 

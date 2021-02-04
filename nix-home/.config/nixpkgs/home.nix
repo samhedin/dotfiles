@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
 {
+
+  nixpkgs.overlays = [
+    # Emacs, see home-manager for more.
+    (import (builtins.fetchTarball {
+      url =
+        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+    }))
+  ];
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -26,6 +35,8 @@
       csquotes wrapfig braket turnstile dashbox chktex cleveref bussproofs
       latexmk;
   };
+
+
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

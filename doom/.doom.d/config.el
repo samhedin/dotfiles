@@ -103,22 +103,23 @@
      (latex . t)
      (jupyter . t)
      (rust . t)
-     (sh . t))))
-(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
-						    (:exports . "both")
-						    (:results . "scalar")))
+     (sh . t)))
+
+  (setq org-latex-minted-options '(("breaklines" "true")
+                                   ("breakanywhere" "true")))
+
 ;; (setq org-latex-listings 'minted
 ;;       org-latex-packages-alist '(("" "minted"))
 ;;       org-latex-pdf-process
 ;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  )
 
-(setq org-latex-minted-options '(("breaklines" "true")
-                                 ("breakanywhere" "true")))
+
 
 ;;  Install dash docsets with these functions.
-;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
-; (dash-docs-install-docset f))
+                                        ;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
+                                        ; (dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))

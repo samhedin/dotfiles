@@ -24,7 +24,8 @@
   };
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtkGcc;
+    # package = pkgs.emacsPgtkGcc;
+    package = pkgs.emacsGcc;
     extraPackages = (epkgs: [ epkgs.vterm ]);
   };
 

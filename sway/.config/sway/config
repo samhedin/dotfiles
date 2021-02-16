@@ -18,8 +18,8 @@ font pango:monospace 10
 default_border pixel 3
 
 # monitors
-output DP-2 resolution 1920x1080@120Hz position 2560,0 scale 1
-output DP-3 resolution 3840x2160@144Hz position 0,0 scale 1.5
+output DP-1 resolution 1920x1080@120Hz position 2560,0 scale 1
+output DP-2 resolution 3840x2160@144Hz position 0,0 scale 1.5
 
 # output DP-2 resolution 1920x1080@120Hz position 2392,0 scale 1
 # output DP-3 resolution 3840x2160@144Hz position 0,0 scale 1.6

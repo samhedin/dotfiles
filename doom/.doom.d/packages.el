@@ -47,6 +47,6 @@
 (package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)
-(package! gnu-apl-mode)
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 (package! engrave-faces :recipe (:host github :repo "tecosaur/engrave-faces"))
+(package! org-ref)

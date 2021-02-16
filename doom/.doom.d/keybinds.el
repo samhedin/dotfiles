@@ -37,17 +37,19 @@
       :g "C-l" 'ivy-switch-buffer
       :g "C-q" '+ivy/switch-workspace-buffer
       :g "C-_" '+popup/toggle
-
+      :n ">" 'sp-slurp-hybrid-sexp
+      :n "<" 'sp-forward-barf-sexp
       :leader
       "!" 'shell-command
-      "C-t" 'counsel-M-x
-      )
+      "C-t" 'counsel-M-x)
 
 (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
 
 (map! :map special-mode-map
       "h" nil)
 (map! :map evil-normal-state-map
+      ">" nil
+      "<" nil
       "C-." nil
       "<C-tab>" nil
       "q" nil)

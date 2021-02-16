@@ -26,7 +26,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 9) (> time 14))
+  (if (or (< time 8) (> time 17))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -85,10 +85,12 @@
   (setq centaur-tabs-set-close-button nil))
 
 (setq org-startup-with-latex-preview t)
+
 ;; (add-hook 'org-mode-hook 'LaTex-math-mode)
 
 (after! org
   (setq-default fill-column 120)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   (auto-fill-mode)
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
@@ -98,6 +100,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
+     (ein .t)
      (emacs-lisp .t)
      (julia . t)
      (latex . t)
@@ -108,11 +111,12 @@
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")))
 
-;; (setq org-latex-listings 'minted
-;;       org-latex-packages-alist '(("" "minted"))
-;;       org-latex-pdf-process
-;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+  ;; (setq org-latex-listings 'minted
+  ;;       org-latex-packages-alist '(("" "minted"))
+  ;;       org-latex-pdf-process
+  ;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+  ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   )
 
 
@@ -126,7 +130,7 @@
 
 (add-hook 'csharp-mode-hook
           (lambda ()
-            (setq-local dash-docs-docsets '("Mono"))))
+            (setq-local dash-docs-docsets '("Mono" "Unity 3D"))))
 
 (add-hook 'python-mode-hook
           (lambda ()
@@ -179,3 +183,41 @@
 (add-hook 'csharp-mode-hook 'remove-dos-eol)
 
 (setq large-file-warning-threshold 100000000)
+
+ (setq ein:output-area-inlined-images t)
+
+(defun my-preview-latex ()
+  "Preview LaTeX from the current cell in a separate buffer.
+
+Handles only markdown and code cells, but both in a bit different
+ways: on the former, its input is being rendered, while on the
+latter - its output."
+  (interactive)
+  (let* ((cell (ein:worksheet-get-current-cell))
+	 (text-to-render
+	  (cond ((ein:markdowncell-p cell) (slot-value cell :input))
+		((ein:codecell-p cell)
+		 (plist-get (car (cl-remove-if-not
+				  (lambda (e) (string= (plist-get e :name) "stdout"))
+				  (slot-value cell :outputs)))
+			    :text))
+		(t (error "Unsupported cell type"))))
+	 (buffer (get-buffer-create " *ein: LaTeX preview*")))
+    (with-current-buffer buffer
+      (when buffer-read-only
+	(toggle-read-only))
+      (unless (= (point-min) (point-max))
+	(delete-region (point-min) (point-max)))
+      (insert text-to-render)
+      (goto-char (point-min))
+      (org-mode)
+      (org-toggle-latex-fragment 10)
+      (special-mode)
+      (unless buffer-read-only
+	(toggle-read-only))
+      (display-buffer
+       buffer
+       '((display-buffer-below-selected display-buffer-at-bottom)
+         (inhibit-same-window . t)))
+      (fit-window-to-buffer (window-in-direction 'below)))))
+(setq dash-docs-browser-func 'eww)

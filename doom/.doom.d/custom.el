@@ -208,9 +208,16 @@ is the buffer position of the start of the containing expression."
  '(warning-suppress-types
    '(((undo discard-info))
      ((undo discard-info))
+     ((undo discard-info))
      (with-editor)
      ((undo discard-info))
      ((undo discard-info)))))
 
 (custom-theme-set-faces! '(doom-one-light)
   '(shadow  :foreground "light gray"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

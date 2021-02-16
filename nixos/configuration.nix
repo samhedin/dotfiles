@@ -26,6 +26,7 @@
         };
       });
     })
+
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -103,6 +104,8 @@
           pygments
           jupyterlab
           ipykernel
+          jedi
+          pyls-mypy
           notebook
           matplotlib
           seaborn
@@ -114,7 +117,9 @@
     in [
       stow
       autoflake
+      python-language-server
       feh
+      swappy
       git
       tor-browser-bundle-bin
       wget
@@ -123,6 +128,7 @@
       mono
       dotnet-sdk_5
       pdfgrep
+      julia
       j4-dmenu-desktop
       nodePackages.pyright
       electrum
@@ -140,6 +146,7 @@
       grim
       slurp
       unrar
+      libreoffice
       alacritty
       unityhub
       unity3d
@@ -158,6 +165,7 @@
       zoom-us
       spotify
       discord-ptb
+      xdg-desktop-portal-wlr
       arc-theme
       papirus-icon-theme
       languagetool

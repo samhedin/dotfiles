@@ -50,3 +50,7 @@
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 (package! engrave-faces :recipe (:host github :repo "tecosaur/engrave-faces"))
 (package! org-ref)
+(package! eaf
+  :recipe
+  (:host github :repo "manateelazycat/emacs-application-framework"
+    :files ("*")))

@@ -99,13 +99,12 @@
           pandas
           numpy
           Keras
-          torchvision
+          # torchvision
           tqdm
           pygments
           jupyterlab
           ipykernel
           jedi
-          pyls-mypy
           notebook
           matplotlib
           seaborn

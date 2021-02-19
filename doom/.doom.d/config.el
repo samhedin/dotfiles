@@ -19,7 +19,7 @@
                (string-match-p (regexp-quote "pdf") (buffer-name)))
     (save-buffer)))
 
-(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile))
+(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all))
   (advice-add f :before #'sneaky-save-buffer))
 
 (add-hook 'focus-out-hook 'sneaky-save-buffer)
@@ -151,8 +151,6 @@
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
 ;; (setq rustic-compile-display-method 'display-buffer-other-frame)
-
-(setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
 (global-paren-face-mode)                ; Not working? Try customizing the `shadow` face.
 (setq-default paren-face-regexp "[][(){};]")

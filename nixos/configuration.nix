@@ -66,8 +66,11 @@
   nix.autoOptimiseStore = true;
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
+  # services.xserver.desktopManager.gnome3.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
+
+  # services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -121,6 +124,9 @@
       swappy
       git
       tor-browser-bundle-bin
+      rustup
+      rust-analyzer
+      stack
       wget
       nodejs
       droidcam
@@ -155,6 +161,7 @@
       my-python
       wf-recorder
       qt5.qtwayland
+      qt5Full
       chromium
       steam
       nyxt

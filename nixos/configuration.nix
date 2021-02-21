@@ -15,6 +15,7 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
+programs.qt5ct.enable = true;
   nixpkgs.overlays = [
     #omnisharp roslyn, remove when outdated.
     (self: super: {
@@ -70,7 +71,7 @@
   services.xserver.displayManager.gdm.wayland = true;
 
   # services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
 
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -119,6 +120,11 @@
     in [
       stow
       autoflake
+  gtk-engine-murrine
+  gtk_engines
+  gsettings-desktop-schemas
+  lxappearance
+
       python-language-server
       feh
       swappy

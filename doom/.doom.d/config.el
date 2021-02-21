@@ -26,7 +26,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 8) (> time 17))
+  (if (or (< time 8) (> time 16))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -144,7 +144,8 @@
             (setq-local dash-docs-docsets '("Julia"))))
 
 (after! lsp
-  (setq lsp-signature-render-documentation nil))
+  (setq lsp-signature-render-documentation nil)
+  (setq lsp-enable-file-watchers nil))
 
 (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
 

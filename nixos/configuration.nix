@@ -65,13 +65,12 @@ programs.qt5ct.enable = true;
   # };
 
   nix.autoOptimiseStore = true;
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
 
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.enable = true;
+# services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.displayManager.defaultSession = "sway";
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.libinput.enable = true;
 
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -150,7 +149,6 @@ programs.qt5ct.enable = true;
       vim
       vscode
       fd
-      tint2
       ripgrep
       firefox-wayland
       ark
@@ -232,15 +230,17 @@ programs.qt5ct.enable = true;
 
   programs.waybar.enable = true;
 
-  systemd.user.services.kanshi = {
+
+systemd.user.services.kanshi = {
     description = "Kanshi output autoconfig ";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
+    environment = { XDG_CONFIG_HOME="/home/sam/.config"; };
     serviceConfig = {
       # kanshi doesn't have an option to specifiy config file yet, so it looks
       # at .config/kanshi/config
       ExecStart = ''
-        ${pkgs.kanshi}/bin/kanshi
+      ${pkgs.kanshi}/bin/kanshi
       '';
       RestartSec = 5;
       Restart = "always";
@@ -280,6 +280,13 @@ programs.qt5ct.enable = true;
       waybar
       wdisplays
     ];
+ extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+    '';
   };
   location.latitude = 59.37118495540346;
   location.longitude = 18.065956381997143;

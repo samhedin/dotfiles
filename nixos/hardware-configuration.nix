@@ -4,29 +4,28 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  # boot.kernelModules = [ "kvm-intel" "amdgpu" ];
-  boot.kernelModules = [ "kvm-intel"];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  hardware.opengl.extraPackages = with pkgs; [
-    rocm-opencl-icd
-    rocm-opencl-runtime
-  ];
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/8110f7b3-41ab-469e-b491-3b0fa79305af";
-    fsType = "ext4";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/8110f7b3-41ab-469e-b491-3b0fa79305af";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/B851-A94D";
-    fsType = "vfat";
-  };
-  fileSystems."/run/media/sam/Lagring" = { device = "/dev/sda1"; };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/B851-A94D";
+      fsType = "vfat";
+    };
+  fileSystems."/run/media/sam/Lagring" =
+    {
+      device = "/dev/sda1";
+    };
 
   swapDevices = [ ];
 

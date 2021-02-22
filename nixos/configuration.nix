@@ -67,7 +67,7 @@ programs.qt5ct.enable = true;
   nix.autoOptimiseStore = true;
 
   services.xserver.enable = true;
-# services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.displayManager.defaultSession = "sway";
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.libinput.enable = true;

@@ -26,7 +26,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 8) (> time 17))
+  (if (or (< time 8) (> time 16))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -136,6 +136,11 @@
           (lambda ()
             (setq-local dash-docs-docsets '("Python 3" "NumPy" "SciPy" "scikit-learn" "TensorFlow 2" "Pandas"))))
 
+(add-hook 'haskell-mode-hook
+          (lambda ()
+
+            (setq lsp-haskell-server-path "/run/current-system/sw/bin/haskell-language-server")
+            (setq-local dash-docs-docsets '("Haskell"))))
 (add-hook 'julia-mode-hook
           (lambda ()
             (setq-local dash-docs-docsets '("Julia"))))
@@ -143,8 +148,11 @@
           (lambda ()
             (setq-local dash-docs-docsets '("Julia"))))
 
+(setq lsp-file-watch-threshold 1000)
 (after! lsp
-  (setq lsp-signature-render-documentation nil))
+  (setq lsp-enable-file-watchers t)
+  (setq lsp-signature-auto-activate t)
+  (setq lsp-signature-render-documentation t))
 
 (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
 
@@ -218,4 +226,5 @@ latter - its output."
        '((display-buffer-below-selected display-buffer-at-bottom)
          (inhibit-same-window . t)))
       (fit-window-to-buffer (window-in-direction 'below)))))
-(setq dash-docs-browser-func 'eww)
+
+(setq browse-url-browser-function 'eww)

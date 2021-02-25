@@ -3,18 +3,22 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }: {
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  # nix = {
+  #   package = pkgs.nixFlakes;
+  #   extraOptions = ''
+  #     experimental-features = nix-command flakes
+  #   '';
+  # };
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./cachix.nix
   ];
   nixpkgs.config.allowUnfree = true;
-
+nix.gc = {
+  automatic = true;
+  dates = "weekly";
+  options = "--delete-older-than 30d";
+};
   nixpkgs.overlays = [
     #omnisharp roslyn, remove when outdated.
     (self: super: {
@@ -119,7 +123,6 @@
     in [
       stow
       autoflake
-      python-language-server
       feh
       swappy
       git
@@ -128,6 +131,7 @@
       rust-analyzer
       stack
       wget
+      appimage-run
       nodejs
       droidcam
       mono
@@ -136,6 +140,7 @@
       julia
       j4-dmenu-desktop
       nodePackages.pyright
+      haskell-language-server
       electrum
       imagemagick
       cmake

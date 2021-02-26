@@ -127,6 +127,7 @@ nix.gc = {
       swappy
       git
       tor-browser-bundle-bin
+      cask
       rustup
       rust-analyzer
       stack
@@ -149,7 +150,6 @@ nix.gc = {
       vim
       vscode
       fd
-      tint2
       ripgrep
       firefox-wayland
       ark
@@ -176,7 +176,6 @@ nix.gc = {
       zoom-us
       spotify
       discord-ptb
-      xdg-desktop-portal-wlr
       arc-theme
       papirus-icon-theme
       languagetool

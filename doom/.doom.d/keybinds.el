@@ -37,6 +37,7 @@
       :g "C-l" 'ivy-switch-buffer
       :g "C-q" '+ivy/switch-workspace-buffer
       :g "C-_" '+popup/toggle
+      :g "C-<" 'pdfgrep
       :n ">" 'sp-slurp-hybrid-sexp
       :n "<" 'sp-forward-barf-sexp
       :leader

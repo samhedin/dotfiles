@@ -9,6 +9,12 @@
   #     experimental-features = nix-command flakes
   #   '';
   # };
+  nix = {
+    extraOptions = ''
+    cores = 8
+'';
+    maxJobs = 16;
+  };
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./cachix.nix
@@ -126,7 +132,7 @@ nix.gc = {
       feh
       swappy
       git
-      tor-browser-bundle-bin
+      # tor-browser-bundle-bin
       cask
       rustup
       rust-analyzer
@@ -148,7 +154,7 @@ nix.gc = {
       ninja
       nixfmt
       vim
-      vscode
+      # vscode
       fd
       ripgrep
       firefox-wayland

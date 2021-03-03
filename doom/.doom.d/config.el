@@ -87,7 +87,6 @@
 (setq org-startup-with-latex-preview t)
 
 ;; (add-hook 'org-mode-hook 'LaTex-math-mode)
-
 (after! org
   (setq-default fill-column 120)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
@@ -110,14 +109,11 @@
 
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")))
-
-
-  ;; (setq org-latex-listings 'minted
-  ;;       org-latex-packages-alist '(("" "minted"))
-  ;;       org-latex-pdf-process
-  ;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-  ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-  )
+  (setq org-latex-pdf-process
+        '("pdflatex -interaction nonstopmode -output-directory %o %f"
+	  "bibtex %b"
+	  "pdflatex -interaction nonstopmode -output-directory %o %f"
+	  "pdflatex -interaction nonstopmode -output-directory %o %f")))
 
 
 
@@ -190,7 +186,7 @@
 
 (setq large-file-warning-threshold 100000000)
 
- (setq ein:output-area-inlined-images t)
+(setq ein:output-area-inlined-images t)
 
 (defun my-preview-latex ()
   "Preview LaTeX from the current cell in a separate buffer.
@@ -227,4 +223,4 @@ latter - its output."
          (inhibit-same-window . t)))
       (fit-window-to-buffer (window-in-direction 'below)))))
 
-(setq browse-url-browser-function 'eww)
+;; (setq browse-url-browser-function 'eww)

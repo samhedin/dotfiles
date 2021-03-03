@@ -22,7 +22,7 @@
        company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy +prescient)               ; a search engine for love and life
+       (ivy +prescient +fuzzy)               ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -46,15 +46,13 @@
        ;;unicode           ; extended unicode support for various languages
        ;;vc-gutter         ; vcs diff in the fringe
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       (window-select +numbers)
-                                        ; visually switch windows
+       (window-select +numbers) ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        ;;zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere)               ; come to the dark side, we have cookies
-       file-templates
-                                        ; auto-snippets for empty files
+       file-templates ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        format   ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys

@@ -115,9 +115,12 @@
           tqdm
           pygments
           epc
-          # pyqt5
+          pyqt5
+          PyQt5-sip
+          pygetwindow
+          qtconsole
           jupyterlab
-          # pyqtwebengine
+          pyqtwebengine
           pymupdf
           ipykernel
           jedi
@@ -133,6 +136,8 @@
       [
       stow
       autoflake
+      xdotool
+      wmctrl
       feh
       swappy
       aria
@@ -178,7 +183,7 @@
       defaultPythonEnv
       machNix.mach-nix
       wf-recorder
-      # qt5.qtwayland
+      qt5.qtwayland
       # qt5Full
       chromium
       steam

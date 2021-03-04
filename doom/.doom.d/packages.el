@@ -53,3 +53,4 @@
   :recipe
   (:host github :repo "manateelazycat/emacs-application-framework"
     :files ("*")))
+(package! epc)

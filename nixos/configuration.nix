@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }: {
+
   nix = {
     extraOptions = ''
       cores = 8
@@ -101,13 +102,12 @@
   # $ nix search wget
   environment.systemPackages = with pkgs;
     let
-      my-python-package = ps: ps.callPackage ./test.nix {};
-      # https://www.youtube.com/watch?v=jXd-hkP4xnU
-      # python-with-my-packages = python38.withPackages(ps: with ps; [
-      #     (my-python-package ps)
-      #   ]);
-      my-python-packages = python-packages:
-        with python-packages; [
+      machNix = import (builtins.fetchGit {
+          url = "https://github.com/DavHau/mach-nix/";
+          ref = "refs/tags/3.1.1";
+        }) {};
+      defaultPythonEnv = machNix.mkPython {
+          requirements = ''
           pandas
           numpy
           Keras
@@ -125,13 +125,12 @@
           matplotlib
           seaborn
           scipy
-          scikitlearn
           black
-        ];
-      my-python = python38.withPackages my-python-packages;
-      # my-python = python-with-my-packages;
-
-    in [
+          '';
+          providers.cffi = "nixpkgs";
+        };
+    in
+      [
       stow
       autoflake
       feh
@@ -176,7 +175,8 @@
       sqlite
       omnisharp-roslyn
       slack
-      my-python
+      defaultPythonEnv
+      machNix.mach-nix
       wf-recorder
       # qt5.qtwayland
       # qt5Full

@@ -3,16 +3,10 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }: {
-  # nix = {
-  #   package = pkgs.nixFlakes;
-  #   extraOptions = ''
-  #     experimental-features = nix-command flakes
-  #   '';
-  # };
   nix = {
     extraOptions = ''
-    cores = 8
-'';
+      cores = 8
+    '';
     maxJobs = 16;
   };
   imports = [ # Include the results of the hardware scan.
@@ -20,11 +14,11 @@
     ./cachix.nix
   ];
   nixpkgs.config.allowUnfree = true;
-nix.gc = {
-  automatic = true;
-  dates = "weekly";
-  options = "--delete-older-than 30d";
-};
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
   nixpkgs.overlays = [
     #omnisharp roslyn, remove when outdated.
     (self: super: {
@@ -171,8 +165,8 @@ nix.gc = {
       slack
       my-python
       wf-recorder
-      qt5.qtwayland
-      qt5Full
+      # qt5.qtwayland
+      # qt5Full
       chromium
       steam
       nyxt

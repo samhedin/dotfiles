@@ -101,6 +101,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs;
     let
+      my-python-package = ps: ps.callPackage ./test.nix {};
+      # https://www.youtube.com/watch?v=jXd-hkP4xnU
+      # python-with-my-packages = python38.withPackages(ps: with ps; [
+      #     (my-python-package ps)
+      #   ]);
       my-python-packages = python-packages:
         with python-packages; [
           pandas
@@ -109,7 +114,11 @@
           # torchvision
           tqdm
           pygments
+          epc
+          # pyqt5
           jupyterlab
+          # pyqtwebengine
+          pymupdf
           ipykernel
           jedi
           notebook
@@ -120,11 +129,14 @@
           black
         ];
       my-python = python38.withPackages my-python-packages;
+      # my-python = python-with-my-packages;
+
     in [
       stow
       autoflake
       feh
       swappy
+      aria
       git
       # tor-browser-bundle-bin
       cask
@@ -141,6 +153,7 @@
       julia
       j4-dmenu-desktop
       nodePackages.pyright
+      # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/
       haskell-language-server
       electrum
       imagemagick

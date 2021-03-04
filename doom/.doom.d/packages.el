@@ -47,10 +47,11 @@
 (package! helm-ag)
 (package! mini-modeline)
 (package! rich-minority)
-(package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 (package! engrave-faces :recipe (:host github :repo "tecosaur/engrave-faces"))
 (package! eaf
   :recipe
   (:host github :repo "manateelazycat/emacs-application-framework"
     :files ("*")))
 (package! epc)
+(package! lsp-julia)
+;; julia

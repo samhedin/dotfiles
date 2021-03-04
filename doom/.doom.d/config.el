@@ -124,27 +124,20 @@
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
 
-(add-hook 'csharp-mode-hook
-          (lambda ()
-            (setq-local dash-docs-docsets '("Mono" "Unity 3D"))))
+(set-docsets! '(csharp-mode) '("Mono" "Unity 3D"))
+(set-docsets! '(python-mode) '("Python 3" "NumPy" "SciPy" "scikit-learn" "TensorFlow 2" "Pandas"))
+(set-docsets! '(haskell-mode) '("Haskell"))
+;; (set-docsets! '(julia-mode) '("Julia"))
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq-local dash-docs-docsets '("Python 3" "NumPy" "SciPy" "scikit-learn" "TensorFlow 2" "Pandas"))))
-
-(add-hook 'haskell-mode-hook
-          (lambda ()
-
-            (setq lsp-haskell-server-path "/run/current-system/sw/bin/haskell-language-server")
-            (setq-local dash-docs-docsets '("Haskell"))))
 (add-hook 'julia-mode-hook
           (lambda ()
             (setq-local dash-docs-docsets '("Julia"))))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq-local dash-docs-docsets '("Julia"))))
+(add-hook 'haskell-mode-hook
+          (lambda () (setq lsp-haskell-server-path "/run/current-system/sw/bin/haskell-language-server")))
+
 
 (setq lsp-file-watch-threshold 1000)
+(setq lsp-enable-folding t)
 (after! lsp
   (setq lsp-enable-file-watchers t)
   (setq lsp-signature-auto-activate t)

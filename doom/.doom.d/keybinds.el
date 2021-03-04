@@ -42,6 +42,7 @@
       :n "<" 'sp-forward-barf-sexp
       :leader
       "!" 'shell-command
+      "l" 'lsp-describe-thing-at-point
       "C-t" 'counsel-M-x)
 
 (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)

@@ -17,7 +17,6 @@
 ;; The keymaps in `emulation-mode-map-alists' take precedence over
 ;; `minor-mode-map-alist'
 (add-to-list 'emulation-mode-map-alists `((keybinds-mode . ,keybinds-mode-map)))
-
 (map! :map keybinds-mode-map
       :g "C-1" 'winum-select-window-1
       :g "C-2" 'winum-select-window-2

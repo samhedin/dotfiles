@@ -185,6 +185,7 @@
       wf-recorder
       qt5.qtwayland
       # qt5Full
+      gnumake
       chromium
       steam
       nyxt

@@ -15,14 +15,14 @@
 (setq which-key-idle-delay 0.001)
 
 (defun sneaky-save-buffer (&rest _r)
-  (unless (or  (string-match-p (regexp-quote "*") (buffer-name))
-               (string-match-p (regexp-quote "pdf") (buffer-name)))
+  (when (buffer-file-name)
     (save-buffer)))
 
-(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all))
+(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all +term/toggle))
   (advice-add f :before #'sneaky-save-buffer))
 
 (add-hook 'focus-out-hook 'sneaky-save-buffer)
+
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
@@ -67,7 +67,6 @@
 
 (load! "keybinds.el")
 (keybinds-mode)
-
 (global-hl-line-mode 0)
 
 (setq-default line-spacing 8)
@@ -125,10 +124,12 @@
 ;;   (dash-docs-install-user-docset f))
 
 (set-docsets! '(csharp-mode) '("Mono" "Unity 3D"))
-(set-docsets! '(python-mode) '("Python 3" "NumPy" "SciPy" "scikit-learn" "TensorFlow 2" "Pandas"))
-(set-docsets! '(haskell-mode) '("Haskell"))
-;; (set-docsets! '(julia-mode) '("Julia"))
+(set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn"  "Pandas")
+(set-docsets! '(haskell-mode) "Haskell")
+(set-docsets! '(julia-mode) "Julia")
 
+(add-hook 'help-mode-hook (lambda ()
+                            (visual-line-mode)))
 (add-hook 'julia-mode-hook
           (lambda ()
             (setq-local dash-docs-docsets '("Julia"))))
@@ -137,7 +138,7 @@
 
 
 (setq lsp-file-watch-threshold 1000)
-(setq lsp-enable-folding t)
+(setq lsp-enable-folding t)             ; Needed for julia atm
 (after! lsp
   (setq lsp-enable-file-watchers t)
   (setq lsp-signature-auto-activate t)
@@ -216,4 +217,4 @@ latter - its output."
          (inhibit-same-window . t)))
       (fit-window-to-buffer (window-in-direction 'below)))))
 
-;; (setq browse-url-browser-function 'eww)
+(setq browse-url-browser-function 'eww)

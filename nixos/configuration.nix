@@ -21,19 +21,18 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-  nixpkgs.overlays = [
-    #omnisharp roslyn, remove when outdated.
-    (self: super: {
-      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
-        src = pkgs.fetchurl {
-          url =
-            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
-          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
-        };
-      });
-    })
-
-  ];
+  nixpkgs.overlays = import ./overlays.nix;
+  # nixpkgs.overlays = [
+  #   #omnisharp roslyn, remove when outdated.
+  #   (self: super: {
+  #     omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+  #       src = pkgs.fetchurl {
+  #         url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.7/omnisharp-mono.tar.gz";
+  #         sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+  #       };
+  #     });
+  #   })
+  # ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -166,7 +165,6 @@
       ninja
       nixfmt
       vim
-      # vscode
       fd
       ripgrep
       firefox-wayland
@@ -180,6 +178,7 @@
       unity3d
       sqlite
       omnisharp-roslyn
+      vscode
       slack
       defaultPythonEnv
       machNix.mach-nix

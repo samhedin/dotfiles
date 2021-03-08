@@ -10,6 +10,7 @@
     '';
     maxJobs = 16;
   };
+  environment.variables.XDG_CURRENT_DESKTOP = "sway";
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./cachix.nix
@@ -182,6 +183,7 @@
       slack
       defaultPythonEnv
       machNix.mach-nix
+      xdg-desktop-portal-wlr
       wf-recorder
       qt5.qtwayland
       # qt5Full

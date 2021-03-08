@@ -5,7 +5,7 @@
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
-(setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
+(setq doom-font (font-spec :family "Fira Code" :size 13.5 :weight 'normal)
       doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
 ;; (setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
@@ -117,14 +117,14 @@
 
 
 ;;  Install dash docsets with these functions.
-                                        ;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Mono" "Pandas"))
-                                        ; (dash-docs-install-docset f))
+;;                                         (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
+;;                                         (dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
 
-(set-docsets! '(csharp-mode) '("Mono" "Unity 3D"))
-(set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn"  "Pandas")
+(set-docsets! '(csharp-mode) "Unity 3D")
+(set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn")
 (set-docsets! '(haskell-mode) "Haskell")
 (set-docsets! '(julia-mode) "Julia")
 
@@ -144,7 +144,6 @@
   (setq lsp-signature-auto-activate t)
   (setq lsp-signature-render-documentation t))
 
-(setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
@@ -217,4 +216,6 @@ latter - its output."
          (inhibit-same-window . t)))
       (fit-window-to-buffer (window-in-direction 'below)))))
 
-(setq browse-url-browser-function 'eww)
+;; (setq browse-url-browser-function 'eww)
+
+(setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")

@@ -21,18 +21,33 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-  nixpkgs.overlays = import ./overlays.nix;
-  # nixpkgs.overlays = [
-  #   #omnisharp roslyn, remove when outdated.
-  #   (self: super: {
-  #     omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
-  #       src = pkgs.fetchurl {
-  #         url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.7/omnisharp-mono.tar.gz";
-  #         sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
-  #       };
-  #     });
-  #   })
-  # ];
+
+  nixpkgs.overlays = [
+    #omnisharp roslyn, remove when outdated.
+    (self: super: {
+      omnisharp-roslyn = super.omnisharp-roslyn.override (old: {
+        src = pkgs.fetchurl {
+          url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.7/omnisharp-mono.tar.gz";
+          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+        };
+
+        nativeBuildInputs =
+          [ pkgs.makeWrapper pkgs.dotnet-sdk pkgs.dotnetPackages.Nuget ];
+
+        installPhase = ''
+          mkdir -p $out/bin
+          cd ..
+          cp -r src $out/
+          rm -rf $out/src/.msbuild
+          cp -r ${pkgs.msbuild}/lib/mono/msbuild $out/src/.msbuild
+          chmod -R u+w $out/src
+          mv $out/src/.msbuild/Current/{bin,Bin}
+          makeWrapper ${pkgs.mono6}/bin/mono $out/bin/omnisharp \
+          --add-flags "$out/src/OmniSharp.exe"
+        '';
+      });
+    })
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -97,17 +112,18 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
+  nix.allowedUsers = [ "sam" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs;
     let
       machNix = import (builtins.fetchGit {
-          url = "https://github.com/DavHau/mach-nix/";
-          ref = "refs/tags/3.1.1";
-        }) {};
+        url = "https://github.com/DavHau/mach-nix/";
+        ref = "refs/tags/3.1.1";
+      }) { };
       defaultPythonEnv = machNix.mkPython {
-          requirements = ''
+        requirements = ''
           pandas
           numpy
           Keras
@@ -129,11 +145,10 @@
           seaborn
           scipy
           black
-          '';
-          providers.cffi = "nixpkgs";
-        };
-    in
-      [
+        '';
+        providers.cffi = "nixpkgs";
+      };
+    in [
       stow
       autoflake
       xdotool
@@ -177,7 +192,7 @@
       unityhub
       unity3d
       sqlite
-      omnisharp-roslyn
+      # omnisharp-roslyn
       vscode
       slack
       defaultPythonEnv

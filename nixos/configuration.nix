@@ -13,7 +13,6 @@
   environment.variables.XDG_CURRENT_DESKTOP = "sway";
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./cachix.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nix.gc = {
@@ -21,34 +20,10 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-
-  nixpkgs.overlays = [
-    #omnisharp roslyn, remove when outdated.
-    (self: super: {
-      omnisharp-roslyn = super.omnisharp-roslyn.override (old: {
-        src = pkgs.fetchurl {
-          url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.7/omnisharp-mono.tar.gz";
-          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
-        };
-
-        nativeBuildInputs =
-          [ pkgs.makeWrapper pkgs.dotnet-sdk pkgs.dotnetPackages.Nuget ];
-
-        installPhase = ''
-          mkdir -p $out/bin
-          cd ..
-          cp -r src $out/
-          rm -rf $out/src/.msbuild
-          cp -r ${pkgs.msbuild}/lib/mono/msbuild $out/src/.msbuild
-          chmod -R u+w $out/src
-          mv $out/src/.msbuild/Current/{bin,Bin}
-          makeWrapper ${pkgs.mono6}/bin/mono $out/bin/omnisharp \
-          --add-flags "$out/src/OmniSharp.exe"
-        '';
-      });
-    })
-  ];
-
+ services.logind.extraConfig = ''
+    RuntimeDirectorySize=50G
+    HandleLidSwitchDocked=ignore
+  '';
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -114,6 +89,19 @@
   };
   nix.allowedUsers = [ "sam" ];
 
+  nixpkgs.overlays = [
+    #omnisharp roslyn, remove when outdated.
+    (self: super: {
+      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+        src = pkgs.fetchurl {
+          url =
+            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
+          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+        };
+      });
+    })
+
+  ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs;
@@ -126,8 +114,6 @@
         requirements = ''
           pandas
           numpy
-          Keras
-          # torchvision
           tqdm
           pygments
           epc
@@ -136,11 +122,8 @@
           pygetwindow
           qtconsole
           jupyterlab
-          pyqtwebengine
+          PyQtWebEngine
           pymupdf
-          ipykernel
-          jedi
-          notebook
           matplotlib
           seaborn
           scipy
@@ -159,14 +142,16 @@
       git
       # tor-browser-bundle-bin
       cask
+      qbittorrent
       rustup
       rust-analyzer
       stack
+      htop
       wget
       appimage-run
       nodejs
       droidcam
-      mono
+      mono6
       dotnet-sdk_5
       pdfgrep
       julia
@@ -174,10 +159,19 @@
       nodePackages.pyright
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/
       haskell-language-server
+      haskellPackages.cabal-install
+      haskellPackages.ghc
+      google-chrome
+      cabal2nix
       electrum
+      ncdu
       imagemagick
       cmake
       ninja
+      libsForQt5.qt5.qtwebengine
+      libsForQt5.qt5.qtbase
+      libsForQt5.qt5.qtx11extras
+      libsForQt5.qmake
       nixfmt
       vim
       fd
@@ -192,7 +186,7 @@
       unityhub
       unity3d
       sqlite
-      # omnisharp-roslyn
+      omnisharp-roslyn
       vscode
       slack
       defaultPythonEnv
@@ -200,9 +194,8 @@
       xdg-desktop-portal-wlr
       wf-recorder
       qt5.qtwayland
-      # qt5Full
+      qt5Full
       gnumake
-      chromium
       steam
       nyxt
       vlc

@@ -5,7 +5,7 @@
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
-(setq doom-font (font-spec :family "Fira Code" :size 13.5 :weight 'normal)
+(setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
       doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
 ;; (setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
@@ -26,7 +26,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 8) (> time 16))
+  (if (or (< time 10) (> time 16))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 

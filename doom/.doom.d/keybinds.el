@@ -59,6 +59,7 @@
   (map! :map org-mode-map
         "C-c C-p" #'org-latex-export-to-pdf))
 
+
 (after! company
   (map! :map company-active-map
         "<C-return>" #'company-complete-selection

@@ -44,6 +44,11 @@
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+(defun copy-julia-import-string ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (kill-new (format "includet(\"%s\")" (buffer-file-name))))
+
 (defun pdfgrep ()
   (interactive)
   (grep (format "pdfgrep --ignore-case --recursive --page-number '%s' ." (read-string "Enter term: "))))

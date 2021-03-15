@@ -192,6 +192,9 @@
       defaultPythonEnv
       machNix.mach-nix
       xdg-desktop-portal-wlr
+      xdg-desktop-portal
+      pipewire
+      tldr
       wf-recorder
       qt5.qtwayland
       qt5Full

@@ -7,8 +7,6 @@
 
 (setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
       doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
-;; (setq doom-font (font-spec :family "Fira Code" :size 19.5 :weight 'normal)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 19.5))
 
 (setq display-line-numbers-type nil)
 (setq confirm-kill-emacs nil)
@@ -44,10 +42,6 @@
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-(defun copy-julia-import-string ()
-  "Copy the current buffer file name to the clipboard."
-  (interactive)
-  (kill-new (format "includet(\"%s\")" (buffer-file-name))))
 
 (defun pdfgrep ()
   (interactive)
@@ -91,7 +85,8 @@
 (setq org-startup-with-latex-preview t)
 
 ;; (add-hook 'org-mode-hook 'LaTex-math-mode)
-(after! org
+(use-package! org
+  :config
   (setq-default fill-column 120)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   (auto-fill-mode)
@@ -119,7 +114,21 @@
 	  "pdflatex -interaction nonstopmode -output-directory %o %f"
 	  "pdflatex -interaction nonstopmode -output-directory %o %f")))
 
+(use-package! org-ref
+  :after-call org-mode-hook)
 
+(after! julia-repl
+  (let* ((file buffer-file-name))
+  (when (and file (buffer-modified-p))
+   (if (or julia-repl-save-buffer-on-send (y-or-n-p "Buffer modified, save? "))
+    (save-buffer)
+    (setq file nil)))
+  (julia-repl--send-string
+   (if file
+    (concat "includet(\""
+     (julia-repl--path-rewrite file julia-repl-path-rewrite-rules)
+     "\");")
+    (buffer-substring-no-properties (point-min) (point-max))))))
 
 ;;  Install dash docsets with these functions.
 ;;                                         (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
@@ -142,9 +151,8 @@
           (lambda () (setq lsp-haskell-server-path "/run/current-system/sw/bin/haskell-language-server")))
 
 
-(setq lsp-file-watch-threshold 1000)
-(setq lsp-enable-folding t)             ; Needed for julia atm
-(after! lsp
+(use-package! lsp-mode
+  :config
   (setq lsp-enable-file-watchers t)
   (setq lsp-signature-auto-activate t)
   (setq lsp-signature-render-documentation t))

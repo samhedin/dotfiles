@@ -74,11 +74,13 @@ nixpkgs.config.allowUnfree = true;
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      wget vim
+    i3pystatus (python38.withPackages(ps: with ps; [ i3pystatus keyring ]))
      firefox
      alacritty
      wl-clipboard
    ];
    programs.light.enable = true;
+
 programs.sway = {
   enable = true;
   wrapperFeatures.gtk = true; # so that gtk works properly
@@ -86,12 +88,40 @@ programs.sway = {
     brightnessctl
     swaylock
     swayidle
+    xwayland
+    mako
+    kanshi
+    grim
+    slurp
     wl-clipboard
     mako # notification daemon
     alacritty # Alacritty is the default terminal in the config
     dmenu # Dmenu is the default in the config but i recommend wofi since its wayland native
   ];
+  extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+    '';
 };
+  # configuring kanshi
+  systemd.user.services.kanshi = {
+    description = "Kanshi output autoconfig ";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    environment = { XDG_CONFIG_HOME="/home/mschwaig/.config"; };
+    serviceConfig = {
+      # kanshi doesn't have an option to specifiy config file yet, so it looks
+      # at .config/kanshi/config
+      ExecStart = ''
+      ${pkgs.kanshi}/bin/kanshi
+      '';
+      RestartSec = 5;
+      Restart = "always";
+    };
+  };
 fonts.fonts = with pkgs; [
   noto-fonts
   noto-fonts-cjk

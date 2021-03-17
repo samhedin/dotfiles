@@ -97,6 +97,7 @@ nixpkgs.config.allowUnfree = true;
     )
      wget vim
      unityhub
+    discord-ptb
      unity3d
     brightnessctl
      firefox

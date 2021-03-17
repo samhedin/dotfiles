@@ -42,13 +42,17 @@ nixpkgs.config.allowUnfree = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  environment = {
+    etc = {
+      # Put config files in /etc. Note that you also can put these in ~/.config, but then you can't manage them with NixOS anymore!
+      "sway/config".source = /home/sam/.config/sway/config;
+    };
+  };
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.defaultSession = "sway";
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -56,12 +60,14 @@ nixpkgs.config.allowUnfree = true;
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  location.latitude = 59.37118495540346;
+  location.longitude = 18.065956381997143;
   # Enable sound.
    sound.enable = true;
    hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.sam = {
@@ -73,50 +79,63 @@ nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+    (
+      pkgs.writeTextFile {
+        name = "startsway";
+        destination = "/bin/startsway";
+        executable = true;
+        text = ''
+          #! ${pkgs.bash}/bin/bash
+
+          # first import environment variables from the login manager
+          systemctl --user import-environment
+          # then start the service
+          exec systemctl --user start sway.service
+        '';
+      }
+    )
      wget vim
-    i3pystatus (python38.withPackages(ps: with ps; [ i3pystatus keyring ]))
      firefox
      alacritty
      wl-clipboard
    ];
-   programs.light.enable = true;
-
 programs.sway = {
   enable = true;
   wrapperFeatures.gtk = true; # so that gtk works properly
   extraPackages = with pkgs; [
-    brightnessctl
     swaylock
-    swayidle
     xwayland
-    mako
-    kanshi
-    grim
-    slurp
     wl-clipboard
     mako # notification daemon
     alacritty # Alacritty is the default terminal in the config
-    dmenu # Dmenu is the default in the config but i recommend wofi since its wayland native
+    j4-dmenu-desktop # Dmenu is the default in the config but i recommend wofi since its wayland native
   ];
-  extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export MOZ_ENABLE_WAYLAND=1
-    '';
 };
-  # configuring kanshi
-  systemd.user.services.kanshi = {
+
+
+  systemd.user.targets.sway-session = {
+    description = "Sway compositor session";
+    documentation = [ "man:systemd.special(7)" ];
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+  };
+
+services.redshift = {
+    enable = true;
+    # Redshift with wayland support isn't present in nixos-19.09 atm. You have to cherry-pick the commit from https://github.com/NixOS/nixpkgs/pull/68285 to do that.
+    package = pkgs.redshift-wlr;
+  };
+
+  programs.waybar.enable = true; systemd.user.services.kanshi = {
     description = "Kanshi output autoconfig ";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
-    environment = { XDG_CONFIG_HOME="/home/mschwaig/.config"; };
     serviceConfig = {
       # kanshi doesn't have an option to specifiy config file yet, so it looks
       # at .config/kanshi/config
       ExecStart = ''
-      ${pkgs.kanshi}/bin/kanshi
+        ${pkgs.kanshi}/bin/kanshi
       '';
       RestartSec = 5;
       Restart = "always";

@@ -42,8 +42,8 @@ bar {
 
 #client.focused #CBCCB3 #285577 #FFFFFF #eb4034
 
-bindsym XF86MonBrightnessUp exec light -A 10
-bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessDown exec "brightnessctl set 2%-"
+bindsym XF86MonBrightnessUp exec "brightnessctl set +2%"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

@@ -72,9 +72,10 @@ nixpkgs.config.allowUnfree = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.sam = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "networkmanager" "video"]; # Enable ‘sudo’ for the user.
    };
 
+   # programs.light.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -95,6 +96,9 @@ nixpkgs.config.allowUnfree = true;
       }
     )
      wget vim
+     unityhub
+     unity3d
+    brightnessctl
      firefox
      alacritty
      wl-clipboard

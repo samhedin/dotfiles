@@ -136,7 +136,6 @@
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
-
 (set-docsets! '(csharp-mode) "Unity 3D")
 (set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn")
 (set-docsets! '(haskell-mode) "Haskell")

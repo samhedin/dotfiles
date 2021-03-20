@@ -1,23 +1,45 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
+#
+# RUN THIS
+# sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+# sudo nix-channel --update
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-nixpkgs.config.allowUnfree = true;
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+  nixpkgs.overlays = [
+    #omnisharp roslyn, remove when outdated.
+    (self: super: {
+      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+        src = pkgs.fetchurl {
+          url =
+            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
+          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+        };
+      });
+    })
+  ];
+  nixpkgs.config = {
+    allowUnfree = true;
+    # packageOverrides = pkgs: {
+    #   unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+    # };
+  };
   boot.kernelPackages = pkgs.linuxPackages_5_10;
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
- networking.networkmanager.enable = true;
- networking.hostName = "nixoslap"; # Define your hostname.
+  networking.networkmanager.enable = true;
+  networking.hostName = "nixoslap"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -63,60 +85,68 @@ nixpkgs.config.allowUnfree = true;
   location.latitude = 59.37118495540346;
   location.longitude = 18.065956381997143;
   # Enable sound.
-   sound.enable = true;
-   hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
 
+    # NixOS allows either a lightweight build (default) or full build of PulseAudio to be installed.
+    # Only the full build has Bluetooth support, so it must be selected here.
+    package = pkgs.pulseaudioFull;
+
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.sam = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" "video"]; # Enable ‘sudo’ for the user.
-   };
+  users.users.sam = {
+    isNormalUser = true;
+    extraGroups =
+      [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
+  };
 
-   # programs.light.enable = true;
+  # programs.light.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-    (
-      pkgs.writeTextFile {
-        name = "startsway";
-        destination = "/bin/startsway";
-        executable = true;
-        text = ''
-          #! ${pkgs.bash}/bin/bash
+  environment.systemPackages = with pkgs; [
+    (pkgs.writeTextFile {
+      name = "startsway";
+      destination = "/bin/startsway";
+      executable = true;
+      text = ''
+        #! ${pkgs.bash}/bin/bash
 
-          # first import environment variables from the login manager
-          systemctl --user import-environment
-          # then start the service
-          exec systemctl --user start sway.service
-        '';
-      }
-    )
-     wget vim
-     unityhub
-    discord-ptb
-     unity3d
+        # first import environment variables from the login manager
+        systemctl --user import-environment
+        # then start the service
+        exec systemctl --user start sway.service
+      '';
+    })
+    wget
+    vim
+    unityhub
+    nixfmt
+    omnisharp-roslyn
+    sqlite
+    unity3d
     brightnessctl
-     firefox
-     alacritty
-     wl-clipboard
-   ];
-programs.sway = {
-  enable = true;
-  wrapperFeatures.gtk = true; # so that gtk works properly
-  extraPackages = with pkgs; [
-    swaylock
-    xwayland
+    discord
+    firefox
+    alacritty
     wl-clipboard
-    mako # notification daemon
-    alacritty # Alacritty is the default terminal in the config
-    j4-dmenu-desktop # Dmenu is the default in the config but i recommend wofi since its wayland native
   ];
-};
-
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # so that gtk works properly
+    extraPackages = with pkgs; [
+      swaylock
+      xwayland
+      wl-clipboard
+      mako # notification daemon
+      alacritty # Alacritty is the default terminal in the config
+      j4-dmenu-desktop # Dmenu is the default in the config but i recommend wofi since its wayland native
+    ];
+  };
 
   systemd.user.targets.sway-session = {
     description = "Sway compositor session";
@@ -126,13 +156,14 @@ programs.sway = {
     after = [ "graphical-session-pre.target" ];
   };
 
-services.redshift = {
+  services.redshift = {
     enable = true;
     # Redshift with wayland support isn't present in nixos-19.09 atm. You have to cherry-pick the commit from https://github.com/NixOS/nixpkgs/pull/68285 to do that.
     package = pkgs.redshift-wlr;
   };
 
-  programs.waybar.enable = true; systemd.user.services.kanshi = {
+  programs.waybar.enable = true;
+  systemd.user.services.kanshi = {
     description = "Kanshi output autoconfig ";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
@@ -146,17 +177,17 @@ services.redshift = {
       Restart = "always";
     };
   };
-fonts.fonts = with pkgs; [
-  noto-fonts
-  noto-fonts-cjk
-  noto-fonts-emoji
-  liberation_ttf
-  fira-code
-  fira-code-symbols
-  mplus-outline-fonts
-  dina-font
-  proggyfonts
-];
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

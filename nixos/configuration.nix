@@ -136,12 +136,19 @@
         desktopName = "unityhub";
         exec = "${unityhub}/bin/unityhub";
       };
+      droidcamdesktop = pkgs.makeDesktopItem {
+        name = "droidcamdesktop";
+        desktopName = "droidcamdesktop";
+        exec = "${droidcam}/bin/droidcam";
+      };
     in [
       stow
       autoflake
       xdotool
+      libnotify
       wmctrl
       unitydesktop
+      droidcamdesktop
       feh
       swappy
       aria

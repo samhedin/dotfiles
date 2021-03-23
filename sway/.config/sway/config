@@ -176,5 +176,11 @@ input 10730:258:Kinesis_Advantage2_Keyboard {
     repeat_delay 170
     repeat_rate 50
 }
+input 1:1:AT_Translated_Set_2_keyboard {
+    xkb_file /home/sam/layout.xkb
+    repeat_delay 170
+    repeat_rate 50
+}
+
 exec --no-startup-id picom -b
 exec --no-startup-id qbittorrent

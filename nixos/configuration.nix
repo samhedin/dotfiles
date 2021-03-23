@@ -131,11 +131,17 @@
         '';
         providers.cffi = "nixpkgs";
       };
+      unitydesktop = pkgs.makeDesktopItem {
+        name = "unityhub";
+        desktopName = "unityhub";
+        exec = "${unityhub}/bin/unityhub";
+      };
     in [
       stow
       autoflake
       xdotool
       wmctrl
+      unitydesktop
       feh
       swappy
       aria
@@ -199,7 +205,6 @@
       qt5.qtwayland
       qt5Full
       gnumake
-      steam
       nyxt
       vlc
       gcc

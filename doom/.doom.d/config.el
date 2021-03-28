@@ -117,19 +117,6 @@
 (use-package! org-ref
   :after-call org-mode-hook)
 
-(after! julia-repl
-  (let* ((file buffer-file-name))
-  (when (and file (buffer-modified-p))
-   (if (or julia-repl-save-buffer-on-send (y-or-n-p "Buffer modified, save? "))
-    (save-buffer)
-    (setq file nil)))
-  (julia-repl--send-string
-   (if file
-    (concat "includet(\""
-     (julia-repl--path-rewrite file julia-repl-path-rewrite-rules)
-     "\");")
-    (buffer-substring-no-properties (point-min) (point-max))))))
-
 ;;  Install dash docsets with these functions.
 ;;                                         (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
 ;;                                         (dash-docs-install-docset f))
@@ -153,6 +140,7 @@
 
 (use-package! lsp-mode
   :config
+  (setq lsp-enable-folding t)             ; Needed for julia atm
   (setq lsp-enable-file-watchers t)
   (setq lsp-signature-auto-activate t)
   (setq lsp-signature-render-documentation t))
@@ -181,7 +169,7 @@
 (setq rm-blacklist "")
 (rich-minority-mode)
 (mini-modeline-mode)
-
+(setq max-mini-window-height 0.05)
 (defun remove-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
   (interactive)
@@ -229,6 +217,6 @@ latter - its output."
          (inhibit-same-window . t)))
       (fit-window-to-buffer (window-in-direction 'below)))))
 
-;; (setq browse-url-browser-function 'eww)
+(setq browse-url-browser-function 'eww)
 
 (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")

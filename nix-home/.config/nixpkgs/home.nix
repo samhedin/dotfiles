@@ -1,18 +1,28 @@
 { config, pkgs, ... }:
 
 {
-
   nixpkgs.overlays = [
     # Emacs, see home-manager for more.
     (import (builtins.fetchTarball {
       url =
         "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
     }))
+
+    (self: super: {
+      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+        src = pkgs.fetchurl {
+          url =
+            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
+          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
+        };
+      });
+    })
   ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # omnisharp-roslyn.enable = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "sam";
@@ -28,6 +38,8 @@
     # package = pkgs.emacsGcc;
     extraPackages = (epkgs: [ epkgs.vterm ]);
   };
+  home.packages = with pkgs;
+    [ omnisharp-roslyn ];
 
   programs.texlive.enable = true;
   programs.texlive.extraPackages = tpkgs: {
@@ -36,8 +48,6 @@
       csquotes wrapfig braket turnstile dashbox chktex cleveref bussproofs
       latexmk;
   };
-
-
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

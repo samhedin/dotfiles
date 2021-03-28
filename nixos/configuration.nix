@@ -89,19 +89,6 @@
   };
   nix.allowedUsers = [ "sam" ];
 
-  nixpkgs.overlays = [
-    #omnisharp roslyn, remove when outdated.
-    (self: super: {
-      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
-        src = pkgs.fetchurl {
-          url =
-            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
-          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
-        };
-      });
-    })
-
-  ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs;
@@ -174,7 +161,7 @@
       haskell-language-server
       haskellPackages.cabal-install
       haskellPackages.ghc
-      google-chrome
+      google-chrome-beta
       cabal2nix
       electrum
       ncdu
@@ -199,7 +186,7 @@
       unityhub
       unity3d
       sqlite
-      omnisharp-roslyn
+      # omnisharp-roslyn
       vscode
       slack
       defaultPythonEnv

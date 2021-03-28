@@ -162,8 +162,9 @@ bindsym $mod+e layout toggle split
 bindsym $mod+t split toggle
 bindsym $mod+Shift+q move container to output right
 # bindsym $mod+Shift+c exec chromium -enable-features=UseOzonePlatform -ozone-platform=wayland --disable-gpu-memory-buffer-video-frames
-bindsym $mod+Shift+c exec google-chrome-stable
+bindsym $mod+Shift+c exec google-chrome-beta
 bindsym $mod+Shift+e exec emacs
+bindsym $mod+Shift+s exec spotify
 
 input 5426:123:Razer_Razer_Viper_Ultimate_Dongle {
       scroll_factor 7

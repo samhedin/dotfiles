@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
+# chromium -enable-features=UseOzonePlatform -ozone-platform=wayland --disable-gpu-memory-buffer-video-frames
 { config, pkgs, lib, ... }: {
 
   nix = {
@@ -167,6 +167,9 @@
       ncdu
       imagemagick
       cmake
+
+      chromium
+
       ninja
       libsForQt5.qt5.qtwebengine
       libsForQt5.qt5.qtbase

@@ -54,3 +54,5 @@
     :files ("*")))
 (package! epc)
 (package! org-ref)
+(package! ob-ess-julia)
+(package! julia-snail)

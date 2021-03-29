@@ -52,6 +52,7 @@
       ">" nil
       "<" nil
       "C-." nil
+      "C-i" nil
       "<C-tab>" nil
       "q" nil)
 
@@ -59,6 +60,12 @@
   (map! :map org-mode-map
         "C-c C-p" #'org-latex-export-to-pdf))
 
+(after! julia-snail
+  (map! :map keybinds-mode-map
+        :n "C-i" #'julia-snail-send-dwim))
+
+(map! :map evil-motion-state-map
+      "<C-i>" nil)
 
 (after! company
   (map! :map company-active-map

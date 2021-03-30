@@ -52,7 +52,6 @@
       ">" nil
       "<" nil
       "C-." nil
-      "C-i" nil
       "<C-tab>" nil
       "q" nil)
 
@@ -62,10 +61,12 @@
 
 (after! julia-snail
   (map! :map keybinds-mode-map
-        :n "C-i" #'julia-snail-send-dwim))
-
-(map! :map evil-motion-state-map
-      "<C-i>" nil)
+        :n "TAB" nil
+        "TAB" nil)
+  (map! :map julia-snail-mode-map
+        :n "<return>" #'julia-snail-send-dwim
+        "TAB" nil
+        :n "TAB" nil))
 
 (after! company
   (map! :map company-active-map

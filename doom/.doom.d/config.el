@@ -16,7 +16,7 @@
   (when (buffer-file-name)
     (save-buffer)))
 
-(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all +term/toggle julia-snail-send-buffer-file))
+(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all +term/toggle))
   (advice-add f :before #'sneaky-save-buffer))
 
 (add-hook 'focus-out-hook 'sneaky-save-buffer)
@@ -83,9 +83,7 @@
   (setq centaur-tabs-set-close-button nil))
 
 (setq org-startup-with-latex-preview t)
-(use-package julia-snail
-  :requires vterm
-  :hook (julia-mode . julia-snail-mode))
+(add-hook 'julia-mode-hook 'julia-snail-mode)
 ;; (add-hook 'org-mode-hook 'LaTex-math-mode)
 (use-package! org
   :config

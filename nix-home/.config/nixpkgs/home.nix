@@ -38,8 +38,9 @@
     # package = pkgs.emacsGcc;
     extraPackages = (epkgs: [ epkgs.vterm ]);
   };
-  home.packages = with pkgs;
-    [ omnisharp-roslyn ];
+  home.packages = with pkgs; [
+    omnisharp-roslyn
+  ];
 
   programs.texlive.enable = true;
   programs.texlive.extraPackages = tpkgs: {

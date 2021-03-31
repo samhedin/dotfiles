@@ -4,9 +4,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
+ '(custom-safe-themes
+   '("2cdc13ef8c76a22daa0f46370011f54e79bae00d5736340a5ddfe656a767fddf" default))
  '(org-startup-folded t)
  '(safe-local-variable-values
-   '((lsp--override-calculate-lisp-indent\? . t)
+   '((eval font-lock-add-keywords nil
+           `((,(concat "("
+                       (regexp-opt
+                        '("sp-do-move-op" "sp-do-move-cl" "sp-do-put-op" "sp-do-put-cl" "sp-do-del-op" "sp-do-del-cl")
+                        t)
+                       "\\_>")
+              1 'font-lock-variable-name-face)))
+     (lsp--override-calculate-lisp-indent\? . t)
      (flycheck-disabled-checkers quote
                                  (emacs-lisp-checkdoc))
      (eval progn

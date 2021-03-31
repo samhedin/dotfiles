@@ -16,7 +16,7 @@
   (when (buffer-file-name)
     (save-buffer)))
 
-(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all +term/toggle))
+(dolist (f '(grep winum-select-window-by-number evil-switch-to-windows-last-buffer magit-status projectile-compile-project recompile TeX-command-run-all +term/toggle julia-snail-send-buffer-file))
   (advice-add f :before #'sneaky-save-buffer))
 
 (add-hook 'focus-out-hook 'sneaky-save-buffer)
@@ -24,7 +24,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 10) (> time 16))
+  (if (or (< time 10) (> time 17))
       (load-theme 'doom-one t)
     (load-theme 'doom-one-light t)))
 
@@ -78,6 +78,15 @@
   (set-face-attribute 'treemacs-root-face nil :height 1.0  :underline nil)
   (setq treemacs-width 50)
   (treemacs-resize-icons 15))
+
+(after! julia-snail
+  (defun julia-snail-send-line-as-region ()
+    (interactive)
+    (save-excursion
+      (move-beginning-of-line 1)
+      (push-mark-command t)
+      (move-end-of-line 1)
+      (julia-snail-send-region))))
 
 (after! centaur-tabs
   (setq centaur-tabs-set-close-button nil))
@@ -220,4 +229,4 @@ latter - its output."
 
 (setq browse-url-browser-function 'eww)
 
-(setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
+;; (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")

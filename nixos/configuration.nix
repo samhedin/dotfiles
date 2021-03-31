@@ -35,6 +35,7 @@
     options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"
   '';
 
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -135,6 +136,7 @@
       libnotify
       wmctrl
       unitydesktop
+      libtool
       droidcamdesktop
       feh
       swappy
@@ -165,6 +167,7 @@
       cabal2nix
       electrum
       ncdu
+      unzip
       imagemagick
       cmake
 

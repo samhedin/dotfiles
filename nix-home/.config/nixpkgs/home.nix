@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  pkgsUnstable = import <nixpkgs-unstable> {};
+in
 {
   nixpkgs.overlays = [
     # Emacs, see home-manager for more.
@@ -9,10 +11,10 @@
     }))
 
     (self: super: {
-      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: {
+      omnisharp-roslyn = pkgsUnstable.omnisharp-roslyn.overrideAttrs (old: {
         src = pkgs.fetchurl {
           url =
-            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.6/omnisharp-mono.tar.gz";
+            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.7/omnisharp-mono.tar.gz";
           sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
         };
       });

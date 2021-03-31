@@ -48,10 +48,6 @@
 (package! mini-modeline)
 (package! rich-minority)
 (package! engrave-faces :recipe (:host github :repo "tecosaur/engrave-faces"))
-(package! eaf
-  :recipe
-  (:host github :repo "manateelazycat/emacs-application-framework"
-    :files ("*")))
 (package! epc)
 (package! org-ref)
 (package! julia-snail)

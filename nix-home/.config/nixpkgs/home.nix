@@ -48,6 +48,7 @@ in
   programs.texlive.extraPackages = tpkgs: {
     inherit (tpkgs)
       scheme-medium cm-super capt-of minted biblatex algorithms tikz-cd caption
+      placeins
       csquotes wrapfig braket turnstile dashbox chktex cleveref bussproofs
       latexmk;
   };

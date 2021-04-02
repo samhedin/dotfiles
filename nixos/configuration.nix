@@ -20,7 +20,7 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
- services.logind.extraConfig = ''
+  services.logind.extraConfig = ''
     RuntimeDirectorySize=50G
     HandleLidSwitchDocked=ignore
   '';
@@ -34,7 +34,6 @@
   boot.extraModprobeConfig = ''
     options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"
   '';
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -111,6 +110,7 @@
           qtconsole
           jupyterlab
           PyQtWebEngine
+          scikit-learn
           pymupdf
           matplotlib
           seaborn
@@ -129,6 +129,7 @@
         desktopName = "droidcamdesktop";
         exec = "${droidcam}/bin/droidcam";
       };
+
     in [
       stow
       autoflake
@@ -156,8 +157,8 @@
       mono6
       dotnet-sdk_5
       pdfgrep
-      julia
       j4-dmenu-desktop
+      julia
       nodePackages.pyright
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/
       haskell-language-server

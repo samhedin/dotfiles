@@ -47,6 +47,15 @@
   networking.useDHCP = false;
   networking.interfaces.enp6s0.useDHCP = true;
 
+  services.pipewire.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal
+    ];
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -129,7 +138,6 @@
         desktopName = "droidcamdesktop";
         exec = "${droidcam}/bin/droidcam";
       };
-
     in [
       stow
       autoflake
@@ -198,9 +206,6 @@
       slack
       defaultPythonEnv
       machNix.mach-nix
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal
-      pipewire
       tldr
       wf-recorder
       qt5.qtwayland

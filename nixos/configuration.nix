@@ -126,7 +126,6 @@
           scipy
           black
         '';
-        providers.cffi = "nixpkgs";
       };
       unitydesktop = pkgs.makeDesktopItem {
         name = "unityhub";

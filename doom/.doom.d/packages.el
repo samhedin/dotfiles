@@ -48,6 +48,7 @@
 (package! mini-modeline)
 (package! rich-minority)
 (package! engrave-faces :recipe (:host github :repo "tecosaur/engrave-faces"))
-(package! epc)
 (package! org-ref)
 (package! julia-snail)
+(package! shrface)
+(package! shr-tag-pre-highlight)

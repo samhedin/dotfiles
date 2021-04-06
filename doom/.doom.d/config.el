@@ -21,6 +21,25 @@
 
 (add-hook 'focus-out-hook 'sneaky-save-buffer)
 
+(use-package eww
+  :defer t
+  :init
+  (add-hook 'eww-after-render-hook #'shrface-mode)
+  :config
+  (require 'shrface))
+
+(use-package shr-tag-pre-highlight
+  :ensure t
+  :after shr
+  :config
+  (add-to-list 'shr-external-rendering-functions
+	       '(pre . shr-tag-pre-highlight))
+  (when (version< emacs-version "26")
+    (with-eval-after-load 'eww
+      (advice-add 'eww-display-html :around
+		  'eww-display-html--override-shr-external-rendering-functions))))
+
+
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
@@ -128,8 +147,8 @@
   :after-call org-mode-hook)
 
 ;;  Install dash docsets with these functions.
-;;                                         (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
-;;                                         (dash-docs-install-docset f))
+;;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
+;;(dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
@@ -169,7 +188,7 @@
 
 (after! pdf-view
   (setq pdf-view-resize-factor 1.10)
-  (setq pdf-view-midnight-colors '("#dddddd" . "#262829")))
+  (setq pdf-view-midnight-colors `(,(face-attribute 'default :foreground) . ,(face-attribute 'default :background))))
 
 (add-hook 'dired-mode-hook
 	  (lambda ()

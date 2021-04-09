@@ -29,7 +29,6 @@
   (require 'shrface))
 
 (use-package shr-tag-pre-highlight
-  :ensure t
   :after shr
   :config
   (add-to-list 'shr-external-rendering-functions
@@ -39,7 +38,7 @@
       (advice-add 'eww-display-html :around
 		  'eww-display-html--override-shr-external-rendering-functions))))
 
-
+(global-hl-line-mode -1)
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
@@ -85,7 +84,6 @@
 
 (load! "keybinds.el")
 (keybinds-mode)
-(global-hl-line-mode 0)
 
 (setq-default line-spacing 8)
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
@@ -98,14 +96,7 @@
   (setq treemacs-width 50)
   (treemacs-resize-icons 15))
 
-(after! julia-snail
-  (defun julia-snail-send-line-as-region ()
-    (interactive)
-    (save-excursion
-      (move-beginning-of-line 1)
-      (push-mark-command t)
-      (move-end-of-line 1)
-      (julia-snail-send-region))))
+(add-hook 'prog-mode-hook (lambda () (hl-line-mode -1)))
 
 (after! centaur-tabs
   (setq centaur-tabs-set-close-button nil))
@@ -153,6 +144,8 @@
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
 
+(setq dash-docs-enable-debugging nil)
+
 (set-docsets! '(csharp-mode) "Unity 3D")
 (set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn")
 (set-docsets! '(haskell-mode) "Haskell")
@@ -170,6 +163,7 @@
 (use-package! lsp-mode
   :config
   (setq lsp-enable-folding t)             ; Needed for julia atm
+  (setq lsp-ui-sideline-show-code-actions nil)
   (setq lsp-enable-file-watchers t)
   (setq lsp-signature-auto-activate t)
   (setq lsp-signature-render-documentation t))
@@ -214,4 +208,4 @@
 
 (setq browse-url-browser-function 'eww)
 
-;; (setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")
+(setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")

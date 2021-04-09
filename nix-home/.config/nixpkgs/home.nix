@@ -9,16 +9,6 @@ in
       url =
         "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
     }))
-
-    (self: super: {
-      omnisharp-roslyn = pkgsUnstable.omnisharp-roslyn.overrideAttrs (old: {
-        src = pkgs.fetchurl {
-          url =
-            "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.37.7/omnisharp-mono.tar.gz";
-          sha256 = "sha256-pebAU2s1ro+tq7AnaVKOIDoTjxM4dZwCRo1kJoARW+Y";
-        };
-      });
-    })
   ];
 
   # Let Home Manager install and manage itself.
@@ -40,9 +30,6 @@ in
     # package = pkgs.emacsGcc;
     extraPackages = (epkgs: [ epkgs.vterm ]);
   };
-  home.packages = with pkgs; [
-    omnisharp-roslyn
-  ];
 
   programs.texlive.enable = true;
   programs.texlive.extraPackages = tpkgs: {

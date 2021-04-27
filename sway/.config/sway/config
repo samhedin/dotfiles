@@ -185,3 +185,5 @@ input 1:1:AT_Translated_Set_2_keyboard {
 
 exec --no-startup-id picom -b
 exec --no-startup-id qbittorrent
+exec "systemctl --user import-environment; systemctl --user stayr sway-session.target"
+exec_always --no-startup-id mako

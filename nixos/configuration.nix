@@ -142,6 +142,10 @@
       autoflake
       xdotool
       libnotify
+      docker
+      pinentry
+      gnome3.seahorse
+      libsForQt5.konqueror
       wmctrl
       unitydesktop
       libtool
@@ -162,6 +166,7 @@
       nodejs
       droidcam
       mono6
+      j
       dotnet-sdk_5
       pdfgrep
       j4-dmenu-desktop
@@ -178,19 +183,12 @@
       unzip
       imagemagick
       cmake
-
       chromium
-
       ninja
-      libsForQt5.qt5.qtwebengine
-      libsForQt5.qt5.qtbase
-      libsForQt5.qt5.qtx11extras
-      libsForQt5.qmake
       nixfmt
       vim
       fd
       ripgrep
-      firefox-wayland
       ark
       grim
       slurp
@@ -209,6 +207,9 @@
       wf-recorder
       qt5.qtwayland
       qt5Full
+      torbrowser
+      gnupg
+      kgpg
       gnumake
       nyxt
       vlc

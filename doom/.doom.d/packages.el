@@ -52,3 +52,4 @@
 (package! julia-snail)
 (package! shrface)
 (package! shr-tag-pre-highlight)
+(package! j-mode)

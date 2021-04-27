@@ -42,13 +42,15 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 10) (> time 17))
-      (load-theme 'doom-one t)
+  (if (or (< time 8) (> time 18))
+      (load-theme 'doom-spacegrey t)
     (load-theme 'doom-one-light t)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+
+(setq org-roam-directory "~/git/privat/roam")
+(setq org-directory "~/git/privat/roam/")
 
 (defun copy-current-file-path ()
   "Copy the current buffer file name to the clipboard."
@@ -85,7 +87,7 @@
 (load! "keybinds.el")
 (keybinds-mode)
 
-(setq-default line-spacing 8)
+(setq-default line-spacing 12)
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 

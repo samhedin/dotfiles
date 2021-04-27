@@ -39,12 +39,18 @@
       :g "C-<" 'pdfgrep
       :n ">" 'sp-slurp-hybrid-sexp
       :n "<" 'sp-forward-barf-sexp
+      :g "<right>" 'evil-window-right
+      :g "<left>" 'evil-window-left
+      :g "<down>" 'doom/escape
       :leader
       "!" 'shell-command
       "l" 'lsp-describe-thing-at-point
-      "C-t" 'counsel-M-x)
+      "<up>" 'counsel-M-x)
 
 (define-key evil-insert-state-map (kbd "C-SPC") 'evil-normal-state)
+(map! :map evil-motion-state-map
+      "<right>" nil
+      "<left>" nil)
 
 (map! :map special-mode-map
       "h" nil)
@@ -74,6 +80,7 @@
         "<return>" nil
         "RET" nil
         "C-SPC" nil)
-  (setq company-minimum-prefix-length 1))
+  (setq company-minimum-prefix-length 1)
+  (setq company-idle-delay 0.01))
 
 (provide 'keybinds)

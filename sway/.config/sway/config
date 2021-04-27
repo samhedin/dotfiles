@@ -167,7 +167,7 @@ bindsym $mod+Shift+e exec emacs
 bindsym $mod+Shift+s exec spotify
 
 input 5426:123:Razer_Razer_Viper_Ultimate_Dongle {
-      scroll_factor 7
+      scroll_factor 6
       accel_profile flat
       pointer_accel 0.1
 }

@@ -19,7 +19,7 @@
        ;;japanese
 
        :completion
-       company           ; the ultimate code completion backend
+       (company +childframe)           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        (ivy +prescient)               ; a search engine for love and life
@@ -42,7 +42,7 @@
        ;; pretty-code       ; ligatures or substitute text with pretty symbols
        ligatures
        ;; tabs              ; a tab bar for Emacs
-       treemacs          ; a project drawer, like neotree but cooler
+       ;; treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        ;;vc-gutter         ; vcs diff in the fringe
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -146,8 +146,9 @@
        ;;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       org               ; organize your plain life in plain text
+       (org +roam +jupyter +dragndrop)               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
+       ;;
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python +lsp +pyright)             ; beautiful is better than ugly
@@ -183,7 +184,7 @@
        (default +bindings +smartparens))
 
 
-(setq doom-leader-key "C-t"
-      doom-leader-alt-key "C-t")
+(setq doom-leader-key "<up>"
+      doom-leader-alt-key "<up>")
 (setq doom-localleader-key "C-,"
       doom-localleader-alt-key "C-,")

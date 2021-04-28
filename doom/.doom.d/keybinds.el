@@ -25,9 +25,6 @@
       :g "C-5" 'winum-select-window-5
       :g  "C-\"" 'recompile
       :g "C-!" 'kill-compilation
-      :i "C-¡" "::"
-      :i "C-@" "->"
-      :i "C-£" "<-"
       :g "C-;" 'iedit-mode
       :g "<C-tab>" 'evil-switch-to-windows-last-buffer
       :i "C-f" 'forward-char
@@ -80,7 +77,29 @@
         "<return>" nil
         "RET" nil
         "C-SPC" nil)
-  (setq company-minimum-prefix-length 1)
+  (setq company-minimum-prefix-length 2)
   (setq company-idle-delay 0.01))
+
+
+(defcustom change-insert-keybindings '()
+  "Alist of keys to strings."
+  :type '(alist :key-type key-sequence :value-type string)
+  :set (lambda (sym new)
+	 (set-default sym new)
+	 (dolist (kv change-insert-keybindings)
+	   (map! :map keybinds-mode-map :i (car kv)
+			   (lambda ()
+			     (interactive)
+			     (insert (cdr kv)))))))
+
+(defun change-insert (key text)
+  "Bind KEY to (insert TEXT)."
+  (interactive "KWhat keybind do you wish to change? \nMWhat text should it insert? ")
+  (when (and (interactive-p)
+	     (y-or-n-p (format "Are you sure you want [%s  \"%s\"]? "
+			       (key-description key)
+			       text)))
+    (setf (alist-get key change-insert-keybindings nil nil #'equal) text)
+    (customize-save-variable 'change-insert-keybindings change-insert-keybindings)))
 
 (provide 'keybinds)

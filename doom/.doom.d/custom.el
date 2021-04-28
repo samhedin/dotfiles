@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
+ '(change-insert-keybindings '(([41] . "blah") ([67108897] . "blah")))
  '(custom-safe-themes
    '("2cdc13ef8c76a22daa0f46370011f54e79bae00d5736340a5ddfe656a767fddf" default))
  '(org-startup-folded t)

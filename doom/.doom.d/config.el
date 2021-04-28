@@ -106,6 +106,9 @@
 (setq org-startup-with-latex-preview t)
 (add-hook 'julia-mode-hook 'julia-snail-mode)
 ;; (add-hook 'org-mode-hook 'LaTex-math-mode)
+
+;; Use this for non breaking space, then insert with C-x 8 <space>
+;; #+LATEX_HEADER: \DeclareUnicodeCharacter{00A0}{~}
 (use-package! org
   :config
   (setq-default fill-column 120)

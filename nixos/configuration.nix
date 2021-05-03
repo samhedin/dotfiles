@@ -110,6 +110,7 @@
         requirements = ''
           pandas
           numpy
+          toolz
           tqdm
           pygments
           epc

@@ -5,16 +5,18 @@
 { config, pkgs, lib, ... }: {
 
   nix = {
-    extraOptions = ''
-      cores = 8
-    '';
     maxJobs = 16;
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
   environment.variables.XDG_CURRENT_DESKTOP = "sway";
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = ["libgit2-0.27.10"];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -110,20 +112,16 @@
         requirements = ''
           pandas
           numpy
-          toolz
+          tensorflow
+          debugpy
           tqdm
           pygments
-          epc
-          pyqt5
-          PyQt5-sip
           pygetwindow
           qtconsole
           jupyterlab
-          PyQtWebEngine
-          scikit-learn
           pymupdf
           matplotlib
-          seaborn
+          pyperclip
           scipy
           black
         '';
@@ -166,11 +164,15 @@
       appimage-run
       nodejs
       droidcam
+      clojure
+      leiningen
+      mkl
       mono6
       j
       dotnet-sdk_5
       pdfgrep
       j4-dmenu-desktop
+      gnuapl
       julia
       nodePackages.pyright
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/

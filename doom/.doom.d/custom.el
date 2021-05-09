@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(change-insert-keybindings '(([41] . "blah") ([67108897] . "blah")))
+ '(change-insert-keybindings '(([67109025] . "Behaviour tree")))
  '(custom-safe-themes
    '("2cdc13ef8c76a22daa0f46370011f54e79bae00d5736340a5ddfe656a767fddf" default))
  '(org-startup-folded t)
@@ -216,7 +216,8 @@ is the buffer position of the start of the containing expression."
                (< emacs-major-version 28)
              (advice-add #'calculate-lisp-indent :around #'wrap-calculate-lisp-indent)))))
  '(warning-suppress-types
-   '(((undo discard-info))
+   '((comp)
+     ((undo discard-info))
      ((undo discard-info))
      ((undo discard-info))
      (with-editor)

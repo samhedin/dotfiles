@@ -39,7 +39,6 @@
 
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
-
 (package! paren-face)
 (package! highlight-parentheses)
 (package! rustic
@@ -53,3 +52,4 @@
 (package! shrface)
 (package! shr-tag-pre-highlight)
 (package! j-mode)
+(package! gnu-apl-mode)

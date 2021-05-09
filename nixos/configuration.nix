@@ -107,7 +107,9 @@
       machNix = import (builtins.fetchGit {
         url = "https://github.com/DavHau/mach-nix/";
         ref = "refs/tags/3.1.1";
-      }) { };
+      }) {
+        python = "python38Full";
+      };
       defaultPythonEnv = machNix.mkPython {
         requirements = ''
           pandas
@@ -172,7 +174,7 @@
       dotnet-sdk_5
       pdfgrep
       j4-dmenu-desktop
-      gnuapl
+      # gnuapl
       julia
       nodePackages.pyright
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/

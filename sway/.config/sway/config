@@ -182,7 +182,7 @@ input 1:1:AT_Translated_Set_2_keyboard {
     repeat_delay 170
     repeat_rate 50
 }
-
+for_window [title="CS188 Pacman"] move position 2800 400
 exec --no-startup-id picom -b
 exec --no-startup-id qbittorrent
 exec "systemctl --user import-environment; systemctl --user stayr sway-session.target"

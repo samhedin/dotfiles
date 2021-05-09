@@ -42,9 +42,9 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 8) (> time 18))
+  (if (or (< time 8) (> time 14))
       (load-theme 'doom-spacegrey t)
-    (load-theme 'doom-one-light t)))
+    (load-theme 'doom-gruvbox-light t)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -112,6 +112,7 @@
 (use-package! org
   :config
   (setq-default fill-column 120)
+  (org-toggle-link-display)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
   (auto-fill-mode)
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
@@ -143,44 +144,39 @@
   :after-call org-mode-hook)
 
 ;;  Install dash docsets with these functions.
-;;(dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
-;;(dash-docs-install-docset f))
+;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Unity_3D"))
+;; (dash-docs-install-docset f))
 
 ;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
 ;;   (dash-docs-install-user-docset f))
 
 (setq dash-docs-enable-debugging nil)
 
-(set-docsets! '(csharp-mode) "Unity 3D")
 (set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn")
 (set-docsets! '(haskell-mode) "Haskell")
 (set-docsets! '(julia-mode) "Julia")
 
 (add-hook 'help-mode-hook (lambda ()
                             (visual-line-mode)))
-(add-hook 'julia-mode-hook
-          (lambda ()
-            (setq-local dash-docs-docsets '("Julia"))))
 (add-hook 'haskell-mode-hook
           (lambda () (setq lsp-haskell-server-path "/run/current-system/sw/bin/haskell-language-server")))
 
 
 (use-package! lsp-mode
   :config
-  (setq lsp-enable-folding t)             ; Needed for julia atm
+  (setq lsp-enable-folding t)           ; Needed for julia atm
   (setq lsp-ui-sideline-show-code-actions nil)
   (setq lsp-enable-file-watchers t)
   (setq lsp-signature-auto-activate t)
+  (setq dap-python-debugger 'debugpy)
   (setq lsp-signature-render-documentation t))
-
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
-;; (setq rustic-compile-display-method 'display-buffer-other-frame)
 
 (global-paren-face-mode)                ; Not working? Try customizing the `shadow` face.
 (setq-default paren-face-regexp "[][(){};]")
-(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode csharp-mode) paren-face-modes))
+(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
 
 ;; Did pdf-tools break? Try
 ;; (pdf-tools-install)
@@ -197,20 +193,6 @@
 (setq rm-blacklist "")
 (rich-minority-mode)
 (mini-modeline-mode)
-(setq max-mini-window-height 0.05)
-(defun remove-dos-eol ()
-  "Do not show ^M in files containing mixed UNIX and DOS line endings."
-  (interactive)
-  (setq buffer-display-table (make-display-table))
-  (aset buffer-display-table ?\^M []))
-
-(add-hook 'csharp-mode-hook 'remove-dos-eol)
-
+(setq max-mini-window-height 0.01)
 (setq large-file-warning-threshold 100000000)
-
-(setq ein:output-area-inlined-images t)
-
-
 (setq browse-url-browser-function 'eww)
-
-(setq lsp-csharp-server-path "/run/current-system/sw/bin/omnisharp")

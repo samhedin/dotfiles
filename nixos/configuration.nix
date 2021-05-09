@@ -116,6 +116,9 @@
           numpy
           tensorflow
           debugpy
+         opencv-python
+keras
+scikit-image
           tqdm
           pygments
           pygetwindow
@@ -211,6 +214,7 @@
       tldr
       wf-recorder
       qt5.qtwayland
+      okular
       qt5Full
       torbrowser
       gnupg

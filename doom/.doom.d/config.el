@@ -197,6 +197,7 @@
 (setq large-file-warning-threshold 100000000)
 (setq browse-url-browser-function 'eww)
 
+;; https://gist.github.com/yorickvP/6132f237fbc289a45c808d8d75e0e1fb
 (setq wl-copy-process nil)
 (defun wl-copy (text)
   (setq wl-copy-process (make-process :name "wl-copy"
@@ -211,3 +212,8 @@
     (shell-command-to-string "wl-paste -n | tr -d \r")))
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
+(setq ein:output-area-inlined-images t)
+;; (setq mailcap-user-mime-data '(("application"
+;;                                 ("feh"
+;;                                  (viewer . "feh %s")
+;;                                  (type . "image/png")))))

@@ -82,7 +82,12 @@
 
 (after! ein
   (map! :map ein:notebook-mode-map
-        :n "<return>" 'ein:worksheet-execute-cell-km))
+        :n "<return>" 'ein:worksheet-execute-cell-km)
+  (map! :leader
+        (:prefix ("e" . "ein notebooks")
+         "a" #'ein:worksheet-insert-cell-above-km
+         "b" #'ein:worksheet-insert-cell-below-km
+         "d" #'ein:worksheet-delete-cell)))
 
 
 (defcustom change-insert-keybindings '()
@@ -92,9 +97,9 @@
 	 (set-default sym new)
 	 (dolist (kv change-insert-keybindings)
 	   (map! :map keybinds-mode-map :i (car kv)
-			   (lambda ()
-			     (interactive)
-			     (insert (cdr kv)))))))
+		 (lambda ()
+		   (interactive)
+		   (insert (cdr kv)))))))
 
 (defun change-insert (key text)
   "Bind KEY to (insert TEXT)."

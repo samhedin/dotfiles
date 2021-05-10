@@ -151,7 +151,6 @@ scikit-image
       docker
       pinentry
       gnome3.seahorse
-      libsForQt5.konqueror
       wmctrl
       libtool
       droidcamdesktop

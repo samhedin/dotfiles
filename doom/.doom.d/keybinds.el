@@ -80,6 +80,10 @@
   (setq company-minimum-prefix-length 2)
   (setq company-idle-delay 0.01))
 
+(after! ein
+  (map! :map ein:notebook-mode-map
+        :n "<return>" 'ein:worksheet-execute-cell-km))
+
 
 (defcustom change-insert-keybindings '()
   "Alist of keys to strings."

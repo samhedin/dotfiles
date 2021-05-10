@@ -187,5 +187,5 @@
 
 (setq doom-leader-key "<up>"
       doom-leader-alt-key "<up>")
-(setq doom-localleader-key "C-,"
-      doom-localleader-alt-key "C-,")
+(setq doom-localleader-key "<down>"
+      doom-localleader-alt-key "<down>")

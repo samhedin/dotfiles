@@ -212,8 +212,4 @@
     (shell-command-to-string "wl-paste -n | tr -d \r")))
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
-(setq ein:output-area-inlined-images t)
-;; (setq mailcap-user-mime-data '(("application"
-;;                                 ("feh"
-;;                                  (viewer . "feh %s")
-;;                                  (type . "image/png")))))
+(setq ein:output-area-inlined-images nil)

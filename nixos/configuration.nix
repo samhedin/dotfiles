@@ -116,6 +116,8 @@
           numpy
           tensorflow
           debugpy
+          torch
+          torchvision
          opencv-python
 keras
 scikit-image
@@ -151,7 +153,6 @@ scikit-image
       gnome3.seahorse
       libsForQt5.konqueror
       wmctrl
-      unitydesktop
       libtool
       droidcamdesktop
       feh
@@ -203,10 +204,7 @@ scikit-image
       unrar
       libreoffice
       alacritty
-      unityhub
-      unity3d
       sqlite
-      omnisharp-roslyn
       vscode
       slack
       defaultPythonEnv
@@ -227,7 +225,6 @@ scikit-image
       zoom-us
       spotify
       discord-ptb
-      arc-theme
       papirus-icon-theme
       languagetool
       pkgs.ntfsprogs

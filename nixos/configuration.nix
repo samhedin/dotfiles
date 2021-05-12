@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # chromium -enable-features=UseOzonePlatform -ozone-platform=wayland --disable-gpu-memory-buffer-video-frames
+# https://elis.nu/blog/2021/02/detailed-setup-of-screen-sharing-in-sway/
 { config, pkgs, lib, ... }: {
 
   nix = {
@@ -16,7 +17,7 @@
     ./hardware-configuration.nix
   ];
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = ["libgit2-0.27.10"];
+  nixpkgs.config.permittedInsecurePackages = [ "libgit2-0.27.10" ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -52,10 +53,7 @@
   services.pipewire.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal
-    ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk xdg-desktop-portal ];
   };
 
   # Configure network proxy if necessary
@@ -107,36 +105,33 @@
       machNix = import (builtins.fetchGit {
         url = "https://github.com/DavHau/mach-nix/";
         ref = "refs/tags/3.1.1";
-      }) {
-        python = "python38Full";
-      };
+      }) { python = "python38Full"; };
       defaultPythonEnv = machNix.mkPython {
         requirements = ''
-          pandas
-          numpy
-          tensorflow
-          debugpy
-          torch
-          torchvision
-         opencv-python
-keras
-scikit-image
-          tqdm
-          pygments
-          pygetwindow
-          qtconsole
-          jupyterlab
-          pymupdf
-          matplotlib
-          pyperclip
-          scipy
-          black
-        '';
-      };
-      unitydesktop = pkgs.makeDesktopItem {
-        name = "unityhub";
-        desktopName = "unityhub";
-        exec = "${unityhub}/bin/unityhub";
+                    pandas
+                    numpy
+                    scikit-learn
+                    pyflakes
+                    isort
+                    tensorflow
+                    debugpy
+                    torch
+                    torchvision
+                    toolz
+                    opencv-python
+                    keras
+                    scikit-image
+                    tqdm
+                    pygments
+                    pygetwindow
+                    qtconsole
+                    jupyterlab
+                    pymupdf
+                    matplotlib
+                    pyperclip
+                    scipy
+                    black
+                  '';
       };
       droidcamdesktop = pkgs.makeDesktopItem {
         name = "droidcamdesktop";
@@ -212,7 +207,6 @@ scikit-image
       wf-recorder
       qt5.qtwayland
       okular
-      qt5Full
       torbrowser
       gnupg
       kgpg

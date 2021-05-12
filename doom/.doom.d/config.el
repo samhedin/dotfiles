@@ -5,8 +5,8 @@
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
-(setq doom-font (font-spec :family "Fira Code" :size 13.0 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13.0))
+(setq doom-font (font-spec :family "Fira Code" :size 13.5 :weight 'normal)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13.5))
 
 (setq display-line-numbers-type nil)
 (setq confirm-kill-emacs nil)
@@ -42,7 +42,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 8) (> time 14))
+  (if (or (< time 8) (> time 19))
       (load-theme 'doom-spacegrey t)
     (load-theme 'doom-gruvbox-light t)))
 
@@ -212,4 +212,15 @@
     (shell-command-to-string "wl-paste -n | tr -d \r")))
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
-(setq ein:output-area-inlined-images nil)
+(setq ein:output-area-inlined-images t)
+;;; Scrolling.
+;; Good speed and allow scrolling through large images (pixel-scroll).
+;; Note: Scroll lags when point must be moved but increasing the number
+;;       of lines that point moves in pixel-scroll.el ruins large image
+;;       scrolling. So unfortunately I think we'll just have to live with
+;;       this.
+(pixel-scroll-mode)
+(setq pixel-dead-time 0) ; Never go back to the old scrolling behaviour.
+(setq pixel-resolution-fine-flag t) ; Scroll by number of pixels instead of lines (t = frame-char-height pixels).
+(setq mouse-wheel-scroll-amount '(1)) ; Distance in pixel-resolution to scroll each mouse wheel event.
+(setq mouse-wheel-progressive-speed nil) ;

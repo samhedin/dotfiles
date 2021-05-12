@@ -23,7 +23,6 @@
       :g "C-3" 'winum-select-window-3
       :g "C-4" 'winum-select-window-4
       :g "C-5" 'winum-select-window-5
-      :g  "C-\"" 'recompile
       :g "C-!" 'kill-compilation
       :g "C-;" 'iedit-mode
       :g "<C-tab>" 'evil-switch-to-windows-last-buffer
@@ -40,6 +39,7 @@
       :g "<left>" 'evil-window-left
       :g "<down>" 'doom/escape
       :leader
+      "r" #'recompile
       "!" 'shell-command
       "l" 'lsp-describe-thing-at-point
       "<up>" 'counsel-M-x)
@@ -82,7 +82,9 @@
 
 (after! ein
   (map! :map ein:notebook-mode-map
-        :n "<return>" 'ein:worksheet-execute-cell-km)
+        :n "<return>" 'ein:worksheet-execute-cell-km
+        :n "<left>" #'ein:worksheet-insert-cell-above
+        :n "<right>" #'ein:worksheet-insert-cell-below-km)
   (map! :leader
         (:prefix ("e" . "ein notebooks")
          "a" #'ein:worksheet-insert-cell-above-km

@@ -51,5 +51,4 @@
 (package! julia-snail)
 (package! shrface)
 (package! shr-tag-pre-highlight)
-(package! j-mode)
-(package! gnu-apl-mode)
+(package! math-preview)

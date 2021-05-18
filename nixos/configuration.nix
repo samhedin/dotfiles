@@ -50,10 +50,11 @@
   networking.useDHCP = false;
   networking.interfaces.enp6s0.useDHCP = true;
 
+  #https://github.com/NixOS/nixpkgs/pull/123034
   services.pipewire.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk xdg-desktop-portal ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
   };
 
   # Configure network proxy if necessary
@@ -70,12 +71,9 @@
   nix.autoOptimiseStore = true;
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome3.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
 
-  # services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
+  services.xserver.desktopManager.gnome.enable = true;
   #  Configure keymap in X11
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
@@ -113,6 +111,7 @@
                     scikit-learn
                     pyflakes
                     isort
+                    ipywidgets
                     tensorflow
                     debugpy
                     torch

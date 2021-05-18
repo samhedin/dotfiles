@@ -123,13 +123,7 @@
    'org-babel-load-languages
    '((python . t)
      (ein .t)
-     (emacs-lisp .t)
-     (julia . t)
-     (ess-julia .t)
-     (latex . t)
-     (jupyter . t)
-     (rust . t)
-     (sh . t)))
+     (emacs-lisp .t)))
 
   (setq org-latex-minted-options '(("breaklines" "true")
                                    ("breakanywhere" "true")))
@@ -212,3 +206,4 @@
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
 (setq ein:output-area-inlined-images t)
+(setq magit-repository-directories '(("/home/sam/git/" . 2)))

@@ -32,7 +32,6 @@
       :g "C-l" 'ivy-switch-buffer
       :g "C-q" '+ivy/switch-workspace-buffer
       :g "C-_" '+popup/toggle
-      :g "C-<" 'pdfgrep
       :n ">" 'sp-slurp-hybrid-sexp
       :n "<" 'sp-forward-barf-sexp
       :g "<right>" 'evil-window-right
@@ -112,5 +111,19 @@
 			       text)))
     (setf (alist-get key change-insert-keybindings nil nil #'equal) text)
     (customize-save-variable 'change-insert-keybindings change-insert-keybindings)))
+
+(use-package! lispyville
+  :init
+  (setq lispyville-key-theme
+        '((operators normal)
+          c-w
+          text-objects
+          additional-motions
+          operators
+          (prettify insert)
+          (atom-movement normal visual)
+          slurp/barf-lispy
+          additional
+          additional-insert)))
 
 (provide 'keybinds)

@@ -1,2 +1,8 @@
-* Layout
+* Layout :ATTACH:
+:PROPERTIES:
+:ID:       de9dd682-4d86-49fd-b40b-821533876c0e
+:END:
 change with ~xkbcomp layout.xkb $out~
+
+
+[[attachment:_20210518_023550screenshot.png]]

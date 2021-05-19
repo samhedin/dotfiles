@@ -42,7 +42,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 8) (> time 19))
+  (if (or (< time 7) (> time 19))
       (load-theme 'doom-spacegrey t)
     (load-theme 'doom-one-light t)))
 
@@ -87,7 +87,7 @@
 (load! "keybinds.el")
 (keybinds-mode)
 
-(setq-default line-spacing 12)
+(setq-default line-spacing 10)
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 
@@ -136,16 +136,31 @@
 (use-package! org-ref
   :after-call org-mode-hook)
 
-;;  Install dash docsets with these functions.
-;; (dolist (f '("Julia" "Python_3" "NumPy" "SciPy" "Haskell"))
-;; (dash-docs-install-docset f))
+;; REGION BEGIN
+;; blablah
+;; REGION END
 
-;; (dolist (f '("scikit-learn" "PyTorch" "TensorFlow 2"))
+;; (after! python
+;;   (defun python-send-delimiters ()
+;;     (interactive)
+;;     (let ((beg nil) (end nil))
+;;       (save-excursion
+;;         (re-search-backward (rx "# section begin"))
+;;         (setq beg (+ (length "# section begin")  (point)))
+;;         (forward-char)
+;;         (re-search-forward (rx "# section end"))
+;;         (setq end (- (point) 1)))
+;;       (python-shell-send-string (buffer-substring-no-properties beg end)))))
+
+;;  Install dash docsets with these functions.
+;; (dolist (f '("Julia" "Python_3" "NumPy" "Haskell"))
+;; (dash-docs-install-docset f))
+;; (dolist (f '("scikit-learn" "PyTorch"))
 ;;   (dash-docs-install-user-docset f))
 
 (setq dash-docs-enable-debugging nil)
 
-(set-docsets! '(python-mode)"Python 3" "NumPy" "SciPy" "scikit-learn")
+(set-docsets! '(python-mode)"Python 3" "NumPy" "scikit-learn" "PyTorch")
 (set-docsets! '(haskell-mode) "Haskell")
 (set-docsets! '(julia-mode) "Julia")
 
@@ -170,6 +185,7 @@
 (global-paren-face-mode)                ; Not working? Try customizing the `shadow` face.
 (setq-default paren-face-regexp "[][(){};]")
 (setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
+
 
 ;; Did pdf-tools break? Try
 ;; (pdf-tools-install)

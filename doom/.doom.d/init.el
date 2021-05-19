@@ -27,7 +27,7 @@
        :ui
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
-       doom-dashboard    ; a nifty splash screen for Emacs
+       ;; doom-dashboard    ; a nifty splash screen for Emacs
        ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
        ;; hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
@@ -48,7 +48,7 @@
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +numbers) ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
-       ;;zen               ; distraction-free coding or writing
+       zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere)               ; come to the dark side, we have cookies
@@ -96,7 +96,7 @@
        lsp
        ;;macos             ; MacOS-specific commands
        (magit +forge)             ; a git porcelain for Emacs
-       make              ; run make tasks from Emacs
+       ;; make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
@@ -112,8 +112,8 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;; (cc +lsp)                ; C/C++/Obj-C madness
-       clojure           ; java with a lisp
-       leiningen
+       ;; clojure           ; java with a lisp
+       ;; leiningen
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
@@ -147,7 +147,7 @@
        ;;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +roam +jupyter +dragndrop)               ; organize your plain life in plain text
+       (org +dragndrop)               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;
        ;;plantuml          ; diagrams for confusing people more

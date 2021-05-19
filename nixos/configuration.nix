@@ -73,7 +73,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
 
-  services.xserver.desktopManager.gnome.enable = true;
   #  Configure keymap in X11
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
@@ -110,9 +109,9 @@
                     numpy
                     scikit-learn
                     pyflakes
+                    jupyter-console
                     isort
                     ipywidgets
-                    tensorflow
                     debugpy
                     torch
                     torchvision
@@ -127,6 +126,7 @@
                     jupyterlab
                     pymupdf
                     matplotlib
+                    seaborn
                     pyperclip
                     scipy
                     black
@@ -150,25 +150,19 @@
       droidcamdesktop
       feh
       swappy
-      aria
       git
-      # tor-browser-bundle-bin
-      cask
       qbittorrent
       rustup
       rust-analyzer
       stack
       htop
       wget
-      appimage-run
+      dolphin
       nodejs
       droidcam
       clojure
       leiningen
       mkl
-      mono6
-      j
-      dotnet-sdk_5
       pdfgrep
       j4-dmenu-desktop
       # gnuapl
@@ -185,7 +179,6 @@
       unzip
       imagemagick
       cmake
-      chromium
       ninja
       nixfmt
       vim
@@ -210,7 +203,6 @@
       gnupg
       kgpg
       gnumake
-      nyxt
       vlc
       gcc
       pandoc
@@ -292,6 +284,7 @@
     liberation_ttf
     fira-code
     fira-code-symbols
+    source-sans-pro
     mplus-outline-fonts
     dina-font
     proggyfonts

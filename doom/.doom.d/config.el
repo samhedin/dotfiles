@@ -43,8 +43,8 @@
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 7) (> time 19))
-      (load-theme 'doom-spacegrey t)
-    (load-theme 'doom-one-light t)))
+      (load-theme 'modus-vivendi t)
+    (load-theme 'modus-operandi t)))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -87,7 +87,7 @@
 (load! "keybinds.el")
 (keybinds-mode)
 
-(setq-default line-spacing 10)
+(setq-default line-spacing 9)
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 

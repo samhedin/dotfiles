@@ -70,8 +70,22 @@
 
   nix.autoOptimiseStore = true;
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
+
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.wayland = true;
+
+  services.xserver = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+    # desktopManager.plasma5.enable = true;
+    extraLayouts.dvorak-ep = {
+      description = "dvorak ep";
+      languages = [ "eng" ];
+      symbolsFile = /home/sam/dvorak-ep.xkb;
+    };
+  };
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.wayland = true;
 
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -105,32 +119,35 @@
       }) { python = "python38Full"; };
       defaultPythonEnv = machNix.mkPython {
         requirements = ''
-                    pandas
-                    numpy
-                    scikit-learn
-                    pyflakes
-                    jupyter-console
-                    isort
-                    ipywidgets
-                    debugpy
-                    torch
-                    torchvision
-                    toolz
-                    opencv-python
-                    keras
-                    scikit-image
-                    tqdm
-                    pygments
-                    pygetwindow
-                    qtconsole
-                    jupyterlab
-                    pymupdf
-                    matplotlib
-                    seaborn
-                    pyperclip
-                    scipy
-                    black
-                  '';
+          pandas
+          numpy
+          h5py
+          tensorflow
+          keras
+          scikit-learn
+          pyflakes
+          jupyter-console
+          isort
+          ipywidgets
+          debugpy
+          torch
+          torchvision
+          toolz
+          opencv-python
+          keras
+          scikit-image
+          tqdm
+          pygments
+          pygetwindow
+          qtconsole
+          jupyterlab
+          pymupdf
+          matplotlib
+          seaborn
+          pyperclip
+          scipy
+          black
+        '';
       };
       droidcamdesktop = pkgs.makeDesktopItem {
         name = "droidcamdesktop";
@@ -173,6 +190,7 @@
       haskellPackages.cabal-install
       haskellPackages.ghc
       google-chrome-beta
+      kate
       cabal2nix
       electrum
       ncdu

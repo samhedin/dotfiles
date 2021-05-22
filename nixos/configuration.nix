@@ -71,21 +71,18 @@
   nix.autoOptimiseStore = true;
   services.xserver.enable = true;
 
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.wayland = true;
 
   services.xserver = {
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
     # desktopManager.plasma5.enable = true;
     extraLayouts.dvorak-ep = {
       description = "dvorak ep";
-      languages = [ "eng" ];
-      symbolsFile = /home/sam/dvorak-ep.xkb;
+      languages = [ "sv" ];
+      symbolsFile = /home/sam/dotfiles/dvorak-ep.xkb;
     };
   };
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.wayland = true;
 
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -172,6 +169,7 @@
       rustup
       rust-analyzer
       stack
+      nyxt
       htop
       wget
       dolphin
@@ -185,11 +183,14 @@
       # gnuapl
       julia
       nodePackages.pyright
+      gnomeExtensions.material-shell
+      gnome.gnome-tweak-tool
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/
       haskell-language-server
       haskellPackages.cabal-install
       haskellPackages.ghc
       google-chrome-beta
+      gnomeExtensions.paperwm
       kate
       cabal2nix
       electrum

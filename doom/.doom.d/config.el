@@ -178,10 +178,8 @@
   (setq lsp-signature-auto-activate t)
   (setq dap-python-debugger 'debugpy)
   (setq lsp-signature-render-documentation t))
-
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
-
 (global-paren-face-mode)                ; Not working? Try customizing the `shadow` face.
 (setq-default paren-face-regexp "[][(){};]")
 (setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
@@ -219,7 +217,7 @@
   (if (and wl-copy-process (process-live-p wl-copy-process))
       nil ; should return nil if we're the current paste owner
     (shell-command-to-string "wl-paste -n | tr -d \r")))
-(setq interprogram-cut-function 'wl-copy)
-(setq interprogram-paste-function 'wl-paste)
+;; (setq interprogram-cut-function 'wl-copy)
+;; (setq interprogram-paste-function 'wl-paste)
 (setq ein:output-area-inlined-images t)
 (setq magit-repository-directories '(("/home/sam/git/" . 2)))

@@ -73,10 +73,10 @@
 
 
   services.xserver = {
-    desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
-    # desktopManager.plasma5.enable = true;
+
     extraLayouts.dvorak-ep = {
       description = "dvorak ep";
       languages = [ "sv" ];
@@ -156,12 +156,18 @@
       autoflake
       xdotool
       libnotify
+      gtk-engine-murrine
+      gtk_engines
+      element-desktop
+      gsettings-desktop-schemas
+      lxappearance
       docker
       pinentry
       gnome3.seahorse
       wmctrl
       libtool
       droidcamdesktop
+      gammastep
       feh
       swappy
       git
@@ -171,6 +177,7 @@
       stack
       nyxt
       htop
+      clipman
       wget
       dolphin
       nodejs
@@ -280,6 +287,7 @@
   };
 
   programs.waybar.enable = true;
+  programs.qt5ct.enable=true;
 
   systemd.user.services.kanshi = {
     description = "Kanshi output autoconfig ";

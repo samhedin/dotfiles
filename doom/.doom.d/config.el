@@ -1,12 +1,11 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
 (setq user-full-name "Sam Yousefzadegan Hedin"
       user-mail-address "sam.hedin@gmail.com")
 
 (setq auth-sources '("/home/sam/.authinfo"))
 
 (setq doom-font (font-spec :family "Fira Code" :size 13.5 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13.5))
+      doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
 (setq display-line-numbers-type nil)
 (setq confirm-kill-emacs nil)
@@ -42,7 +41,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 7) (> time 19))
+  (if (or (< time 4) (> time 19))
       (load-theme 'modus-vivendi t)
     (load-theme 'modus-operandi t)))
 
@@ -87,7 +86,7 @@
 (load! "keybinds.el")
 (keybinds-mode)
 
-(setq-default line-spacing 9)
+(setq-default line-spacing 5)
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 (advice-add #'rainbow-delimiters-mode :override #'ignore)
 

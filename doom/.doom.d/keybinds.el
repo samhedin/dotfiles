@@ -38,6 +38,7 @@
       :g "<left>" 'evil-window-left
       :g "<down>" 'doom/escape
       :leader
+      "k" #'browse-kill-ring
       "r" #'recompile
       "!" 'shell-command
       "l" 'lsp-describe-thing-at-point

@@ -6,3 +6,6 @@ change with ~xkbcomp layout.xkb $out~
 
 
 [[attachment:_20210518_023550screenshot.png]]
+
+* Stack Haskell
+Doesn't work? Try `rm -r ~/.stack/setup-exe-cache`

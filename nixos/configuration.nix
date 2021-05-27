@@ -110,6 +110,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs;
     let
+      unstable = import <nixos-unstable> {config={allowUnfree=true;};};
       machNix = import (builtins.fetchGit {
         url = "https://github.com/DavHau/mach-nix/";
         ref = "refs/tags/3.1.1";
@@ -149,7 +150,7 @@
       droidcamdesktop = pkgs.makeDesktopItem {
         name = "droidcamdesktop";
         desktopName = "droidcamdesktop";
-        exec = "${droidcam}/bin/droidcam";
+        exec = "${unstable.droidcam}/bin/droidcam";
       };
     in [
       stow
@@ -169,37 +170,33 @@
       droidcamdesktop
       gammastep
       feh
-      swappy
+      unstable.swappy
       git
       qbittorrent
       rustup
-      rust-analyzer
+      unstable.rust-analyzer
       stack
-      nyxt
+      unstable.nyxt
       htop
       clipman
       wget
       dolphin
       nodejs
-      droidcam
+      unstable.droidcam
       clojure
       leiningen
       mkl
       pdfgrep
       j4-dmenu-desktop
       # gnuapl
-      julia
       nodePackages.pyright
-      gnomeExtensions.material-shell
-      gnome.gnome-tweak-tool
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/
-      haskell-language-server
+      unstable.haskell-language-server
       haskellPackages.cabal-install
       haskellPackages.ghc
       google-chrome-beta
-      gnomeExtensions.paperwm
       kate
-      cabal2nix
+      unstable.cabal2nix
       electrum
       ncdu
       unzip
@@ -213,11 +210,10 @@
       ark
       grim
       slurp
-      unrar
-      libreoffice
+      unstable.unrar
       alacritty
       sqlite
-      vscode
+      unstable.vscode
       slack
       defaultPythonEnv
       machNix.mach-nix
@@ -234,7 +230,7 @@
       pandoc
       zoom-us
       spotify
-      discord-ptb
+      unstable.discord-ptb
       papirus-icon-theme
       languagetool
       pkgs.ntfsprogs

@@ -41,7 +41,7 @@
 
 (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 4) (> time 19))
+  (if (or (< time 6) (> time 19))
       (load-theme 'modus-vivendi t)
     (load-theme 'modus-operandi t)))
 
@@ -199,6 +199,12 @@
 (setq rm-blacklist "")
 (rich-minority-mode)
 (mini-modeline-mode)
+
+(defun my/update-mini-modeline ()
+  (setq mini-modeline-face-attr `(:background ,(face-attribute 'mode-line :background)))
+  (mini-modeline-mode))
+(advice-add 'load-theme :after #'my/update-mini-modeline)
+
 (setq max-mini-window-height 0.01)
 (setq large-file-warning-threshold 100000000)
 (setq browse-url-browser-function 'eww)

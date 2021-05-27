@@ -201,9 +201,9 @@
 (mini-modeline-mode)
 
 (defun my/update-mini-modeline ()
-  (setq mini-modeline-face-attr `(:background ,(face-attribute 'mode-line :background)))
+  (custom-set-variables `(mini-modeline-face-attr `(:background ,(face-attribute 'mode-line :background))))
   (mini-modeline-mode))
-(advice-add 'counsel-load-theme :after #'my/update-mini-modeline)
+(advice-add 'load-theme :after #'my/update-mini-modeline)
 
 (setq max-mini-window-height 0.01)
 (setq large-file-warning-threshold 100000000)

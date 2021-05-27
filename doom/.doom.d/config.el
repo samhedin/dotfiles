@@ -39,17 +39,11 @@
 
 (global-hl-line-mode -1)
 
-(setq doom-theme 'doom-Iosvkem)
+;; (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
   (if (or (< time 6) (> time 19))
       (load-theme 'modus-vivendi t)
     (load-theme 'modus-operandi t)))
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-
-(setq org-roam-directory "~/git/privat/roam")
-(setq org-directory "~/git/privat/roam/")
 
 (defun copy-current-file-path ()
   "Copy the current buffer file name to the clipboard."
@@ -83,8 +77,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(load! "keybinds.el")
-(keybinds-mode)
 
 (setq-default line-spacing 5)
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
@@ -104,9 +96,6 @@
 
 (setq org-startup-with-latex-preview t)
 (add-hook 'julia-mode-hook 'julia-snail-mode)
-;; (add-hook 'org-mode-hook 'LaTex-math-mode)
-;;
-;; Use this for non breaking space, then insert with C-x 8 <space>
 (use-package! org
   :config
   (setq-default fill-column 120)
@@ -222,6 +211,9 @@
   (if (and wl-copy-process (process-live-p wl-copy-process))
       nil ; should return nil if we're the current paste owner
     (shell-command-to-string "wl-paste -n | tr -d \r")))
-;; (setq interprogram-cut-function 'wl-copy)
-;; (setq interprogram-paste-function 'wl-paste)
+(setq interprogram-cut-function 'wl-copy)
+(setq interprogram-paste-function 'wl-paste)
 (setq ein:output-area-inlined-images t)
+
+(load! "keybinds.el")
+(keybinds-mode)

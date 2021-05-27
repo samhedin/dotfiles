@@ -180,8 +180,8 @@
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
 (global-paren-face-mode)                ; Not working? Try customizing the `shadow` face.
-(setq-default paren-face-regexp "[][(){};]")
-(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode) paren-face-modes))
+(setq-default paren-face-regexp "[][(){};,]")
+(setq-default paren-face-modes (append '(rustic-mode org-mode python-mode haskell-mode) paren-face-modes))
 
 
 ;; Did pdf-tools break? Try
@@ -203,7 +203,7 @@
 (defun my/update-mini-modeline ()
   (setq mini-modeline-face-attr `(:background ,(face-attribute 'mode-line :background)))
   (mini-modeline-mode))
-(advice-add 'load-theme :after #'my/update-mini-modeline)
+(advice-add 'counsel-load-theme :after #'my/update-mini-modeline)
 
 (setq max-mini-window-height 0.01)
 (setq large-file-warning-threshold 100000000)
@@ -225,4 +225,3 @@
 ;; (setq interprogram-cut-function 'wl-copy)
 ;; (setq interprogram-paste-function 'wl-paste)
 (setq ein:output-area-inlined-images t)
-(setq magit-repository-directories '(("/home/sam/git/" . 2)))

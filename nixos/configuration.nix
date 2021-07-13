@@ -73,7 +73,7 @@
 
 
   services.xserver = {
-    # desktopManager.gnome.enable = true;
+ #   desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
 
@@ -113,15 +113,13 @@
       unstable = import <nixos-unstable> {config={allowUnfree=true;};};
       machNix = import (builtins.fetchGit {
         url = "https://github.com/DavHau/mach-nix/";
-        ref = "refs/tags/3.1.1";
-      }) { python = "python38Full"; };
+        ref = "refs/tags/3.3.0";
+      }) { python = "python39Full"; };
       defaultPythonEnv = machNix.mkPython {
         requirements = ''
           pandas
           numpy
           h5py
-          tensorflow
-          keras
           scikit-learn
           pyflakes
           jupyter-console
@@ -131,7 +129,6 @@
           torch
           torchvision
           toolz
-          opencv-python
           keras
           scikit-image
           tqdm
@@ -142,7 +139,6 @@
           pymupdf
           matplotlib
           seaborn
-          pyperclip
           scipy
           black
         '';
@@ -152,23 +148,24 @@
         desktopName = "droidcamdesktop";
         exec = "${unstable.droidcam}/bin/droidcam";
       };
+      R-with-my-packages = rWrapper.override{packages = with rPackages; [ggplot2 dplyr xts];};
     in [
       stow
+      R-with-my-packages
       autoflake
       xdotool
       libnotify
-      gtk-engine-murrine
-      gtk_engines
-      element-desktop
       gsettings-desktop-schemas
       lxappearance
-      docker
       pinentry
       gnome3.seahorse
-      wmctrl
       libtool
       droidcamdesktop
       gammastep
+      steam
+      smplayer
+      mplayer
+      julia-stable-bin
       feh
       unstable.swappy
       git
@@ -210,10 +207,10 @@
       ark
       grim
       slurp
-      unstable.unrar
+      # unstable.unrar
       alacritty
       sqlite
-      unstable.vscode
+      # unstable.vscode
       slack
       defaultPythonEnv
       machNix.mach-nix
@@ -225,10 +222,10 @@
       gnupg
       kgpg
       gnumake
-      vlc
+      unstable.vlc
       gcc
       pandoc
-      zoom-us
+      # zoom-us
       spotify
       unstable.discord-ptb
       papirus-icon-theme
@@ -280,6 +277,10 @@
     enable = true;
     # Redshift with wayland support isn't present in nixos-19.09 atm. You have to cherry-pick the commit from https://github.com/NixOS/nixpkgs/pull/68285 to do that.
     package = pkgs.redshift-wlr;
+    temperature = {
+      day = 5000;
+      night = 2700;
+    };
   };
 
   programs.waybar.enable = true;

@@ -74,23 +74,15 @@
 
   services.xserver = {
  #   desktopManager.gnome.enable = true;
-    # displayManager.gdm.enable = true;
-    displayManager.sddm.enable = true;
+    displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
-    desktopManager.plasma5.enable = true;
 
     extraLayouts.dvorak-ep = {
       description = "dvorak ep";
-      languages = [ "sv" "se"];
+      languages = [ "sv" ];
       symbolsFile = /home/sam/dotfiles/dvorak-ep.xkb;
     };
   };
-services.xserver.displayManager.sessionPackages = [
-  (pkgs.plasma-workspace.overrideAttrs
-    (old: { passthru.providedSessions = [ "plasmawayland" ]; }))
-];
-  # services.xserver.displayManager.sddm.settings.Wayland.SessionDir = "${pkgs.plasma5Packages.plasma-workspace}/share/wayland-sessions";
-
 
   #  Configure keymap in X11
   services.xserver.layout = "us";
@@ -127,6 +119,7 @@ services.xserver.displayManager.sessionPackages = [
         requirements = ''
           pandas
           numpy
+          h5py
           scikit-learn
           pyflakes
           jupyter-console
@@ -135,12 +128,15 @@ services.xserver.displayManager.sessionPackages = [
           debugpy
           torch
           torchvision
+          toolz
+          keras
           scikit-image
           tqdm
           pygments
           pygetwindow
           qtconsole
           jupyterlab
+          pymupdf
           matplotlib
           seaborn
           scipy
@@ -152,8 +148,10 @@ services.xserver.displayManager.sessionPackages = [
         desktopName = "droidcamdesktop";
         exec = "${unstable.droidcam}/bin/droidcam";
       };
+      R-with-my-packages = rWrapper.override{packages = with rPackages; [ggplot2 dplyr xts];};
     in [
       stow
+      R-with-my-packages
       autoflake
       xdotool
       libnotify
@@ -165,6 +163,8 @@ services.xserver.displayManager.sessionPackages = [
       droidcamdesktop
       gammastep
       steam
+      smplayer
+      mplayer
       julia-stable-bin
       feh
       unstable.swappy
@@ -181,17 +181,24 @@ services.xserver.displayManager.sessionPackages = [
       nodejs
       unstable.droidcam
       clojure
+      leiningen
       mkl
       pdfgrep
       j4-dmenu-desktop
+      # gnuapl
       nodePackages.pyright
       # https://jcodev.eu/posts/using-nix-for-haskell-development-in-emacs-with-lsp/
+      unstable.haskell-language-server
+      haskellPackages.cabal-install
+      haskellPackages.ghc
       google-chrome-beta
       kate
+      unstable.cabal2nix
       electrum
       ncdu
       unzip
       imagemagick
+      cmake
       ninja
       nixfmt
       vim
@@ -218,14 +225,54 @@ services.xserver.displayManager.sessionPackages = [
       unstable.vlc
       gcc
       pandoc
-
       # zoom-us
       spotify
       unstable.discord-ptb
       papirus-icon-theme
       languagetool
       pkgs.ntfsprogs
+      (pkgs.writeTextFile {
+        name = "startsway";
+        destination = "/bin/startsway";
+        executable = true;
+        text = ''
+          #! ${pkgs.bash}/bin/bash
+
+          # first import environment variables from the login manager
+          systemctl --user import-environment
+          # then start the service
+          exec systemctl --user start sway.service
+        '';
+      })
     ];
+  systemd.user.targets.sway-session = {
+    description = "Sway compositor session";
+    documentation = [ "man:systemd.special(7)" ];
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+  };
+
+  systemd.user.services.sway = {
+    description = "Sway - Wayland window manager";
+    documentation = [ "man:sway(5)" ];
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+    # We explicitly unset PATH here, as we want it to be set by
+    # systemctl --user import-environment in startsway
+    environment.PATH = lib.mkForce null;
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''
+        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+      '';
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+
   services.redshift = {
     enable = true;
     # Redshift with wayland support isn't present in nixos-19.09 atm. You have to cherry-pick the commit from https://github.com/NixOS/nixpkgs/pull/68285 to do that.
@@ -236,7 +283,7 @@ services.xserver.displayManager.sessionPackages = [
     };
   };
 
-  # programs.waybar.enable = true;
+  programs.waybar.enable = true;
   programs.qt5ct.enable=true;
 
   systemd.user.services.kanshi = {
@@ -274,6 +321,21 @@ services.xserver.displayManager.sessionPackages = [
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # so that gtk works properly
+    extraPackages = with pkgs; [
+      swaylock
+      swayidle
+      wl-clipboard
+      mako # notification daemon
+      alacritty # Alacritty is the default terminal in the config
+      dmenu # Dmenu is the default in the config but i recommend wofi since its wayland native
+      kanshi
+      waybar
+      wdisplays
+    ];
+  };
   location.latitude = 59.37118495540346;
   location.longitude = 18.065956381997143;
   # List services that you want to enable:

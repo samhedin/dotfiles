@@ -41,7 +41,7 @@
 
 ;; (setq doom-theme 'doom-Iosvkem)
 (let ((time  (string-to-number (format-time-string "%H"))))
-  (if (or (< time 6) (> time 19))
+  (if (or (< time 3) (> time 19))
       (load-theme 'modus-vivendi t)
     (load-theme 'modus-operandi t)))
 
@@ -100,7 +100,7 @@
   :config
   (setq-default fill-column 120)
   (org-toggle-link-display)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.15))
   (auto-fill-mode)
   (set-face-attribute 'org-block-begin-line nil :inherit 'org-block :height 0.8 :background nil)
   (set-face-attribute 'org-block-end-line nil :inherit 'org-block :height 0.8 :background nil)
@@ -190,6 +190,7 @@
 (mini-modeline-mode)
 
 (defun my/update-mini-modeline ()
+  (interactive)
   (custom-set-variables `(mini-modeline-face-attr `(:background ,(face-attribute 'mode-line :background))))
   (mini-modeline-mode))
 (advice-add 'load-theme :after #'my/update-mini-modeline)
@@ -199,20 +200,21 @@
 (setq browse-url-browser-function 'eww)
 
 ;; https://gist.github.com/yorickvP/6132f237fbc289a45c808d8d75e0e1fb
-(setq wl-copy-process nil)
-(defun wl-copy (text)
-  (setq wl-copy-process (make-process :name "wl-copy"
-				      :buffer nil
-				      :command '("wl-copy" "-f" "-n")
-				      :connection-type 'pipe))
-  (process-send-string wl-copy-process text)
-  (process-send-eof wl-copy-process))
-(defun wl-paste ()
-  (if (and wl-copy-process (process-live-p wl-copy-process))
-      nil ; should return nil if we're the current paste owner
-    (shell-command-to-string "wl-paste -n | tr -d \r")))
-(setq interprogram-cut-function 'wl-copy)
-(setq interprogram-paste-function 'wl-paste)
+;; (setq wl-copy-process nil)
+;; (defun wl-copy (text)
+;;   (setq wl-copy-process (make-process :name "wl-copy"
+;; 				      :buffer nil
+;; 				      :command '("wl-copy" "-f" "-n")
+;; 				      :connection-type 'pipe))
+;;   (process-send-string wl-copy-process text)
+;;   (process-send-eof wl-copy-process))
+;; (defun wl-paste ()
+;;   (if (and wl-copy-process (process-live-p wl-copy-process))
+;;       nil ; should return nil if we're the current paste owner
+;;     (shell-command-to-string "wl-paste -n | tr -d \r")))
+;; (setq interprogram-cut-function 'wl-copy)
+;; (setq interprogram-paste-function 'wl-paste)
+
 (setq ein:output-area-inlined-images t)
 
 (load! "keybinds.el")

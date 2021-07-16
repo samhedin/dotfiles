@@ -48,11 +48,6 @@
 (package! rich-minority)
 (package! engrave-faces :recipe (:host github :repo "tecosaur/engrave-faces"))
 (package! org-ref)
-(package! julia-snail)
 (package! shrface)
 (package! shr-tag-pre-highlight)
-(package! math-preview)
-
-;; (package! nano-doom
-;;   :recipe (:host github :repo "skyler544/doom-nano-testing"))
 (package! browse-kill-ring)
